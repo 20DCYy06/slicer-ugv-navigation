@@ -1,0 +1,202 @@
+[
+  {
+    "file": "docs/history/field/BASE_CONTROL_FINDINGS.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/BODY_LOW_WZ_20261028.md",
+    "rewritten_links": 0,
+    "missing_archive_links_labeled": 8
+  },
+  {
+    "file": "docs/history/field/BODY_NAV_RESULTS_20261025.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 1
+  },
+  {
+    "file": "docs/history/field/BODY_SPEED_0X16.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/BODY_TURN_RESULT_20261025.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/COMPLETE_FIX_VALIDATION.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/EKF_IMU_FIELD_20261027.md",
+    "rewritten_links": 0,
+    "missing_archive_links_labeled": 6
+  },
+  {
+    "file": "docs/history/field/EKF_RESPONSE.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 1
+  },
+  {
+    "file": "docs/history/field/INDOOR_10M_RESULT_20261028.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 6
+  },
+  {
+    "file": "docs/history/field/INTEGRATION_VALIDATION.md",
+    "rewritten_links": 5,
+    "missing_archive_links_labeled": 35
+  },
+  {
+    "file": "docs/history/field/NAV_PRECISION_FIELD_20261027.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 8
+  },
+  {
+    "file": "docs/history/field/NAV_PRECISION_OBSTACLE_TEST_20261027.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/NAV_SPEED_LIMITS.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/NAVIGATION_OBSTACLES_DEPLOYMENT.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/NAVIGATION_OBSTACLES_FIELD.md",
+    "rewritten_links": 4,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/NAVIGATION_OBSTACLES_VALIDATION.md",
+    "rewritten_links": 4,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/ODOM12_TURN_FINDINGS_20261025.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/ODOM_FIELD_CHECK.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/ODOM_PREFLIGHT_VALIDATION.md",
+    "rewritten_links": 4,
+    "missing_archive_links_labeled": 3
+  },
+  {
+    "file": "docs/history/field/ODOM_READY_20261025.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/ODOM_ROLLING_12M.md",
+    "rewritten_links": 3,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/ODOM_SOURCE_UPDATE.md",
+    "rewritten_links": 3,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/ODOM_STARTUP_CHAIN.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 1
+  },
+  {
+    "file": "docs/history/field/PERCEPTION_NAV_FIELD_RESULTS_20261026.md",
+    "rewritten_links": 0,
+    "missing_archive_links_labeled": 5
+  },
+  {
+    "file": "docs/history/field/REPORT_TO_MAIN_20261026.md",
+    "rewritten_links": 3,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/REVIEW_FIX_VALIDATION.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 21
+  },
+  {
+    "file": "docs/history/field/SLICER_ODOM.md",
+    "rewritten_links": 3,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/SMALL_OBSTACLE_FINDINGS.md",
+    "rewritten_links": 0,
+    "missing_archive_links_labeled": 2
+  },
+  {
+    "file": "docs/history/field/WHEEL_SPEED_ARM64_2026-10-24.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/WHEEL_SPEED_POWERED_RESPONSE_2026-10-24.md",
+    "rewritten_links": 3,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/field/WHEEL_SPEED_ZERO_INTERFACE_2026-10-24.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/firmware/C30D_BRIDGE_CANDIDATE_2026-10-24.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 1
+  },
+  {
+    "file": "docs/history/firmware/C30D_BRIDGE_FLASH_2026-10-24.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/firmware/C30D_TIMEBASE_2026-10-24.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 1
+  },
+  {
+    "file": "docs/history/GNSS_RTK_REUSE_20261030.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/INTERFACES.md",
+    "rewritten_links": 3,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/MIGRATION.md",
+    "rewritten_links": 5,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/OFFLINE_ONLINE_NAV_20261030.md",
+    "rewritten_links": 1,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/PROJECT_README_27488d3.md",
+    "rewritten_links": 21,
+    "missing_archive_links_labeled": 0
+  },
+  {
+    "file": "docs/history/VALIDATION.md",
+    "rewritten_links": 2,
+    "missing_archive_links_labeled": 17
+  }
+]

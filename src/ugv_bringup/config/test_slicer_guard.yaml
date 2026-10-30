@@ -1,0 +1,13 @@
+# TEST_ONLY input to the isolated Guard tests; no device or driver consumes it.
+# Physical limits below are the current commissioning caps, not calibration.
+navigation:
+  max_forward: 0.125
+  max_reverse: 0.0
+  max_angular: 0.25
+  accel_linear: 0.2
+  accel_angular: 1.0
+  turn_start_pwm_permille: 50.0
+base_frame: TEST_ONLY_guard_base
+# Synthetic compensation fixture: a .2rad/s floor exercises rejection ordering.
+turn_gain_permille_per_rad_s: 250.0
+ros_driver_pwm_limit_permille: 750

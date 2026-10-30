@@ -1,0 +1,42 @@
+# WASD唯一现场配置；原config/slicer_config.yaml中的c30d_wasd不再被新入口读取。
+serial_port: auto
+usb_vid: 0x1a86
+usb_pid: 0x55d4
+serial_number: '5CF0016377'
+baud: 115200
+counts_per_revolution: 60000   # 轮端暂定；1560 是电机轴标称，不可直接用于轮速
+max_wheel_mm_s: 800
+control_mode: body_speed    # ROS导航：0x16车身速度，编码器vx + 板载IMU wz双闭环
+motor_output_limit_percent: 100  # 0..100; 100 -> at most 80% PWM, 50 -> at most 40%
+test_pwm_limit_permille: 750  # 750‰ = 75%
+ros_driver_pwm_limit_permille: 600  # Legacy wheel/open-loop reference; body_speed uses MCU percentage ceiling
+test_pwm_signs: [1, -1, 1, -1]  # A右后、B左后、C右前、D左前
+encoder_signs: [-1, 1, -1, 1]   # 用户手推前进确认；用于轮式里程计
+pwm_signs: [-1, 1, 1, 1]       # 1米闭环测试验证；STM32 0x10 与开环 0x11 的桥臂极性不同
+wheel_ports: {left_front: D, right_front: C, left_rear: B, right_rear: A}
+wheel_diameter: 0.085
+track_width: 0.15
+test_duty_permille: 250       # W/S力度，保留现场值
+wasd_spin_pwm_permille: 350   # 独立 WASD A/D 每侧开环 PWM，350‰=35%
+wasd_spin_angular: 3  # 保留原 A/D 角速度，闭环出口换算左右轮目标速度
+test_slew_permille_s: 1000
+wheel_slew_mm_s2: 800         # 闭环四轮目标速度斜坡；保持原有斜坡处理
+turn_gain_permille_per_rad_s: 283.11258278  # 历史开环参考；正常电机出口不使用
+linear_speed: 0.22          # ROS期望直线速度，开环映射参考值
+initial_scale: 1.0
+min_scale: 0.2
+max_scale: 2.0
+scale_step: 0.2
+key_timeout_s: 0.25         # 终端无松键事件；无新按键时停车
+telemetry_timeout_s: 0.5
+publish_hz: 20
+command_timeout_s: 0.25
+teleop_topic: /teleop/cmd_vel
+nav_topic: /cmd_vel/nav
+mission_topic: /cmd_vel/mission
+output_topic: /cmd_vel
+odom_topic: /wheel/odom
+odom_frame: odom
+base_frame: base_link
+publish_tf: false          # 与FAST-LIO/EKF并行时由融合节点发布唯一TF
+docker_image: potato-visual-noetic:latest

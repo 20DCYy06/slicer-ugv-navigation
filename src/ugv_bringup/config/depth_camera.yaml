@@ -1,0 +1,19 @@
+base_frame: base_link
+mount_frame: camera_link
+output_frame: online_depth_optical
+# 用户实测：底盘中心前14cm、离地约10cm、水平朝前；以camera_link为安装参考。
+mount_xyz_m: [0.14, 0.0, 0.10]
+mount_rpy_deg: [0.0, 0.0, 0.0]
+depth_topic: /camera/depth/image_rect_raw
+info_topic: /camera/depth/camera_info
+gravity_topic: /Odometry
+depth_scale: 0.001
+min_depth_m: 0.20
+max_depth_m: 3.5
+min_obstacle_height: 0.08
+max_obstacle_height: 1.20
+pixel_stride: 4
+voxel_size_m: 0.05
+publish_hz: 5.0
+gravity_max_age_s: 0.5
+tf_timeout_s: 0.05

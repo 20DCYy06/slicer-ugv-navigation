@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="1" time="17.874"><testcase classname="rostest.runner.RosTest" name="testguard_transport" time="17.8740" /><system-out>&lt;![CDATA[
+[ROSTEST]setup[/workspace/src/ugv_slicer_control/test/guard.test] run_id[76ca0eb4-d439-11f1-8cea-15b686c478b4] starting
+&amp;#x001B;[1mstarted roslaunch server http://127.0.0.1:45143/&amp;#x001B;[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /TEST_ONLY_guard/allow_patrol_spin: False
+ * /TEST_ONLY_guard/angular_intent_threshold: 0.01
+ * /TEST_ONLY_guard/command_timeout: 0.5
+ * /TEST_ONLY_guard/compensation_horizon: 0.8
+ * /TEST_ONLY_guard/config_file: /workspace/src/ug...
+ * /TEST_ONLY_guard/control_config_file: /workspace/src/ug...
+ * /TEST_ONLY_guard/costmap_timeout: 1.5
+ * /TEST_ONLY_guard/costmap_topic: /TEST_ONLY_guard/...
+ * /TEST_ONLY_guard/input_topic: /TEST_ONLY_guard/raw
+ * /TEST_ONLY_guard/lio_timeout: 0.5
+ * /TEST_ONLY_guard/lio_topic: /TEST_ONLY_guard/lio
+ * /TEST_ONLY_guard/output_topic: /TEST_ONLY_guard/...
+ * /TEST_ONLY_guard/planner_namespace: /TEST_ONLY_guard_...
+ * /TEST_ONLY_guard/publish_hz: 20.0
+ * /TEST_ONLY_guard/tf_timeout: 0.5
+ * /TEST_ONLY_guard/turn_compensation_enabled: False
+ * /TEST_ONLY_guard/turning_linear_window: 0.03
+ * /TEST_ONLY_guard_boosted/allow_patrol_spin: False
+ * /TEST_ONLY_guard_boosted/angular_intent_threshold: 0.01
+ * /TEST_ONLY_guard_boosted/command_timeout: 0.5
+ * /TEST_ONLY_guard_boosted/compensation_horizon: 0.8
+ * /TEST_ONLY_guard_boosted/config_file: /workspace/src/ug...
+ * /TEST_ONLY_guard_boosted/control_config_file: /workspace/src/ug...
+ * /TEST_ONLY_guard_boosted/costmap_timeout: 1.5
+ * /TEST_ONLY_guard_boosted/costmap_topic: /TEST_ONLY_guard/...
+ * /TEST_ONLY_guard_boosted/input_topic: /TEST_ONLY_guard/raw
+ * /TEST_ONLY_guard_boosted/lio_timeout: 0.5
+ * /TEST_ONLY_guard_boosted/lio_topic: /TEST_ONLY_guard/lio
+ * /TEST_ONLY_guard_boosted/output_topic: /TEST_ONLY_guard_...
+ * /TEST_ONLY_guard_boosted/planner_namespace: /TEST_ONLY_guard_...
+ * /TEST_ONLY_guard_boosted/publish_hz: 20.0
+ * /TEST_ONLY_guard_boosted/tf_timeout: 0.5
+ * /TEST_ONLY_guard_boosted/turn_compensation_enabled: True
+ * /TEST_ONLY_guard_boosted/turning_linear_window: 0.03
+ * /TEST_ONLY_guard_planner/TebLocalPlannerROS/acc_lim_theta: 1.0
+ * /TEST_ONLY_guard_planner/TebLocalPlannerROS/acc_lim_x: 0.2
+ * /TEST_ONLY_guard_planner/TebLocalPlannerROS/max_vel_theta: 0.25
+ * /TEST_ONLY_guard_planner/TebLocalPlannerROS/max_vel_x: 0.125
+ * /TEST_ONLY_guard_planner/TebLocalPlannerROS/max_vel_x_backwards: 0.02
+ * /TEST_ONLY_guard_planner/base_local_planner: teb_local_planner...
+ * /TEST_ONLY_guard_planner/local_costmap/footprint: [[-0.165, -0.14],...
+ * /TEST_ONLY_guard_planner/local_costmap/robot_base_frame: TEST_ONLY_guard_base
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /use_sim_time: False
+
+NODES
+  /
+    TEST_ONLY_guard (ugv_slicer_control/arc_velocity_guard.py)
+    TEST_ONLY_guard_boosted (ugv_slicer_control/arc_velocity_guard.py)
+
+[ROSTEST]setup[/workspace/src/ugv_slicer_control/test/guard.test] run_id[76ca0eb4-d439-11f1-8cea-15b686c478b4] done
+[ROSTEST]Running test [guard_transport]
+&amp;#x001B;[1mROS_MASTER_URI=http://127.0.0.1:32987/&amp;#x001B;[0m
+&amp;#x001B;[1msetting /run_id to 76ca0eb4-d439-11f1-8cea-15b686c478b4&amp;#x001B;[0m
+&amp;#x001B;[1mprocess[TEST_ONLY_guard-1]: started with pid [1539]&amp;#x001B;[0m
+&amp;#x001B;[1mprocess[TEST_ONLY_guard_boosted-2]: started with pid [1540]&amp;#x001B;[0m
+[ROSTEST]running test guard_transport
+&amp;#x001B;[1mprocess[guard_transport-3]: started with pid [1541]&amp;#x001B;[0m
+&amp;#x001B;[1m[guard_transport-3] process has finished cleanly
+log file: /workspace/.ros/log/76ca0eb4-d439-11f1-8cea-15b686c478b4/guard_transport-3*.log&amp;#x001B;[0m
+[ROSTEST]test [guard_transport] finished
+[ROSTEST]test [guard_transport] results are in [/workspace/build/test_results/ugv_slicer_control/rosunit-guard_transport.xml]
+[ROSTEST]test [guard_transport] results summary: 0 errors, 0 failures, 11 tests
+[ROSTEST][ROSTEST] test [guard_transport] done
+[ROSTEST]tearDown[/workspace/src/ugv_slicer_control/test/guard.test]
+shutting down processing monitor...
+[TEST_ONLY_guard_boosted-2] killing on exit
+[TEST_ONLY_guard-1] killing on exit
+... shutting down processing monitor complete
+[ROSTEST]rostest teardown /workspace/src/ugv_slicer_control/test/guard.test complete
+
+]]&gt;</system-out><system-err>&lt;![CDATA[
+
+]]&gt;</system-err></testsuite>

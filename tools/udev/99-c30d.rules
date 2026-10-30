@@ -1,0 +1,2 @@
+# Stable C30D alias; retain existing device ownership and permissions.
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d4", ATTRS{serial}=="5CF0016377", SYMLINK+="c30d"

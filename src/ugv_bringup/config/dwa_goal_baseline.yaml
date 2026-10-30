@@ -1,0 +1,4 @@
+# Original goal tolerances; use dynparam load for a running DWA.
+# The original full config remains in dwa.yaml unchanged.
+yaw_goal_tolerance: 0.25
+xy_goal_tolerance: 0.15

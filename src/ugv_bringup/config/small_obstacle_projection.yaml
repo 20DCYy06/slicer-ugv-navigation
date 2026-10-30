@@ -1,0 +1,19 @@
+# Diagnostic baseline: height/range/angle step from the 2026-10-26 source snapshot;
+# other explicit values are diagnostic choices, not a complete runtime copy.
+# This is NOT a dump of the running Jetson parameters. Keep the original
+# /scan_raw and /scan chain running; this node publishes a separate topic.
+# Heights and ranges are in target_frame (base_link), not the LiDAR frame.
+target_frame: base_link
+# Diagnostic choice; not a copy of the original projector's runtime tolerance.
+transform_tolerance: 0.10
+min_height: 0.04
+max_height: 0.50
+angle_min: -3.141592653589793
+angle_max: 3.141592653589793
+angle_increment: 0.008726646
+scan_time: 0.10
+range_min: 0.05
+range_max: 20.0
+use_inf: true
+inf_epsilon: 1.0
+concurrency_level: 1

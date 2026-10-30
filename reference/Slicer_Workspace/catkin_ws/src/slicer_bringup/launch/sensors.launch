@@ -1,0 +1,37 @@
+<launch>
+  <arg name="root" default="/slicer"/>
+  <arg name="rviz" default="false"/>
+  <!-- No chassis driver here: mapping may be hand-pushed with factory MCU firmware. -->
+  <node pkg="slicer_bringup" type="sensor_geometry.py" name="slicer_geometry" output="screen" required="true">
+    <param name="config_file" value="$(arg root)/config/slicer_config.yaml"/>
+  </node>
+  <rosparam command="load" file="$(arg root)/.generated/sensor_launch.yaml"/>
+  <param name="user_config_path" value="$(arg root)/.generated/MID360.json"/>
+  <node pkg="livox_ros_driver2" type="livox_ros_driver2_node" name="livox_lidar_publisher" output="screen" required="true" args="100000000000000"/>
+  <rosparam command="load" file="$(arg root)/.generated/lio.yaml"/>
+  <param name="point_filter_num" value="1"/>
+  <param name="max_iteration" value="3"/>
+  <param name="filter_size_surf" value="0.15"/>
+  <param name="filter_size_map" value="0.25"/>
+  <param name="cube_side_length" value="200.0"/>
+  <param name="runtime_pos_log_enable" value="false"/>
+  <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" required="true"/>
+  <node pkg="slicer_bringup" type="lio_projector.py" name="slicer_lio_projector" output="screen" required="true">
+    <param name="config_file" value="$(arg root)/config/slicer_config.yaml"/>
+  </node>
+  <node pkg="robot_localization" type="ekf_localization_node" name="slicer_ekf" output="screen" required="true">
+    <rosparam command="load" file="$(arg root)/.generated/fusion.yaml"/>
+    <remap from="odometry/filtered" to="/odom"/>
+  </node>
+  <node pkg="slicer_navigation" type="arm_cloud_filter.py" name="slicer_arm_cloud_filter" output="screen" required="true">
+    <param name="config_file" value="$(arg root)/config/slicer_config.yaml"/>
+  </node>
+  <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="slicer_cloud_to_scan" output="screen" required="true">
+    <remap from="cloud_in" to="/cloud_nav_filtered"/><remap from="scan" to="/scan_raw"/>
+    <rosparam command="load" file="$(arg root)/.generated/scan.yaml"/>
+  </node>
+  <node pkg="slicer_navigation" type="self_scan_filter.py" name="slicer_scan_filter" output="screen" required="true">
+    <param name="config_file" value="$(arg root)/config/slicer_config.yaml"/>
+  </node>
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="slicer_rviz" args="-d $(arg root)/config/slicer.rviz"/>
+</launch>

@@ -1,0 +1,51 @@
+# 两个独立障碍层做MAX融合。各自只清除本层历史，不互相抹掉另一传感器看到的障碍。
+# 只在最后统一膨胀一次，半径/footprint从原车配置继承。
+global_costmap:
+  plugins:
+    - {name: static_layer, type: 'costmap_2d::StaticLayer'}
+    - {name: obstacle_layer, type: 'costmap_2d::ObstacleLayer'}
+    - {name: depth_layer, type: 'costmap_2d::ObstacleLayer'}
+    - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}
+  static_layer:
+    map_topic: /map
+    first_map_only: false
+    subscribe_to_updates: true
+    track_unknown_space: true
+    lethal_cost_threshold: 100
+  depth_layer: &depth
+    enabled: true
+    combination_method: 1
+    footprint_clearing_enabled: true
+    max_obstacle_height: 1.2
+    observation_sources: depth_hits depth_rays
+    depth_hits:
+      topic: /online_depth/obstacles
+      sensor_frame: online_depth_optical
+      data_type: PointCloud2
+      marking: true
+      clearing: false
+      min_obstacle_height: 0.08
+      max_obstacle_height: 1.2
+      obstacle_range: 2.5
+      raytrace_range: 3.5
+      observation_persistence: 0.0
+      expected_update_rate: 1.0
+    depth_rays:
+      topic: /online_depth/clearing
+      sensor_frame: online_depth_optical
+      data_type: PointCloud2
+      marking: false
+      clearing: true
+      # 地面本身不标障碍，但其测距射线必须保留，否则物体移走后无法清除旧障碍。
+      min_obstacle_height: -10.0
+      max_obstacle_height: 10.0
+      obstacle_range: 2.5
+      raytrace_range: 3.5
+      observation_persistence: 0.0
+      expected_update_rate: 1.0
+local_costmap:
+  plugins:
+    - {name: obstacle_layer, type: 'costmap_2d::ObstacleLayer'}
+    - {name: depth_layer, type: 'costmap_2d::ObstacleLayer'}
+    - {name: inflation_layer, type: 'costmap_2d::InflationLayer'}
+  depth_layer: *depth

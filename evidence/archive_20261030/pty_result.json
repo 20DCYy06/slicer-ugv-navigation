@@ -1,0 +1,81 @@
+{
+  "test_only": true,
+  "result": "PASS",
+  "duration_s": 17.520310936999977,
+  "nmea_backend": "nmea_navsat_driver/0.6.1",
+  "ntrip_backend": "ntrip_client/1.4.1",
+  "phases": [
+    {
+      "phase": "sole_serial_owner",
+      "mono_s": 1209.523391713,
+      "wall_s": 1793347931.4374213,
+      "pid": 92,
+      "fd": "16",
+      "path": "/dev/pts/0"
+    },
+    {
+      "phase": "q4_fresh_upstream_fix",
+      "mono_s": 1210.530035578,
+      "wall_s": 1793347932.4440646,
+      "covariance": "UNKNOWN",
+      "receipt_minus_gga_tod_s": 1.2568948364205426
+    },
+    {
+      "phase": "q5_float_not_fixed",
+      "mono_s": 1211.532824965,
+      "wall_s": 1793347933.4468536
+    },
+    {
+      "phase": "q0_no_fix",
+      "mono_s": 1212.535547632,
+      "wall_s": 1793347934.4495761
+    },
+    {
+      "phase": "q4_recovered_after_no_fix",
+      "mono_s": 1213.538245123,
+      "wall_s": 1793347935.4522734
+    },
+    {
+      "phase": "q4_stale_differential_rejected",
+      "mono_s": 1214.541619566,
+      "wall_s": 1793347936.4556482
+    },
+    {
+      "phase": "bad_crc_reconnected_without_forwarding",
+      "mono_s": 1216.646713682,
+      "wall_s": 1793347938.5607429,
+      "caster_connections": 3
+    },
+    {
+      "phase": "paused_q4_stale_write_rejected",
+      "mono_s": 1221.510839603,
+      "wall_s": 1793347943.4248688
+    },
+    {
+      "phase": "resumed_live_rtcm_and_fresh_q4",
+      "mono_s": 1222.513651132,
+      "wall_s": 1793347944.4276803
+    },
+    {
+      "phase": "clean_stop",
+      "mono_s": 1223.525487978,
+      "wall_s": 1793347945.4395182,
+      "exit_code": 0,
+      "pty_bytes": 682,
+      "uploads": 3
+    }
+  ],
+  "wire_counts": {
+    "/gnss/fix": 74,
+    "/gnss/diagnostics": 14,
+    "/gnss/nmea": 65
+  },
+  "raw_receiver_gga_uploads": 3,
+  "caster_connections": 4,
+  "bad_crc_injected": 1,
+  "pty_bytes_equal_acknowledged_serial_write": 682,
+  "serial_owner_descriptors": 1,
+  "credential_scan": "PASS",
+  "hardware_acceptance": false,
+  "rtcm_receiver_use_not_claimed": true
+}

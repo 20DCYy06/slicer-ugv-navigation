@@ -1,0 +1,14 @@
+<launch>
+  <!-- TEST_ONLY: run only in a no-device container with networking disabled. -->
+  <param name="use_sim_time" value="false" />
+  <include file="$(find ugv_bringup)/launch/odom.launch">
+    <arg name="namespace" value="ugv" />
+    <arg name="odom_topic" value="/odom" />
+    <arg name="scan_topic" value="/scan" />
+    <arg name="cmd_vel_topic" value="cmd_vel/nav_raw" />
+    <arg name="global_frame" value="odom" />
+    <arg name="base_frame" value="base_link" />
+  </include>
+  <test test-name="odom_navigation" pkg="ugv_navigation"
+        type="test_odom_navigation.py" time-limit="180.0" />
+</launch>

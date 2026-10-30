@@ -1,0 +1,16 @@
+# NOT ENABLED: comparison candidate only after the 0.20 m/s route is completed
+# safely and the onsite operator confirms a new movement group.
+# Same root-overlay semantics and all other settings as indoor_10m_020.yaml.
+# Keep DWA scaling_speed=0.25 / max_scaling_factor=0.2 collision protection.
+global_costmap:
+  width: 24.0
+  height: 16.0
+  resolution: 0.05
+  rolling_window: true
+GlobalPlanner:
+  allow_unknown: true
+DWAPlannerROS:
+  max_vel_x: 0.30
+  max_vel_trans: 0.30
+  yaw_goal_tolerance: 0.12
+  xy_goal_tolerance: 0.10

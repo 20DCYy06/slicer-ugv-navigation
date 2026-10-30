@@ -1,0 +1,16 @@
+{
+  "new_documents": 7,
+  "local_links_checked": 79,
+  "broken_links": [],
+  "source_files_compared": 626,
+  "all_source_bytes_unchanged": true,
+  "archived_junit": {
+    "files": 28,
+    "tests": 278,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "hardware_operations": false,
+  "ros_tests_rerun": false
+}

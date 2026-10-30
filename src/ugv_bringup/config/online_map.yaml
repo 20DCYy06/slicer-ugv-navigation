@@ -1,0 +1,31 @@
+# Final overlay for the online profile. Do not load teammate vehicle.yaml:
+# retain our speed caps, shared footprint, inflation and control parameters.
+global_costmap:
+  global_frame: map
+  rolling_window: false
+  static_map: true
+  plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+  static_layer:
+    map_topic: /map
+    first_map_only: false
+    subscribe_to_updates: true
+    track_unknown_space: true
+    lethal_cost_threshold: 100
+local_costmap:
+  global_frame: odom
+  rolling_window: true
+  track_unknown_space: true
+  always_send_full_costmap: true
+# A global route may cross unobserved map cells. Local obstacle checking and
+# the existing Guard still use their observed local grid and original limits.
+GlobalPlanner:
+  allow_unknown: true
+DWAPlannerROS:
+  xy_goal_tolerance: 0.10
+  yaw_goal_tolerance: 0.12
+TebLocalPlannerROS:
+  xy_goal_tolerance: 0.10
+  yaw_goal_tolerance: 0.12

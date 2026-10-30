@@ -1,0 +1,7 @@
+<launch>
+  <!-- TEST_ONLY. Start within tools/noetic.sh (network none, no devices). -->
+  <param name="use_sim_time" value="false"/>
+  <include file="$(find ugv_bringup)/launch/odom.launch"/>
+  <node pkg="ugv_navigation" type="model.py" name="TEST_ONLY_kinematic_model"
+        output="screen" required="true"/>
+</launch>

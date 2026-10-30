@@ -1,0 +1,4 @@
+<launch>
+  <!-- Keep the explicitly requested original entry point intact. -->
+  <include file="$(dirname)/../../config/fkie_ugv_sync.launch"/>
+</launch>

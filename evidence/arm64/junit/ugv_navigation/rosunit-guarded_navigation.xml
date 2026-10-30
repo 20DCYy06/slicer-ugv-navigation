@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="2" time="6.734"><testcase classname="__main__.GuardedNavigationTest" name="test_01_startup_hold_blocks_real_teb_output" time="0.6033" /><testcase classname="__main__.GuardedNavigationTest" name="test_02_explicit_release_forward_arrival_and_cancel" time="5.2076" /><system-out>&lt;![CDATA[
+
+]]&gt;</system-out><system-err>&lt;![CDATA[
+
+]]&gt;</system-err></testsuite>

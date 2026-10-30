@@ -1,0 +1,56 @@
+# Algorithm settings selectively migrated from current Slicer TEB source.
+# Limits are uncalibrated commissioning caps, not measured vehicle performance.
+TebLocalPlannerROS:
+  max_vel_x: 0.125
+  # Standard TEB requires a positive reverse bound. This is NOT permission to
+  # reverse: the unchanged Guard rejects the entire Twist for any raw vx < 0.
+  # Neither this bound nor the forward-drive weight makes TEB hard forward-only.
+  max_vel_x_backwards: 0.02
+  max_vel_y: 0.0
+  max_vel_theta: 0.25       # old local initialization cap, boost must stay off
+  acc_lim_x: 0.2
+  acc_lim_y: 0.0
+  acc_lim_theta: 1.0
+  min_turning_radius: 0.0
+  cmd_angle_instead_rotvel: false
+  xy_goal_tolerance: 0.15
+  yaw_goal_tolerance: 0.25
+  free_goal_vel: false
+  complete_global_plan: true
+  teb_autosize: true
+  dt_ref: 0.3
+  dt_hysteresis: 0.1
+  min_samples: 3
+  max_samples: 60
+  allow_init_with_backwards_motion: false  # Forward seed only; optimization may still produce vx < 0.
+  global_plan_overwrite_orientation: true
+  max_global_plan_lookahead_dist: 1.5
+  exact_arc_length: true
+  force_reinit_new_goal_dist: 1.0
+  force_reinit_new_goal_angular: 0.52
+  weight_kinematics_nh: 1000.0
+  weight_kinematics_turning_radius: 0.0
+  weight_kinematics_forward_drive: 900.0  # Soft preference, including near-zero negative vx.
+  enable_homotopy_class_planning: false
+  enable_multithreading: false
+  no_inner_iterations: 3
+  no_outer_iterations: 3
+  feasibility_check_no_poses: 3
+  min_resolution_collision_check_angular: 0.15
+  global_plan_viapoint_sep: 0.5
+  weight_viapoint: 0.30
+  weight_optimaltime: 1.0
+  penalty_epsilon: 0.01
+  weight_shortest_path: 0.0
+  weight_obstacle: 60.0
+  min_obstacle_dist: 0.12
+  inflation_dist: 0.25
+  weight_inflation: 0.2
+  include_costmap_obstacles: true
+  costmap_obstacles_behind_robot_dist: 1.0
+  obstacle_poses_affected: 15
+  selection_prefer_initial_plan: 0.95
+  shrink_horizon_backup: true
+  oscillation_recovery: true
+  publish_feedback: false
+  visualize_hc_graph: false

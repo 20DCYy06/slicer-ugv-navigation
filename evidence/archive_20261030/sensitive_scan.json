@@ -1,0 +1,17 @@
+{
+  "forbidden_paths": [],
+  "review_matches_without_values": [
+    {
+      "file": "provenance/jetson_to_candidate_existing_files.patch",
+      "line": 227,
+      "kind": "secret_literal"
+    },
+    {
+      "file": "slicer_ugv_ros1/tools/slicer_shell.sh",
+      "line": 41,
+      "kind": "secret_literal"
+    }
+  ],
+  "note": "Pattern scan only; matches may be test literals, field names, documentation or templating; no values printed.",
+  "review_result": "No real credentials detected in included text. Both literal matches are ugv_secret=$(readlink...) shell variable expansion, not credentials."
+}

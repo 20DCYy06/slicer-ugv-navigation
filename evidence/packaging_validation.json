@@ -1,0 +1,37 @@
+{
+  "production_files_checked": 162,
+  "all_production_bytes_unchanged": true,
+  "production_mismatches": [],
+  "python_ast_files": 87,
+  "xml_files": 23,
+  "syntax_errors": [],
+  "development_packages": [
+    {
+      "path": "src/cup_gnss/package.xml",
+      "name": "cup_gnss"
+    },
+    {
+      "path": "src/ugv_bringup/package.xml",
+      "name": "ugv_bringup"
+    },
+    {
+      "path": "src/ugv_navigation/package.xml",
+      "name": "ugv_navigation"
+    },
+    {
+      "path": "src/ugv_slicer_control/package.xml",
+      "name": "ugv_slicer_control"
+    }
+  ],
+  "reference_catkin_ignore": true,
+  "evidence_catkin_ignore": true,
+  "markdown_files_checked": 66,
+  "local_links_checked": 203,
+  "broken_links": [],
+  "git_visible_files": 560,
+  "ignored_packaged_files": [],
+  "critical_files_not_visible": [],
+  "ros_tests_rerun": false,
+  "hardware_operations": false,
+  "github_published": false
+}

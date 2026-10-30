@@ -1,0 +1,15 @@
+<launch>
+  <!-- TEST_ONLY experiment, not a passing-test label for goal reachability. -->
+  <include file="$(find ugv_bringup)/launch/slicer_odom.launch">
+    <arg name="connect_control" value="true"/>
+    <arg name="source_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="control_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="raw_topic" value="/TEST_ONLY_chain/raw"/>
+    <arg name="release_owner" value="/TEST_ONLY_chain_operator"/>
+  </include>
+  <arg name="output" default="/workspace/.test-results/guarded-characterization.json"/>
+  <node pkg="ugv_navigation" type="characterize_guarded_navigation.py"
+        name="TEST_ONLY_chain_operator" output="screen" required="true">
+    <param name="output" value="$(arg output)"/>
+  </node>
+</launch>

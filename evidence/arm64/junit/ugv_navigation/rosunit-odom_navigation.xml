@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="5" time="21.348"><testcase classname="__main__.OdomNavigationTest" name="test_01_observed_plan_and_unknown_or_outside_window_rejection" time="0.0697" /><testcase classname="__main__.OdomNavigationTest" name="test_02_real_teb_motion_and_action_success" time="4.7104" /><testcase classname="__main__.OdomNavigationTest" name="test_03_cancel_is_preempted_and_does_not_revive" time="2.7071" /><testcase classname="__main__.OdomNavigationTest" name="test_04_scan_loss_stops_then_original_goal_continues" time="7.2055" /><testcase classname="__main__.OdomNavigationTest" name="test_05_full_width_wall_blocks_path_and_is_never_crossed" time="5.4961" /><system-out>&lt;![CDATA[
+
+]]&gt;</system-out><system-err>&lt;![CDATA[
+
+]]&gt;</system-err></testsuite>

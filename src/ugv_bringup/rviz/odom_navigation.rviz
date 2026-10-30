@@ -1,0 +1,179 @@
+# Observation only: send goals with the existing ugv_navigation Action client.
+# Navigation topics use slicer_odom.launch's default namespace, /ugv.
+# For another namespace, edit the /ugv/move_base topic prefix below or remap
+# these absolute topic names when starting RViz. Sensor topics remain /scan
+# and /odom unless scan_topic / odom_topic were changed in the launch file.
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+      Splitter Ratio: 0.5
+  - Class: rviz/Views
+    Name: Views
+  - Class: rviz/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: ""
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Grid
+      Name: Grid (0.5 m)
+      Enabled: true
+      Value: true
+      Alpha: 0.35
+      Cell Size: 0.5
+      Color: 140; 140; 140
+      Line Style:
+        Line Width: 0.02
+        Value: Lines
+      Normal Cell Count: 0
+      Plane: XY
+      Plane Cell Count: 24
+      Reference Frame: <Fixed Frame>
+    - Class: rviz/Map
+      Name: Global costmap
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/global_costmap/costmap
+      Alpha: 0.35
+      Color Scheme: costmap
+      Draw Behind: true
+      Use Timestamp: false
+    - Class: rviz/Map
+      Name: Local costmap
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/local_costmap/costmap
+      Alpha: 0.55
+      Color Scheme: costmap
+      Draw Behind: false
+      Use Timestamp: false
+    - Class: rviz/LaserScan
+      Name: Scan
+      Enabled: true
+      Value: true
+      Topic: /scan
+      Alpha: 1
+      Color: 255; 255; 255
+      Color Transformer: FlatColor
+      Position Transformer: XYZ
+      Style: Flat Squares
+      Size (m): 0.035
+      Size (Pixels): 3
+      Decay Time: 0
+      Queue Size: 10
+      Use Fixed Frame: true
+    - Class: rviz/Odometry
+      Name: Fused odometry
+      Enabled: true
+      Value: true
+      Topic: /odom
+      Keep: 100
+      Position Tolerance: 0.05
+      Angle Tolerance: 0.1
+      Shape:
+        Alpha: 0.7
+        Color: 255; 200; 0
+        Head Length: 0.08
+        Head Radius: 0.04
+        Shaft Length: 0.15
+        Shaft Radius: 0.015
+        Value: Arrow
+      Covariance:
+        Value: false
+    - Class: rviz/Path
+      Name: GlobalPlanner plan
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/GlobalPlanner/plan
+      Alpha: 1
+      Buffer Length: 1
+      Color: 40; 200; 255
+      Line Style: Lines
+      Line Width: 0.03
+      Pose Style: None
+    - Class: rviz/Path
+      Name: DWA local plan
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/DWAPlannerROS/local_plan
+      Alpha: 1
+      Buffer Length: 1
+      Color: 30; 255; 80
+      Line Style: Lines
+      Line Width: 0.04
+      Pose Style: None
+    - Class: rviz/Path
+      Name: TEB local plan
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/TebLocalPlannerROS/local_plan
+      Alpha: 1
+      Buffer Length: 1
+      Color: 255; 145; 35
+      Line Style: Lines
+      Line Width: 0.04
+      Pose Style: None
+    - Class: rviz/Pose
+      Name: Accepted current goal
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/current_goal
+      Alpha: 1
+      Color: 255; 70; 180
+      Shape: Arrow
+      Head Length: 0.15
+      Head Radius: 0.08
+      Shaft Length: 0.35
+      Shaft Radius: 0.025
+    - Class: rviz/Polygon
+      Name: Local footprint
+      Enabled: true
+      Value: true
+      Topic: /ugv/move_base/local_costmap/footprint
+      Alpha: 1
+      Color: 255; 170; 40
+    - Class: rviz/TF
+      Name: TF (optional)
+      Enabled: false
+      Value: false
+      Frame Timeout: 15
+      Marker Scale: 0.4
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+  Enabled: true
+  Global Options:
+    Background Color: 35; 35; 35
+    Default Light: true
+    Fixed Frame: odom
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+  Value: true
+  Views:
+    Current:
+      Class: rviz/TopDownOrtho
+      Angle: 0
+      Name: Current View
+      Near Clip Distance: 0.01
+      Scale: 70
+      Target Frame: <Fixed Frame>
+      Value: TopDownOrtho (rviz)
+      X: 0
+      Y: 0
+    Saved: ~
+Window Geometry:
+  Height: 900
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Width: 1280

@@ -1,0 +1,11 @@
+# Initial integration reference fcf88de8.../config/slicer_config.yaml (2026-10-23):
+# min_obstacle_dist=.144. Do not weaken that existing clearance for field use.
+# Other inherited commissioning limits/footprint remain conservative; no new
+# base-motion calibration or turn-start boost is introduced here.
+TebLocalPlannerROS:
+  min_obstacle_dist: 0.144
+  # Reuse the current teammate TEB path/time preferences from the 2026-10-26
+  # source snapshot; loaded only by the explicit Slicer TEB entry. Keep the
+  # shared footprint and commissioning velocity/acceleration caps unchanged.
+  weight_optimaltime: 1.5
+  weight_shortest_path: 0.2

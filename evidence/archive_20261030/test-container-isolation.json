@@ -1,0 +1,20 @@
+[
+  {
+    "id": "5713f9a3125b",
+    "image": "sha256:5a194ce7eb0689b4a7eea4ddefd360db747fd631136877ced77de5d4c1485c28",
+    "network_mode": "none",
+    "devices": [],
+    "mounts": [
+      {
+        "source": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source",
+        "destination": "/workspace",
+        "rw": true
+      },
+      {
+        "source": "/home/potato/Slicer_Workspace",
+        "destination": "/slicer",
+        "rw": false
+      }
+    ]
+  }
+]

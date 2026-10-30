@@ -1,0 +1,209 @@
+# Static observation preset: no goal, pose or velocity tools.
+# Existing sensors.launch provides the original chain; this file starts no nodes.
+# Toggle the two cloud/scan displays to compare each filter boundary.
+# Fixed Frame base_link shows height in the same frame as the projection band.
+# Optional projection display needs small_obstacle_projection.launch.
+Panels:
+- Class: rviz/Displays
+  Name: Displays
+  Property Tree Widget:
+    Expanded:
+    - /Global Options1
+    Splitter Ratio: 0.5
+- Class: rviz/Views
+  Name: Views
+- Class: rviz/Time
+  Name: Time
+  SyncMode: 0
+  SyncSource: ''
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Class: rviz/Grid
+    Name: Ground grid (0.10 m)
+    Enabled: true
+    Value: true
+    Alpha: 0.35
+    Cell Size: 0.1
+    Color: 140; 140; 140
+    Line Style:
+      Line Width: 0.02
+      Value: Lines
+    Normal Cell Count: 0
+    Plane: XY
+    Plane Cell Count: 24
+    Reference Frame: <Fixed Frame>
+  - Class: rviz/PointCloud2
+    Name: LIO body cloud (before arm filter)
+    Enabled: true
+    Value: true
+    Topic: /cloud_registered_body
+    Alpha: 0.85
+    Color: 255; 160; 40
+    Color Transformer: FlatColor
+    Position Transformer: XYZ
+    Style: Points
+    Size (Pixels): 3
+    Size (m): 0.015
+    Decay Time: 0
+    Queue Size: 2
+    Use Fixed Frame: true
+  - Class: rviz/PointCloud2
+    Name: Navigation cloud (after arm filter)
+    Enabled: true
+    Value: true
+    Topic: /cloud_nav_filtered
+    Alpha: 0.85
+    Color: 40; 220; 255
+    Color Transformer: FlatColor
+    Position Transformer: XYZ
+    Style: Points
+    Size (Pixels): 3
+    Size (m): 0.015
+    Decay Time: 0
+    Queue Size: 2
+    Use Fixed Frame: true
+  - Class: rviz/LaserScan
+    Name: Projected scan (before body filter)
+    Enabled: true
+    Value: true
+    Topic: /scan_raw
+    Alpha: 1
+    Color: 80; 255; 80
+    Color Transformer: FlatColor
+    Position Transformer: XYZ
+    Style: Flat Squares
+    Size (m): 0.035
+    Size (Pixels): 3
+    Decay Time: 0
+    Queue Size: 10
+    Use Fixed Frame: true
+  - Class: rviz/LaserScan
+    Name: Optional diagnostic projection
+    Enabled: false
+    Value: false
+    Topic: /ugv/perception_test/scan
+    Alpha: 1
+    Color: 255; 80; 210
+    Color Transformer: FlatColor
+    Position Transformer: XYZ
+    Style: Flat Squares
+    Size (m): 0.035
+    Size (Pixels): 3
+    Decay Time: 0
+    Queue Size: 10
+    Use Fixed Frame: true
+  - Class: rviz/Map
+    Name: Global costmap
+    Enabled: true
+    Value: true
+    Topic: /ugv/move_base/global_costmap/costmap
+    Alpha: 0.35
+    Color Scheme: costmap
+    Draw Behind: true
+    Use Timestamp: false
+  - Class: rviz/Map
+    Name: Local costmap
+    Enabled: true
+    Value: true
+    Topic: /ugv/move_base/local_costmap/costmap
+    Alpha: 0.55
+    Color Scheme: costmap
+    Draw Behind: false
+    Use Timestamp: false
+  - Class: rviz/LaserScan
+    Name: Scan
+    Enabled: true
+    Value: true
+    Topic: /scan
+    Alpha: 1
+    Color: 255; 255; 255
+    Color Transformer: FlatColor
+    Position Transformer: XYZ
+    Style: Flat Squares
+    Size (m): 0.035
+    Size (Pixels): 3
+    Decay Time: 0
+    Queue Size: 10
+    Use Fixed Frame: true
+  - Class: rviz/Polygon
+    Name: Local footprint
+    Enabled: true
+    Value: true
+    Topic: /ugv/move_base/local_costmap/footprint
+    Alpha: 1
+    Color: 255; 170; 40
+  - Class: rviz/TF
+    Name: TF (optional)
+    Enabled: false
+    Value: false
+    Frame Timeout: 15
+    Marker Scale: 0.4
+    Show Arrows: true
+    Show Axes: true
+    Show Names: true
+  - Class: rviz/Path
+    Name: DWA local plan
+    Enabled: true
+    Value: true
+    Topic: /ugv/move_base/DWAPlannerROS/local_plan
+    Alpha: 1
+    Buffer Length: 1
+    Color: 30; 255; 80
+    Line Style: Lines
+    Line Width: 0.03
+    Pose Style: None
+  - Class: rviz/Path
+    Name: TEB local plan
+    Enabled: true
+    Value: true
+    Topic: /ugv/move_base/TebLocalPlannerROS/local_plan
+    Alpha: 1
+    Buffer Length: 1
+    Color: 255; 80; 210
+    Line Style: Lines
+    Line Width: 0.03
+    Pose Style: None
+  Enabled: true
+  Global Options:
+    Background Color: 35; 35; 35
+    Default Light: true
+    Fixed Frame: base_link
+    Frame Rate: 30
+  Name: root
+  Tools:
+  - Class: rviz/Interact
+    Hide Inactive Objects: true
+  - Class: rviz/MoveCamera
+  - Class: rviz/Select
+  - Class: rviz/FocusCamera
+  - Class: rviz/Measure
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 2.5
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 0.8
+        Y: 0
+        Z: 0.1
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.5
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 0.8
+    Saved: null
+Window Geometry:
+  Height: 900
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Width: 1280

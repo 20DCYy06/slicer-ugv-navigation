@@ -1,0 +1,13 @@
+# 只填写已经确认的场地数据；null 表示未确认，不要用 0 冒充测量值。
+# 坐标计算工具读取本文件，不发布 TF、不修改 EKF、不发送导航目标。
+datum: null  # 接收机输出与公共原点的真实基准；当前数学模块仅支持 WGS84。
+origin:
+  latitude: null              # 公共 ENU 原点纬度，单位度；飞机/小车必须共用。
+  longitude: null             # 公共 ENU 原点经度，单位度；不能各取自己的首帧。
+  altitude_ellipsoid_m: null  # WGS84 椭球高，单位米；不是海拔 MSL。
+# [tx米, ty米, yaw弧度]，p_map = R(yaw) * p_enu + [tx, ty]。
+# ENU 为东/北/上；这是实测的 map←ENU 配准，不是目标点或天线安装角。
+map_from_enu: [null, null, null]
+# 天线相位中心相对 base_link 原点的 [前, 左, 上] 米；不要套用旧底盘尺寸。
+# 当前只保存/显示，不自动补偿；GNSS 输出与预览仍表示天线点。
+antenna_in_base_link_m: [null, null, null]

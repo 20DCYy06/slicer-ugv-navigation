@@ -1,0 +1,9 @@
+<launch>
+  <!-- Run only in a device-free, network-none container with its own master. -->
+  <node pkg="ugv_slicer_control" type="velocity_mux.py" name="slicer_velocity_mux" required="true">
+    <param name="config_file" value="$(find ugv_slicer_control)/test/mux.yaml"/>
+    <param name="manual_release_owner" value="/ugv/control"/>
+  </node>
+  <test pkg="ugv_slicer_control" type="test_control_ros.py" test-name="move_base"
+        ns="ugv" time-limit="45"/>
+</launch>

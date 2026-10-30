@@ -1,0 +1,55 @@
+{
+  "old_project": "/home/rescue/industrial_cup_ros1",
+  "old_commit": "65308aa",
+  "selected_slicer_input": "681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f",
+  "files": [
+    {
+      "source": "validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/config/slicer_config.yaml",
+      "sha256": "4694a1d1ad912cbf0fa173dc668fba9c4497b5bb0a4d9105d434a773fb0033b2"
+    },
+    {
+      "source": "validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/scripts/prepare_workspace.py",
+      "sha256": "206ab5ece6ae9efa54c86f5f28ad3a3f643455bdeb067dd39fc027afdbbf8dd0"
+    },
+    {
+      "source": "validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/slicer_navigation/config/navigation_params.yaml",
+      "sha256": "bc42ae12e2bebd4208a306a393ea3ac32554bb8e743704aa08c4e2a817aa9d06"
+    },
+    {
+      "source": "validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/slicer_navigation/config/teb_local_planner_params.yaml",
+      "sha256": "2480fe8f247bf8b28e8ba3858062182a4d03506bb11d28c0c14c6666b0af6ce0"
+    },
+    {
+      "source": "validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/slicer_navigation/scripts/arc_velocity_guard.py",
+      "sha256": "5f0af875447bd7711bd7374bda146bbad5fc21f65bf6da00e06b5197b56a006b"
+    },
+    {
+      "source": "validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/Slicer_wasd_control/scripts/velocity_mux.py",
+      "sha256": "aa103a18f42ff3fd03ab305418a6c053939d534d3ba88f25503b7aa021162101"
+    },
+    {
+      "source": "catkin_ws/src/cup_nav_bridge/launch/initialization_local.launch",
+      "sha256": "45bd6d055328e2efbb1ab13f97d9235ccd2f0f89772b1f95eac44764f4eb904c"
+    },
+    {
+      "source": "catkin_ws/src/cup_nav_bridge/launch/slicer_planner.launch",
+      "sha256": "5e11f70d40e9462a53cdac864004fe212eb342c1dfad38f93c54c5024dc0d75f"
+    },
+    {
+      "source": "catkin_ws/src/cup_nav_bridge/config/slicer_planner_overrides.yaml",
+      "sha256": "8187ec87eb5bd9da05f39de73c061f09c9b3bcfa1e9c64508af3572a1cb7b07f"
+    },
+    {
+      "source": "catkin_ws/src/cup_nav_bridge/config/rtk_costmap_global.yaml",
+      "sha256": "676ac7c96e0403608265594582f75203b32ed29010c9a1c44bc2cf274f977c8b"
+    },
+    {
+      "source": "catkin_ws/src/cup_nav_bridge/config/rtk_costmap_local.yaml",
+      "sha256": "6bb8932e82d8f39b59d2f39bd05169a1baf34e396420c1ed39954a6126f02b0b"
+    },
+    {
+      "source": "catkin_ws/src/cup_nav_bridge/config/vehicles/slicer.json",
+      "sha256": "ee200032367ff9a5fa8b967631f7dfa9c5546b2ec0c5be93f9552946ce4c3920"
+    }
+  ]
+}

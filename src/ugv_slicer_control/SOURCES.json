@@ -1,0 +1,119 @@
+{
+  "selected_slicer_input": "681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f",
+  "files": [
+    {
+      "file": "scripts/velocity_mux.py",
+      "source": "/home/rescue/industrial_cup_ros1/validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/Slicer_wasd_control/scripts/velocity_mux.py",
+      "sha256": "aa103a18f42ff3fd03ab305418a6c053939d534d3ba88f25503b7aa021162101",
+      "source_sha256": "aa103a18f42ff3fd03ab305418a6c053939d534d3ba88f25503b7aa021162101"
+    },
+    {
+      "file": "scripts/arc_velocity_guard.py",
+      "source": "/home/rescue/industrial_cup_ros1/validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/slicer_navigation/scripts/arc_velocity_guard.py",
+      "sha256": "865875d92845f824c51cacb4eb976a174576df929421c80e1d2003ad8036a3cd",
+      "source_sha256": "5f0af875447bd7711bd7374bda146bbad5fc21f65bf6da00e06b5197b56a006b",
+      "adaptation": "Selected adapter with actual standard planner binding (TEB/DWA) and full-command refusal of forbidden reverse before compensation."
+    },
+    {
+      "file": "scripts/control_core.py",
+      "source": "/home/rescue/industrial_cup_ros1/validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/Slicer_wasd_control/scripts/control_core.py",
+      "sha256": "887115871bd830f80cc4802bc218c253f0d82caa0cb03198bb5471647a7050b7",
+      "source_sha256": "8afb1b896fec4ea502ba31fc70f71cf3ee624c94ade5bfb1743be9f44cc6124d",
+      "adaptation": "Preserve PWM default; add explicit wheel-speed configuration validation and proportional SI differential kinematics to ABCD integer mm/s, with no host PID. 2026-10-25: explicit opt-in body_speed / 0x16 with independent 0x93 IMU feedback, existing owner and wheel odometry retained; no PWM/wheel fallback."
+    },
+    {
+      "file": "scripts/slicer_manual.py",
+      "source": "/home/rescue/industrial_cup_ros1/validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/Slicer_wasd_control/scripts/slicer_manual.py",
+      "sha256": "516ac357fb8c62841300fea768b9b6841b1ae3b99aa9f00927cd4d49b4593e40",
+      "source_sha256": "516ac357fb8c62841300fea768b9b6841b1ae3b99aa9f00927cd4d49b4593e40"
+    },
+    {
+      "file": "scripts/navigation_core.py",
+      "source": "/home/rescue/industrial_cup_ros1/validation/slicer-build-inputs/681de31eaeabf5ab2d96e9822d453de563ce8319c4c6227e64294d910688e07f/workspace/catkin_ws/src/slicer_navigation/scripts/navigation_core.py",
+      "sha256": "ef351590f91a37f59d1f74b7c630464c920ba7c39b3d92673aec050fff838d89",
+      "source_sha256": "1a3e9ff03442a0490ea44ad16bddcc162cd2291c37f9eab28a6210dce0cd0804",
+      "adaptation": "Selected adapter; actual selected-planner cap intersection; forbidden reverse arcs return an exact zero command, preserving legal pure turns."
+    }
+  ],
+  "controlled_driver_reference": {
+    "capture": "2026-10-23-final-capture/current-control-source",
+    "execution": "opt-in independent launch; teammate tree remains read-only",
+    "files": [
+      {
+        "file": "scripts/c30d_driver_node.py",
+        "source": "review_packages/slicer_ugv_review_2026-10-23/teammate_workspace_reference/catkin_ws/src/Slicer_wasd_control/scripts/c30d_driver_node.py",
+        "source_sha256": "6eb45d4a7ef5fab1f9e8aff50cd140cfd641c1936bd9adcf57032697a26187e1",
+        "sha256": "3d1d569145540ebea5e26334e36a75b45c97a8f1aed3b395667657df0fabeaf1",
+        "adaptation": "Explicit PWM default or opt-in MCU wheel-speed protocol; configure before speed, no nonzero protocol mixing or automatic fallback; zero on loss/fault/timeout/reversal, observation-independent close; retain instance diagnostics and odometry. Actual MCU loop is unverified. 2026-10-25: explicit opt-in body_speed / 0x16 with independent 0x93 IMU feedback, existing owner and wheel odometry retained; no PWM/wheel fallback."
+      },
+      {
+        "file": "scripts/c30d_link.py",
+        "source": "review_packages/slicer_ugv_review_2026-10-23/teammate_workspace_reference/catkin_ws/src/Slicer_wasd_control/scripts/c30d_link.py",
+        "source_sha256": "c30ab873e9719de0b92f0ad180f177722079aa6c1fe12dcdec94648b37bbf20d",
+        "sha256": "6f63a54d787ba6ecf29fb335181202bdebd94679db7a26257877ebb4d2846295",
+        "adaptation": "Retain existing SLC2 protocol; require integer wheel speeds and new configured telemetry after nonce ACK; observe configuration signs/ACK and individual transmissions without changing wire format. 2026-10-25: explicit opt-in body_speed / 0x16 with independent 0x93 IMU feedback, existing owner and wheel odometry retained; no PWM/wheel fallback."
+      },
+      {
+        "file": "scripts/chassis_core.py",
+        "source": "review_packages/slicer_ugv_review_2026-10-23/teammate_workspace_reference/catkin_ws/src/Slicer_wasd_control/scripts/chassis_core.py",
+        "source_sha256": "117bbed73a7566b94ef6817e0aaa54e4e762feda63226514343479739f528620",
+        "sha256": "117bbed73a7566b94ef6817e0aaa54e4e762feda63226514343479739f528620",
+        "adaptation": "Verbatim protocol/parser/odometry dependency."
+      },
+      {
+        "file": "scripts/serial_transport.py",
+        "source": "review_packages/slicer_ugv_review_2026-10-23/teammate_workspace_reference/catkin_ws/src/Slicer_wasd_control/scripts/serial_transport.py",
+        "source_sha256": "2f613825beb1310991b325470202d3e52f948fc22fe8580ff230642ce45bfb6d",
+        "sha256": "7fa308c567d200412390d163c5462eedd328ef25ce119f9e2702ce09ad1bc015",
+        "adaptation": "Only identity and Link.__init__/send/close; remove unused standalone legacy CLI and receive/stream helpers."
+      }
+    ],
+    "configuration": {
+      "file": "src/ugv_bringup/config/slicer_driver.yaml",
+      "source": "review_packages/slicer_ugv_review_2026-10-23/teammate_workspace_reference/catkin_ws/src/Slicer_wasd_control/config/teleop_params.yaml",
+      "source_sha256": "c365d778b07b39c53918b01f6464b3aada4aeb5e3da0cc5d230791726f61ebea",
+      "sha256": "09d45cdef7216213246022bd780630bbbb9c80a04a753d8dd2151fc882302032",
+      "adaptation": "Explicit pwm_reference default; preserve existing serial identity, PWM caps, signs, slew and watchdog; calibration limitations explicit."
+    },
+    "wheel_speed_configuration": {
+      "file": "src/ugv_bringup/config/slicer_driver_wheel_speed_reference.yaml",
+      "source": "review_packages/slicer_ugv_review_2026-10-23/teammate_workspace_reference/catkin_ws/src/Slicer_wasd_control/config/teleop_params.yaml",
+      "source_sha256": "c365d778b07b39c53918b01f6464b3aada4aeb5e3da0cc5d230791726f61ebea",
+      "sha256": "d9d0ff6bc99eb614c2700444d58ee9355acc5b890b80d4fc58e03dd21f370f04",
+      "adaptation": "Opt-in wheel_speed candidate only. Independent PWM signs derived from selected firmware reference bridge formulas; encoder signs retained as unverified candidates. No host PWM cap for 0x10; reference firmware cap and calibration uncertainty explicit. See docs/field/BASE_CONTROL_FINDINGS.md."
+    }
+  },
+  "hash_semantics": "source_sha256 identifies the recorded input; sha256 identifies the current adapted file. Audit metadata only; not a runtime gate.",
+  "body_control_reference": {
+    "captured": "2026-10-25",
+    "files": [
+      {
+        "source": "/home/potato/Slicer_Workspace/firmware/c30d_body_closed_loop/tools/body_link.py",
+        "source_sha256": "7528d4e2d53f173d40967a892a4ba4e11b7c233edf89a2f2775f2f0fea4d74f7"
+      },
+      {
+        "source": "/home/potato/Slicer_Workspace/catkin_ws/src/Slicer_wasd_control/scripts/c30d_driver_node.py",
+        "source_sha256": "cd721dfc728c50502a45e04c63e32fff5795067af7bf76e323c8c3cce673d661"
+      },
+      {
+        "source": "/home/potato/Slicer_Workspace/firmware/c30d_body_closed_loop/HARDWARE/usartx.h",
+        "source_sha256": "5b0eeb2f8cc4daeb2c66c6edf98597a2e8de2cda7cadf9859d4e23a5b5382782"
+      },
+      {
+        "source": "/home/potato/Slicer_Workspace/firmware/c30d_body_closed_loop/config.yaml",
+        "source_sha256": "4372931dc2026112270fcf659cf69b72ca70981809d54e4ca222c2cfdea3c5e4"
+      },
+      {
+        "source": "/home/potato/Slicer_Workspace/firmware/c30d_body_closed_loop/BALANCE/balance.c",
+        "source_sha256": "1778f21c74b6a4f56d8f1c990fb96812bbefdae7670ce5bf3b81fc0fcf0e6fea"
+      },
+      {
+        "source": "/home/potato/Slicer_Workspace/firmware/c30d_body_closed_loop/BALANCE/balance.h",
+        "source_sha256": "e7d5e4de6069f02ab7f93483142d02adc848ad39c3752393ca19db42bc4c8977"
+      }
+    ],
+    "adaptation": "Reuse existing 0x16 body command / 0x17 capability / 0x93 layout inside our existing Chassis, preserving diagnostic observation and dedicated-port close. IMU flags and advancing body feedback are required before nonzero; this metadata is not a runtime gate.",
+    "configuration": "src/ugv_bringup/config/slicer_driver_body_speed.yaml",
+    "hardware_validation": "pending user startup and controlled physical turn; no firmware flash in this task"
+  }
+}

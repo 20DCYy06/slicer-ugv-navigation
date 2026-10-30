@@ -1,0 +1,133 @@
+--- a/BALANCE/balance.c
++++ b/BALANCE/balance.c
+@@ -20,6 +20,11 @@
+ }
+ void body_update(float vx,float wz,float measured_vx,float measured_wz,float dt,
+                  int16_t wheels[4]){
++ /* A pure-turn request reversal invalidates only an opposing yaw I.
++  * Do this once at the command boundary, before the saturation snapshot.
++  * Keep feedback P/D (including braking), linear I and the wheel PI intact. */
++ if(vx==0&&body.target_vx==0&&wz*body.target_yaw<0&&body.yaw.integral*wz<0)
++  body.yaw.integral=0;
+  body.target_vx=vx;body.target_yaw=wz;
+  body.measured_vx=measured_vx;body.measured_yaw=measured_wz;
+  if(vx==0&&wz==0){body_reset();for(unsigned i=0;i<4;i++)wheels[i]=0;return;}
+--- a/tests/test_firmware.c
++++ b/tests/test_firmware.c
+@@ -251,8 +251,9 @@
+  for(unsigned n=0;n<400;n++){
+   int w=n<200?1:-1;yaw_step(0,w);yaw_record("micro_pure",n,w);
+   for(unsigned i=0;i<4;i++)assert(!targets[i]&&!duty[i]);
+-  /* A bounded, still-positive I may remain at reversal; do not reset PID. */
+-  if(n==200)assert(body.yaw.integral>0&&body.yaw.started);
++  /* Reversal may reject old yaw I, but must not amplify a sub-resolution
++   * request into motion or reset the unrelated PID history. */
++  if(n==200)assert(body.yaw.started&&!body.linear.integral);
+  }
+ }
+ static void yaw_reset_and_limits(void){
+@@ -305,10 +306,102 @@
+  printf("YAW_REVERSAL_ACCEPTANCE failures=%u\n",yaw_failures);
+  return yaw_failures?2:0;
+ }
++
++/* Catch a stale opposite yaw I suppressing a real pure-turn reversal.
++ * No motor/plant model: only actual firmware targets and timer commands. */
++static unsigned reversal_checks, reversal_failures;
++static void reversal_check(int ok,const char *name){
++ reversal_checks++;
++ if(!ok){reversal_failures++;printf("FAIL reversal %s\n",name);}
++}
++static void partial_reversal(int sign,unsigned history){
++ yaw_ready();
++ for(unsigned n=0;n<history;n++)yaw_step(0,sign*80);
++ for(unsigned n=0;n<10;n++){
++  yaw_step(0,-sign*80);
++  /* Hand calculation at rest after rejecting old opposite I:
++   * |wheel_ref|=(.08*.16 + .1*.08 + .2*.08*.01)*1000 -> 20 mm/s.
++   * The new request must not be suppressed by its opposite history. */
++  for(unsigned i=0;i<4;i++){
++   int side=(i==0||i==2)?1:-1;
++   reversal_check(targets[i]*(-sign)*side>=20,"partial_history_target");
++   reversal_check(duty[i]*pwm_sign[i]*(-sign)*side>=80,"partial_history_output");
++  }
++ }
++}
++static void ramp_reversal(int sign){
++ yaw_ready();for(unsigned n=0;n<120;n++)yaw_step(0,sign*80);
++ for(unsigned n=0;n<5;n++)yaw_step(0,sign*28);
++ yaw_step(0,-sign*24);
++ for(unsigned i=0;i<4;i++){
++  int side=(i==0||i==2)?1:-1;
++  /* 24 mrad/s fresh request -> 6 mm/s, then final 80 -> >=20. */
++  reversal_check(targets[i]*(-sign)*side>=6,"ramped_first_new_direction");
++ }
++ for(unsigned n=0;n<5;n++)yaw_step(0,-sign*24);
++ yaw_step(0,-sign*80);
++ for(unsigned i=0;i<4;i++){
++  int side=(i==0||i==2)?1:-1;
++  reversal_check(targets[i]*(-sign)*side>=20,"ramped_full_request");
++ }
++}
++static void reversal_braking(int sign){
++ yaw_ready();for(unsigned n=0;n<120;n++)yaw_step(0,sign*80);
++ yaw_outer_step(0,-sign*.08f,0,sign*.30f);
++ reversal_check(sign*(targets[0]-targets[1])<0,"brake_old_rotation");
++ /* Also brake overspeed already in the newly requested direction.
++  * The correction may legitimately oppose the target direction. */
++ yaw_ready();for(unsigned n=0;n<120;n++)yaw_step(0,sign*80);
++ yaw_outer_step(0,-sign*.08f,0,-sign*.30f);
++ reversal_check(sign*(targets[0]-targets[1])>0,"brake_new_direction_overspeed");
++}
++static void retain_useful_yaw_integral(int sign){
++ yaw_ready();
++ for(unsigned n=0;n<100;n++)yaw_outer_step(0,sign*.08f,0,sign*.16f);
++ float useful=body.yaw.integral;
++ yaw_outer_step(0,-sign*.08f,0,0);
++ reversal_check(body.yaw.integral*(-sign)>=useful*(-sign),
++                "retain_integral_already_helping_new_direction");
++}
++static void no_repeated_reset(void){
++ yaw_ready();for(unsigned n=0;n<120;n++)yaw_step(0,80);
++ yaw_step(0,-80);
++ for(unsigned n=0;n<100;n++)yaw_step(0,-80);
++ reversal_check(targets[0]<=-36,"same_request_integral_can_build");
++}
++
++static void reversal_saturation_and_linear_history(int sign){
++ yaw_ready();for(unsigned n=0;n<120;n++)yaw_step(0,sign*80);
++ body_update(0,-sign*3.5f,0,0,.01f,targets);
++ reversal_check(body.yaw.integral==0,"first_reversal_saturation_does_not_restore_old_I");
++ for(unsigned i=0;i<4;i++)reversal_check(absi(targets[i])<=800,"reversal_wheel_limit");
++ yaw_ready();
++ for(unsigned n=0;n<100;n++)yaw_outer_step(.2f,0,.1f,0);
++ for(unsigned n=0;n<120;n++)yaw_outer_step(0,sign*.08f,0,0);
++ float retained=body.linear.integral;
++ yaw_outer_step(0,-sign*.08f,0,0);
++ reversal_check(body.linear.integral==retained&&retained>0,"linear_history_unchanged");
++ reversal_check(sign*(targets[1]-targets[0])>=40,"yaw_differential_with_linear_history");
++}
++
++static int reversal_suite(void){
++ const unsigned histories[]={20,60,100,120,180,200};
++ for(int sign=-1;sign<=1;sign+=2){
++  for(unsigned i=0;i<sizeof(histories)/sizeof(histories[0]);i++)
++   partial_reversal(sign,histories[i]);
++  ramp_reversal(sign);reversal_braking(sign);retain_useful_yaw_integral(sign);
++  reversal_saturation_and_linear_history(sign);
++ }
++ no_repeated_reset();
++ printf("YAW_PARTIAL_HISTORY checks=%u failures=%u\n",reversal_checks,reversal_failures);
++ return reversal_failures?2:0;
++}
++
+ int main(int argc,char **argv){
+  assert(crc((const uint8_t*)"123456789",9)==0x29b1);
+  imu_and_pid();protocol_and_arbitration();telemetry_and_legacy();bridge_and_saturation();
+  puts("BODY_PID_IMU_CONVERSION_POLARITY_ARBITRATION_WATCHDOG_PROTOCOL_PASS");
++ if(argc==2&&!strcmp(argv[1],"--reversal-regression"))return reversal_suite();
+  if(argc==3&&!strcmp(argv[1],"--yaw-suite"))return yaw_suite(argv[2]);
+- return 0;
+-}
++ return reversal_suite();
++}

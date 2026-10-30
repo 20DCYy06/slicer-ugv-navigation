@@ -1,0 +1,14 @@
+# Opt-in odom navigation trial, loaded AFTER the existing move_base defaults.
+# Only global planning is changed. The local costmap, DWA, footprint, velocity
+# limits and Guard/Mux remain exactly as in slicer_odom.launch.
+global_costmap:
+  width: 12.0
+  height: 12.0
+  rolling_window: true
+
+GlobalPlanner:
+  # A (3,4) goal from near (0,0) is 5 m away, beyond the existing <=4 m
+  # ray-clearing horizon. Permit an optimistic global route through unknown
+  # cells; keep track_unknown_space=true and the local collision checks.
+  # This neither marks unseen space free nor guarantees that a route exists.
+  allow_unknown: true

@@ -1,0 +1,24 @@
+<launch>
+  <!-- Consume existing Slicer localization and safety components. No drivers,
+       TF publishers, static map, AMCL, or hardware lifecycle here. -->
+  <arg name="namespace" default="ugv"/>
+  <arg name="odom_topic" default="/odom"/>
+  <arg name="scan_topic" default="/scan"/>
+  <arg name="cmd_vel_topic" default="cmd_vel/nav_raw"/>
+  <arg name="global_frame" default="odom"/>
+  <arg name="base_frame" default="base_link"/>
+  <!-- Standard plugins: teb remains the explicit comparison baseline. -->
+  <arg name="local_planner" default="teb"/>
+  <arg name="config_dir" default="$(find ugv_bringup)/config"/>
+  <group ns="$(arg namespace)">
+    <include file="$(find ugv_navigation)/launch/move_base.launch">
+      <arg name="config_dir" value="$(arg config_dir)"/>
+      <arg name="odom_topic" value="$(arg odom_topic)"/>
+      <arg name="scan_topic" value="$(arg scan_topic)"/>
+      <arg name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
+      <arg name="global_frame" value="$(arg global_frame)"/>
+      <arg name="base_frame" value="$(arg base_frame)"/>
+      <arg name="local_planner" value="$(arg local_planner)"/>
+    </include>
+  </group>
+</launch>

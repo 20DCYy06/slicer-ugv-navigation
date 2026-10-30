@@ -1,0 +1,8 @@
+{
+  "repository": "/home/rescue/slicer_ugv_ros1/.worktrees/online-nav-20261030/slicer_ugv_ros1",
+  "branch": "offline/rtk-reuse-20261030",
+  "commit": "27488d3a75f3a827de432c9056e65aa34e428dac",
+  "working_tree_clean": true,
+  "source_snapshot": "git archive HEAD; no files from dirty old root included",
+  "software_validation": "431 tests and ARM build/install previously passed; see validation/; not new field validation"
+}

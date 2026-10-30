@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.0.2)
+project(cup_gnss)
+find_package(catkin REQUIRED COMPONENTS rospy std_msgs sensor_msgs diagnostic_msgs)
+catkin_python_setup()
+catkin_package()
+catkin_install_python(PROGRAMS scripts/gnss_node.py scripts/gnss_status.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY LICENSES reference DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+if(CATKIN_ENABLE_TESTING)
+  foreach(case core sources quality ntrip upstream_ntrip serial_rtcm upstream_nmea upstream_nmea_ros mature_default enu evidence_epochs)
+    catkin_add_nosetests(tests/test_${case}.py)
+  endforeach()
+endif()

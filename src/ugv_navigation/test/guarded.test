@@ -1,0 +1,13 @@
+<launch>
+  <!-- TEST_ONLY: no driver. Run with tools/noetic.sh, network none, no devices. -->
+  <param name="use_sim_time" value="false"/>
+  <include file="$(find ugv_bringup)/launch/slicer_odom.launch">
+    <arg name="connect_control" value="true"/>
+    <arg name="source_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="control_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="raw_topic" value="/TEST_ONLY_chain/raw"/>
+    <arg name="release_owner" value="/TEST_ONLY_chain_operator"/>
+  </include>
+  <test test-name="guarded_navigation" pkg="ugv_navigation"
+        type="test_guarded_navigation.py" name="TEST_ONLY_chain_operator" time-limit="120.0"/>
+</launch>

@@ -1,0 +1,61 @@
+<launch>
+  <!-- Compose online mapping with our existing localization/control owners.
+       No driver, control release, waypoint sender, or teammate full nav launch. -->
+  <arg name="namespace" default="ugv"/>
+  <arg name="local_planner" default="dwa"/>
+  <arg name="start_sensors" default="false"/>
+  <arg name="enable_depth" default="true"/>
+  <arg name="start_camera" default="false"/>
+  <arg name="camera_serial" default=""/>
+  <arg name="connect_control" default="false"/>
+  <arg name="start_mux" default="true"/>
+  <arg name="odom_topic" default="/odom"/>
+  <arg name="scan_topic" default="/scan"/>
+  <arg name="sensor_root" default="$(find ugv_bringup)/config/online_runtime"/>
+  <arg name="source_config" default="$(arg sensor_root)/config/slicer_config.yaml"/>
+  <arg name="control_config" default="$(find slicer_wasd_control)/config/teleop_params.yaml"/>
+  <arg name="depth_config" default="$(find ugv_bringup)/config/depth_camera.yaml"/>
+  <arg name="gmapping_config" default="$(find ugv_bringup)/config/gmapping_online.yaml"/>
+  <!-- Initial map allocation, NOT sensor range or a claim of observed free space.
+       60 m in either direction accommodates rotated field coordinates. Profile
+       CPU/RAM on Jetson; reduce this to the known arena/goal extent when available. -->
+  <arg name="initial_map_half_extent" default="60.0"/>
+
+  <include if="$(arg start_sensors)" file="$(find ugv_bringup)/launch/slicer_sensors.launch">
+    <arg name="root" value="$(arg sensor_root)"/>
+    <arg name="rviz" value="false"/>
+    <arg name="tune_ekf" value="true"/>
+  </include>
+
+  <!-- Gmapping is the sole owner of map -> odom. -->
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" required="true">
+    <rosparam command="load" file="$(arg gmapping_config)"/>
+    <param name="xmin" value="$(eval -float(arg('initial_map_half_extent')))"/>
+    <param name="ymin" value="$(eval -float(arg('initial_map_half_extent')))"/>
+    <param name="xmax" value="$(arg initial_map_half_extent)" type="double"/>
+    <param name="ymax" value="$(arg initial_map_half_extent)" type="double"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+    <remap from="map" to="/map"/>
+  </node>
+
+  <include if="$(arg enable_depth)" file="$(find ugv_bringup)/launch/slicer_depth.launch">
+    <arg name="config_file" value="$(arg depth_config)"/>
+    <arg name="start_camera" value="$(arg start_camera)"/>
+    <arg name="camera_serial" value="$(arg camera_serial)"/>
+  </include>
+
+  <include file="$(find ugv_bringup)/launch/slicer_odom.launch">
+    <arg name="namespace" value="$(arg namespace)"/>
+    <arg name="local_planner" value="$(arg local_planner)"/>
+    <arg name="connect_control" value="$(arg connect_control)"/>
+    <arg name="start_mux" value="$(arg start_mux)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="scan_topic" value="$(arg scan_topic)"/>
+    <arg name="source_config" value="$(arg source_config)"/>
+    <arg name="control_config" value="$(arg control_config)"/>
+    <arg name="global_costmap_config" value="$(find ugv_bringup)/config/online_map.yaml"/>
+  </include>
+  <!-- Load the reused depth layer only when its processor is enabled. -->
+  <rosparam if="$(arg enable_depth)" command="load" ns="$(arg namespace)/move_base"
+            file="$(find ugv_bringup)/config/depth_costmap.yaml"/>
+</launch>

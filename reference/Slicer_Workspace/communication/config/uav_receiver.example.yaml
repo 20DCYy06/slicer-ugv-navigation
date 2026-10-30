@@ -1,0 +1,8 @@
+# UAV receive whitelist: useful robot telemetry only; test topic removed.
+# Do not load this on the UGV in place of sync_topics.yaml.
+sync_topics:
+  - /ugv/odom
+  - /ugv/pose
+  - /ugv/chassis_ready
+  - /ugv/mission/state
+# Apply manually on UAV and restart only its dedicated master_sync process.

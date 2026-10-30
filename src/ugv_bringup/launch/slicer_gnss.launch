@@ -1,0 +1,8 @@
+<launch>
+  <!-- Standalone receiver on the caller's ROS_MASTER_URI. No navigation,
+       localization TF, chassis driver, goals or control ownership changes. -->
+  <arg name="config_file" default="$(find ugv_bringup)/config/slicer_gnss.yaml"/>
+  <node pkg="cup_gnss" type="gnss_node.py" name="cup_gnss" output="screen">
+    <rosparam command="load" file="$(arg config_file)"/>
+  </node>
+</launch>

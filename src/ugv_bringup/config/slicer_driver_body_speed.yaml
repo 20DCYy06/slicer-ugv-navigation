@@ -1,0 +1,62 @@
+# Explicit opt-in for the teammate MCU body/IMU extension (0x16/0x93).
+# Input remains final Mux Twist. Host sends mm/s and mrad/s, not wheel targets.
+# MCU owns body feedback, wheel conversion, PI, output caps and watchdog.
+# max_wheel_mm_s / ros_driver_pwm_limit_permille are compatibility declarations;
+# 0x16 does not carry a host wheel/PWM cap. Guard/DWA limits remain unchanged.
+# Encoder geometry below continues to serve wheel/odom only; no TF or EKF change.
+# Protocol reference: .test-results/body-speed-20261025/reference/SHA256SUMS
+control_mode: body_speed
+serial_port: auto
+usb_vid: 6790
+usb_pid: 21972
+serial_number: 5CF0016377
+baud: 115200
+counts_per_revolution: 60000
+max_wheel_mm_s: 600
+test_pwm_limit_permille: 750
+ros_driver_pwm_limit_permille: 600
+pwm_signs:
+- -1
+- 1
+- 1
+- 1
+test_pwm_signs:
+- 1
+- -1
+- 1
+- -1
+encoder_signs:
+- -1
+- 1
+- -1
+- 1
+wheel_ports:
+  left_front: D
+  right_front: C
+  left_rear: B
+  right_rear: A
+wheel_diameter: 0.085
+track_width: 0.15
+test_duty_permille: 250
+wasd_spin_pwm_permille: 300
+test_slew_permille_s: 1000
+turn_gain_permille_per_rad_s: 283.11258278
+linear_speed: 0.22
+initial_scale: 1.0
+min_scale: 0.2
+max_scale: 2.0
+scale_step: 0.2
+key_timeout_s: 0.25
+telemetry_timeout_s: 0.5
+publish_hz: 20
+command_timeout_s: 0.25
+teleop_topic: /teleop/cmd_vel
+nav_topic: /cmd_vel/nav
+mission_topic: /cmd_vel/mission
+output_topic: /cmd_vel
+odom_topic: /wheel/odom
+odom_frame: odom
+base_frame: base_link
+publish_tf: false
+body_feedback_timeout_s: 0.3
+body_imu_timeout_ms: 100

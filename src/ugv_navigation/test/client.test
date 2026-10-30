@@ -1,0 +1,6 @@
+<launch>
+  <!-- TEST_ONLY; same network-none/no-device requirement as odom.test. -->
+  <include file="$(find ugv_navigation)/test/software_demo.launch"/>
+  <test test-name="goal_process" pkg="ugv_navigation"
+        type="test_goal_process.py" time-limit="80"/>
+</launch>

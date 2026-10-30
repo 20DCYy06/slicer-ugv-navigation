@@ -1,0 +1,30 @@
+{
+  "kind": "cup_gnss_service",
+  "schema_version": 1,
+  "host": "103.143.19.54",
+  "selected_port": 8003,
+  "selected_mountpoint": "RTCM33GRCEJpro",
+  "tls": false,
+  "ports": {
+    "8001": {
+      "frame": "ITRF2008",
+      "reference_epoch": "2016",
+      "verified": false
+    },
+    "8002": {
+      "frame": "WGS84",
+      "reference_epoch": "2005",
+      "verified": false
+    },
+    "8003": {
+      "frame": "CGCS2000",
+      "reference_epoch": "2000",
+      "verified": false
+    }
+  },
+  "mountpoints": [
+    "RTCM32GRCpro",
+    "RTCM33GRCEJpro"
+  ],
+  "provider_declared_expiry": null
+}

@@ -1,0 +1,314 @@
+# 唯一现场参数入口；.generated/ 内为自动生成文件，不要手改。
+schema_version: 1
+runtime:
+  docker_image: slicer-fkie:latest
+  ros_master_uri: http://127.0.0.1:11311
+  build_jobs: 2
+frames: {map: map, odom: odom, base: base_link, laser: laser_link, arm: arm_base_link}
+chassis:
+  serial_port: /dev/ttyACM0
+  fallback_port: /dev/ttyUSB0
+  usb_vid: 0x1a86
+  usb_pid: 0x55d4
+  serial_number: '5CF0016379'
+  baud: 115200
+  firmware_confirmed: false        # 源码未刷板，禁止向出厂固件发送速度
+  polarity_verified: false         # 架空实测四轮方向后才设 true
+  host_uart: 1                     # 源码接入 USART1；刷板前核对 USB 桥接走线
+  uart_route_verified: false
+  wheel_diameter: 0.085
+  wheel_radius: 0.0425
+  wheelbase: 0.17
+  track_width: 0.15
+  body_length: 0.23
+  body_width: 0.18
+  encoder_lines: 500              # 轮端暂定换算因子；1560 为电机轴标称，不可代替轮端实测
+  gear_ratio: 30
+  quadrature: 4
+  counts_per_revolution: 60000   # 轮端暂定，实测近一圈约 54688；待精确标定
+  port_order: [A, B, C, D]
+  wheel_ports: {left_front: D, right_front: C, left_rear: B, right_rear: A}
+  # 原厂电气极性初值，不等于已验证整车前进方向。正数表示车辆向前。
+  encoder_signs: [1, 1, -1, -1]
+  pwm_signs: [-1, -1, 1, 1]
+  control_hz: 100
+  telemetry_hz: 25
+  firmware_watchdog_ms: 500
+  host_watchdog_s: 0.25
+  telemetry_timeout_s: 0.25
+  max_linear: 0.25
+  max_angular: 0.6
+  max_wheel_speed: 0.40
+  velocity_kp: 700.0              # 原厂 PI 初值，架空验收后调参
+  velocity_ki: 700.0
+  pwm_limit: 16500
+  pi_output_limit: 16800
+  accel_linear: 0.25
+  accel_angular: 0.8
+  pose_covariance: [0.04, 0.04, 0.09]
+  twist_covariance: [0.01, 0.04]
+teleop:
+  linear_speed: 0.22
+  angular_speed: 0.5
+  key_timeout_s: 0.25
+  initial_scale: 1.0
+  scale_step: 0.1
+  min_scale: 0.1
+  max_scale: 1.0
+  publish_hz: 20
+# 独立原厂协议 WASD；不解除上方新增固件驱动的任何保护。
+factory_wasd:
+  serial_port: auto               # 可填设备路径，但仍强制核对 VID/PID/序列号
+  usb_vid: 0x1a86
+  usb_pid: 0x55d4
+  serial_number: '5CF0016377'      # 新 UART；不允许回退到 RTK
+  baud: 115200
+  linear_speed: 0.3               # 保留现场修改；旧原厂协议入口不用于当前SLC2
+  angular_speed: 0.25             # rad/s；A/D 纯旋转
+  max_linear_speed: 0.15
+  max_angular_speed: 0.50
+  accel_linear: 0.15              # m/s^2；仅非零指令平滑，失效立即归零
+  accel_angular: 0.60             # rad/s^2
+  initial_scale: 1.0
+  min_scale: 0.2
+  max_scale: 2.0
+  scale_step: 0.2
+  key_timeout_s: 0.25             # 终端没有松键事件；最后按键后自动停车
+  telemetry_timeout_s: 0.5
+  publish_hz: 20
+  invert_linear: false           # 仅翻转整车目标，不是编码器/PID极性修复
+  invert_angular: false
+# F407VET6 新固件；编译固件前修改此段，build.py 生成参数头。
+c30d_firmware:
+  pwm_test_max_ms: 0              # 连续WASD；500ms通信超时保护仍然有效
+  part: STM32F407VET6
+  baud: 115200
+  counts_per_revolution: 60000    # 500 × 30 × 4；暂定值
+  wheel_diameter_m: 0.085
+  control_ms: 10
+  telemetry_ms: 40
+  watchdog_ms: 500
+  closed_loop_stall_timeout_ms: 3000     # 持续堵转约3秒才锁停，允许低速PI起转建立力矩
+  closed_loop_direction_timeout_ms: 1000 # 持续反向约1秒才锁停，容许换向惯性
+  min_battery_mv: 10000
+  max_wheel_mm_s: 600            # 闭环单轮目标限幅；mm/s
+  encoder_max_speed_m_s: 1.00    # 约2247脉冲/10ms；高于实测单帧2049，仍保留单周期超速锁停
+  pwm_limit_permille: 600        # 仅已标定闭环；60%上限，不保证达到目标速度
+  pwm_test_limit_permille: 750   # 开环PWM测试硬限幅75%；默认按键占空比仍由下方分别设置
+  calibration_permille: 150
+  calibration_ms: 250
+  kp: 1.0
+  ki: 4.0
+  feedforward: 3.0
+# 历史限时测试配置；新WASD唯一入口为catkin_ws/src/Slicer_wasd_control/config/teleop_params.yaml
+c30d_wasd:
+  control_mode: pwm_test
+  test_pwm_signs: [1, -1, 1, -1]
+  test_duty_permille: 250
+  test_turn_duty_permille: 400
+  test_slew_permille_s: 1000
+  test_max_hold_s: 1.5
+  serial_port: auto
+  usb_vid: 0x1a86
+  usb_pid: 0x55d4
+  serial_number: '5CF0016377'
+  baud: 115200
+  counts_per_revolution: 60000   # 握手必须与固件一致
+  max_wheel_mm_s: 600
+  track_width_m: 0.15
+  wheel_ports: {left_front: D, right_front: C, left_rear: B, right_rear: A}
+  # 电气正向不等于车辆前进方向；架空验证后可逐通道改 +/-1。
+  pwm_signs: [1, 1, 1, 1]
+  encoder_signs: null             # --calibrate 架空限幅标定后写入，不猜测相序
+  linear_speed: 0.30             # 仅--closed-loop模式生效；开环使用test_duty_permille
+  angular_speed: 0.40
+  max_linear_speed: 0.60
+  max_angular_speed: 0.60
+  accel_linear: 0.20
+  accel_angular: 0.80
+  initial_scale: 1.0
+  min_scale: 0.2
+  max_scale: 2.0
+  scale_step: 0.2
+  key_timeout_s: 0.25
+  telemetry_timeout_s: 0.5
+  publish_hz: 20
+  invert_linear: false
+  invert_angular: false
+sensors:
+  base_to_laser: {xyz: [0.07, 0.0, 0.18], quaternion: [0, 0, 0, 1]}
+  laser_to_arm: {xyz: [0.0, 0.0, 0.045], quaternion: [0, 0, 0, 1]}
+  lidar_ip: 192.168.1.192
+  host_lidar_ip: 192.168.1.5
+  lidar_interface: enP8p1s0
+  lidar_publish_hz: 10.0
+  # Livox 官方内部外参：p_IMU = R * p_LIDAR + t，不是安装高度。
+  lidar_to_imu_translation: [-0.011, -0.02329, 0.04412]
+  lidar_to_imu_rotation: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+  lio_pose_variance: [0.0025, 0.0025, 0.0025]
+  scan_min_height: 0.05 
+  scan_max_height: 0.50
+  scan_range_min: 0.05
+  scan_range_max: 20.0
+  scan_angle_increment: 0.008726646
+  self_filter_padding: 0.01
+  arm_self_filter_min_z: 0.23  # 已测最低舵机离地23cm；夹爪若更低，需现场测量后调整
+  front_fov_deg: 160.0          # 前进近障限速和 /scan_front；/scan 仍保留 360 度安全观测
+  camera_width: 640
+  camera_height: 480
+  camera_fps: 15
+navigation:
+  A: null
+  B: null
+  map_file: null                    # 新场地建图保存后填 maps/xxx.yaml
+  footprint_padding: 0.03       # 按实测外包络外扩 3 cm；生成时只扩一次
+  travel_envelope: {rear_x: -0.10, front_x: 0.17, half_width: 0.11}  # 雷达前置7cm，夹爪再前伸10cm；总宽22cm
+  front_stop_distance: 0.15     # 雷达中心至正前方障碍至少15cm（夹爪前端约剩5cm）
+  inflation_radius: 0.192       # 本次修改前 0.24 m 的 80%，全局/局部代价地图共用
+  cost_scaling_factor: 4.5
+  min_obstacle_dist: 0.144       # 原 0.12 m 的 1.2 倍；相对于已外扩足迹的 TEB 软间距
+  obstacle_range: 3.0
+  raytrace_range: 4.0
+  min_obstacle_height: -0.05
+  max_forward: 0.9           # 导航前进速度上限减半，给弯道跟踪留更多时间
+  max_reverse: 0.0              # 导航出口硬禁车体后退，保留两侧轮反向自转
+  turn_start_angular: 2.1192982456  # 保留原导航起转角速度；闭环出口按轮速执行
+  min_turning_radius: 0.0       # 用户确认：允许原地差速自转
+  teb_forward_drive_weight: 900.0
+  max_angular: 2.4725146199  # 保留现有导航最大角速度 rad/s
+  accel_linear: 0.2
+  accel_angular: 1.20
+  xy_tolerance: 0.15
+  yaw_tolerance: 0.30           # TEB与巡航一致，避免到点后过度磨蹭
+  controller_hz: 10.0
+  planner_hz: 1.0
+  local_costmap_publish_hz: 4.0
+  goal_timeout_s: 120.0
+  local_size: 5.0
+  costmap_resolution: 0.05
+  odometry_fusion_hz: 30
+  amcl_min_particles: 500
+  amcl_max_particles: 2000
+  amcl_xy_variance: 0.05
+  amcl_yaw_variance: 0.09
+mission:
+  search_angular_speed: 0.35
+  search_timeout_s: 30.0
+  vision_timeout_s: 3.0
+  align_kp: 1.0
+  align_tolerance: 0.08
+  align_timeout_s: 20.0
+  settling_time_s: 0.5
+arm:
+  initial_positions: [500, 270, 970, 1100, 540, 300]
+  soft_limits: {1: [-100, 930], 2: [60, 800], 3: [340, 980], 4: [450, 1180], 5: [410, 610], 6: [80, 950]}
+  gripper_open_pos: 300
+  gripper_close_pos: null          # 现场夹持标定后填入，不以900冒充实测
+  gripper_calibrated: false
+  mapping_confirmed: true
+  logical_to_protocol:
+    1: {logical_range: [-100, 930], protocol_range: [0, 1000]}
+    2: {scale: 1.0, offset: 0.0}
+    3: {scale: 1.0, offset: 0.0}
+    4: {logical_range: [450, 1180], protocol_range: [0, 1000]}
+    5: {scale: 1.0, offset: 0.0}
+    6: {scale: 1.0, offset: 0.0}
+  serial_port: null
+  serial_number: '5CE5119829'
+  blocked_serials: ['5185028488', '5CF0016379']
+  baud: 115200
+  position_tolerance: 5
+  max_joint_step: 30
+  min_segment_time_s: 0.25
+  move_time_s: 2.0
+  arrival_timeout_s: 3.0
+  cartesian_step_m: 0.005
+  cartesian_speed_mps: 0.03
+  joint_path_tcp_tolerance_m: 0.015
+  stop_on_exit: true
+kinematics:
+  backend: package
+  # 从现有 arm.json 原样迁移的连杆模型；base 是模型内部尺寸，不可再加TF安装高度。
+  links_m: {base: 0.217, link1: 0.085, link2: 0.085, link3: 0.050, tool: 0.121}
+  joint_calibration:
+    - {neutral_pulse: 500, angle_at_neutral_deg: 0.0, degrees_per_pulse: 0.24, angle_limits_deg: [-120.2, 120.2]}
+    - {neutral_pulse: 500, angle_at_neutral_deg: -90.0, degrees_per_pulse: -0.24, angle_limits_deg: [-186.2, 6.2]}
+    - {neutral_pulse: 500, angle_at_neutral_deg: 0.0, degrees_per_pulse: -0.24, angle_limits_deg: [-120.2, 120.2]}
+    - {neutral_pulse: 500, angle_at_neutral_deg: -90.0, degrees_per_pulse: -0.24, angle_limits_deg: [-200.2, 20.2]}
+    - {neutral_pulse: 500, angle_at_neutral_deg: 0.0, degrees_per_pulse: 0.24, angle_limits_deg: [-120.2, 120.2]}
+  tcp_length: 0.121
+  tcp_offset: [0.0, 0.0, 0.121]
+  R_model_tool_flange: [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+  flange_at_link3_end: true
+  tool_m: 0.121
+  tcp_calibrated: true
+  pitch_deg: 90.0
+  roll_deg: 0.0
+  search_pitch: false
+  max_position_error_m: 0.002
+  max_rotation_error_deg: 1.0
+camera:
+  color_topic: /camera/color/image_raw
+  depth_topic: /camera/aligned_depth_to_color/image_raw
+  info_topic: /camera/color/camera_info
+  debug_topic: /slicer_grasp/debug_image
+  aligned_depth_required: true
+  sync_slop_s: 0.04
+  frame_timeout_s: 1.0
+  camera_wait_timeout_s: 30.0
+  depth_scale_16u: 0.001
+  mounting: eye_in_hand
+  extrinsics_calibrated: false
+  T_tool_camera_optical: null
+  T_base_camera_optical: null
+  # 用户授权几何初值：仅观测初始姿态有效，不能用于真机抓取。
+  T_base_camera_initial_guess: [[0, 0, 1, 0.12], [-1, 0, 0, 0.0], [0, -1, 0, 0.035], [0, 0, 0, 1]]
+  camera_height_ground_m: 0.26
+  camera_to_base_dist: 0.12
+  base_height_ground_m: 0.225
+  extrinsic_height_tolerance_m: 0.03
+  distortion_model: plumb_bob
+vision:
+  lower_red_1: [0, 100, 70]
+  upper_red_1: [10, 255, 255]
+  lower_red_2: [170, 100, 70]
+  upper_red_2: [180, 255, 255]
+  min_contour_area: 200
+  max_contour_area: 180000
+  morph_kernel: 3
+  min_depth_m: 0.10
+  max_depth_m: 1.5
+  min_depth_pixels: 25
+  min_valid_fraction: 0.30
+  max_depth_mad_m: 0.015
+  aspect_ratio: [0.5, 2.0]
+  min_extent: 0.45
+  stable_frames: 5
+  stable_distance_m: 0.01
+  detection_timeout_s: 40.0
+  surface_to_tcp_offset_m: [0.0, 0.0, 0.0]
+task:
+  lift_height: 0.06
+  pregrasp_height_m: 0.04
+  preapproach_clearance_m: 0.02
+  place_servo_1_target: null
+  servo_1_turn_offset: 180
+  place_plane_z_m: null
+  place_tcp_offset_m: 0.02
+  scene_calibrated: false
+  workspace_min_m: [-0.35, -0.35, 0.01]
+  workspace_max_m: [0.35, 0.35, 0.5]
+  gripper_dwell_s: 0.7
+  settle_s: 0.4
+  cycle_pause_s: 2.0
+  max_cycles: 1
+calibration:
+  chessboard_inner_corners: [7, 5]
+  square_size_m: null             # 实测棋盘方格边长，未填不允许求解
+  min_samples: 12
+mock:
+  target_base_m: [0.18, 0.0, 0.12]
+  place_plane_z_m: 0.10
+  gripper_close_pos: 900          # 只供仿真，不写回 arm.gripper_close_pos
+  time_scale: 0.0
+  seed: 18

@@ -1,0 +1,9 @@
+{
+  "sourceFiles": 24,
+  "artifactFiles": 8,
+  "mismatches": [],
+  "all_build_commands_exit_zero": true,
+  "bin_sha256": "3849abee0451ef94a6ac5bfd5bbe508c7ca9da016ae87afed70ee09ea18a17a4",
+  "flashed": false,
+  "vehicle_motion_validated": false
+}

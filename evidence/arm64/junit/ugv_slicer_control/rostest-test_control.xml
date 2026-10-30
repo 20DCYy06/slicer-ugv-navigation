@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="1" time="19.373"><testcase classname="rostest.runner.RosTest" name="testmove_base" time="19.3726" /><system-out>&lt;![CDATA[
+[ROSTEST]setup[/workspace/src/ugv_slicer_control/test/control.test] run_id[73f64310-d439-11f1-8ab0-3d913827e446] starting
+&amp;#x001B;[1mstarted roslaunch server http://127.0.0.1:37235/&amp;#x001B;[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /slicer_velocity_mux/config_file: /workspace/src/ug...
+ * /slicer_velocity_mux/manual_release_owner: /ugv/control
+
+NODES
+  /
+    slicer_velocity_mux (ugv_slicer_control/velocity_mux.py)
+
+[ROSTEST]setup[/workspace/src/ugv_slicer_control/test/control.test] run_id[73f64310-d439-11f1-8ab0-3d913827e446] done
+[ROSTEST]Running test [move_base]
+&amp;#x001B;[1mROS_MASTER_URI=http://127.0.0.1:35817/&amp;#x001B;[0m
+&amp;#x001B;[1msetting /run_id to 73f64310-d439-11f1-8ab0-3d913827e446&amp;#x001B;[0m
+&amp;#x001B;[1mprocess[slicer_velocity_mux-1]: started with pid [1436]&amp;#x001B;[0m
+[ROSTEST]running test move_base
+&amp;#x001B;[1mprocess[ugv/move_base-2]: started with pid [1437]&amp;#x001B;[0m
+&amp;#x001B;[1m[ugv/move_base-2] process has finished cleanly
+log file: /workspace/.ros/log/73f64310-d439-11f1-8ab0-3d913827e446/ugv-move_base-2*.log&amp;#x001B;[0m
+[ROSTEST]test [move_base] finished
+[ROSTEST]test [move_base] results are in [/workspace/build/test_results/ugv_slicer_control/rosunit-move_base.xml]
+[ROSTEST]test [move_base] results summary: 0 errors, 0 failures, 1 tests
+[ROSTEST][ROSTEST] test [move_base] done
+[ROSTEST]tearDown[/workspace/src/ugv_slicer_control/test/control.test]
+shutting down processing monitor...
+[slicer_velocity_mux-1] killing on exit
+... shutting down processing monitor complete
+[ROSTEST]rostest teardown /workspace/src/ugv_slicer_control/test/control.test complete
+
+]]&gt;</system-out><system-err>&lt;![CDATA[
+
+]]&gt;</system-err></testsuite>

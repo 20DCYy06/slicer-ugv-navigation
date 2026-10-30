@@ -1,0 +1,146 @@
+{
+  "source_commit": "27488d3a75f3a827de432c9056e65aa34e428dac",
+  "previous_commit": "d1bba69c3870e081d5569723d74a1a10fb91670d",
+  "source_archive_sha256": "cc739451c2030150a46a055ab24524a2946afcbb54c6f4d10b5623e2cee96b4c",
+  "root": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030",
+  "uid": 1000,
+  "gid": 1000,
+  "image": {
+    "tag": "ugv-online-rtk:arm64-20261030",
+    "id": "sha256:5a194ce7eb0689b4a7eea4ddefd360db747fd631136877ced77de5d4c1485c28",
+    "architecture": "arm64"
+  },
+  "build_exit_code": 0,
+  "tools_tests": 153,
+  "catkin_tests": 278,
+  "total_tests": 431,
+  "failures": 0,
+  "skips": 0,
+  "configs": [
+    {
+      "name": "slicer_gnss.yaml",
+      "source": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/src/ugv_bringup/config/slicer_gnss.yaml",
+      "installed": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/install/share/ugv_bringup/config/slicer_gnss.yaml",
+      "sha256": "8dc552f073cc1b0759a16c3a59996a710eed80ebd324152429ee199a66114278",
+      "installed_byte_identical": true
+    },
+    {
+      "name": "gnss_site.yaml",
+      "source": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/src/ugv_bringup/config/gnss_site.yaml",
+      "installed": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/install/share/ugv_bringup/config/gnss_site.yaml",
+      "sha256": "bfc716223132aaf09b1e6c11d936c64adcfc06849a92bee8bf4ff020aa51dd96",
+      "installed_byte_identical": true
+    },
+    {
+      "name": "gnss_enu_origin.json",
+      "source": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/src/ugv_bringup/config/gnss_enu_origin.json",
+      "installed": "/home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/install/share/ugv_bringup/config/gnss_enu_origin.json",
+      "sha256": "55448cb7fd7c55ceb393dee2dd5daa91b0399bd5c076ee86623b9ef26605aa35",
+      "installed_byte_identical": true
+    }
+  ],
+  "dependency_versions": {
+    "architecture": "aarch64",
+    "packages": {
+      "ros-noetic-ntrip-client": "1.4.1-1focal.20250520.012828",
+      "ros-noetic-nmea-navsat-driver": "0.6.1-2focal.20250520.030031",
+      "ros-noetic-rtcm-msgs": "1.1.6-1focal.20250426.030653",
+      "ros-noetic-nmea-msgs": "1.1.0-1focal.20250426.030516",
+      "python3-serial": "3.4-5.1",
+      "ros-noetic-realsense2-camera": "2.3.2-1focal.20250521.025003",
+      "ros-noetic-librealsense2": "2.50.0-1focal.20250426.013030",
+      "ros-noetic-ddynamic-reconfigure": "0.4.2-1focal.20250521.010018"
+    }
+  },
+  "pty": {
+    "test_only": true,
+    "result": "PASS",
+    "duration_s": 17.520310936999977,
+    "nmea_backend": "nmea_navsat_driver/0.6.1",
+    "ntrip_backend": "ntrip_client/1.4.1",
+    "phases": [
+      {
+        "phase": "sole_serial_owner",
+        "mono_s": 1209.523391713,
+        "wall_s": 1793347931.4374213,
+        "pid": 92,
+        "fd": "16",
+        "path": "/dev/pts/0"
+      },
+      {
+        "phase": "q4_fresh_upstream_fix",
+        "mono_s": 1210.530035578,
+        "wall_s": 1793347932.4440646,
+        "covariance": "UNKNOWN",
+        "receipt_minus_gga_tod_s": 1.2568948364205426
+      },
+      {
+        "phase": "q5_float_not_fixed",
+        "mono_s": 1211.532824965,
+        "wall_s": 1793347933.4468536
+      },
+      {
+        "phase": "q0_no_fix",
+        "mono_s": 1212.535547632,
+        "wall_s": 1793347934.4495761
+      },
+      {
+        "phase": "q4_recovered_after_no_fix",
+        "mono_s": 1213.538245123,
+        "wall_s": 1793347935.4522734
+      },
+      {
+        "phase": "q4_stale_differential_rejected",
+        "mono_s": 1214.541619566,
+        "wall_s": 1793347936.4556482
+      },
+      {
+        "phase": "bad_crc_reconnected_without_forwarding",
+        "mono_s": 1216.646713682,
+        "wall_s": 1793347938.5607429,
+        "caster_connections": 3
+      },
+      {
+        "phase": "paused_q4_stale_write_rejected",
+        "mono_s": 1221.510839603,
+        "wall_s": 1793347943.4248688
+      },
+      {
+        "phase": "resumed_live_rtcm_and_fresh_q4",
+        "mono_s": 1222.513651132,
+        "wall_s": 1793347944.4276803
+      },
+      {
+        "phase": "clean_stop",
+        "mono_s": 1223.525487978,
+        "wall_s": 1793347945.4395182,
+        "exit_code": 0,
+        "pty_bytes": 682,
+        "uploads": 3
+      }
+    ],
+    "wire_counts": {
+      "/gnss/fix": 74,
+      "/gnss/diagnostics": 14,
+      "/gnss/nmea": 65
+    },
+    "raw_receiver_gga_uploads": 3,
+    "caster_connections": 4,
+    "bad_crc_injected": 1,
+    "pty_bytes_equal_acknowledged_serial_write": 682,
+    "serial_owner_descriptors": 1,
+    "credential_scan": "PASS",
+    "hardware_acceptance": false,
+    "rtcm_receiver_use_not_claimed": true
+  },
+  "pty_cleanup": {
+    "test_only": true,
+    "owned_process_residue": [],
+    "failed": null,
+    "credentials_removed": true
+  },
+  "real_receiver_opened": false,
+  "real_ntrip_connected": false,
+  "production_nodes_started": false,
+  "active_workspace_replaced": false
+}

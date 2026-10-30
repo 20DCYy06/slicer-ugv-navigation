@@ -1,0 +1,91 @@
+{
+  "part": "STM32F407VET6",
+  "flash_base": "0x08000000",
+  "protocol": "SLC2",
+  "extension": "body-imu-v1",
+  "size": 10208,
+  "sha256": "3849abee0451ef94a6ac5bfd5bbe508c7ca9da016ae87afed70ee09ea18a17a4",
+  "sectors_changed": [
+    0
+  ],
+  "configuration": {
+    "hardware": {
+      "part": "STM32F407VET6",
+      "baud": 115200,
+      "counts_per_revolution": 60000,
+      "wheel_diameter_m": 0.085,
+      "track_width_m": 0.15,
+      "wheelbase_m": 0.17,
+      "wheel_side": [
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "pwm_signs": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "encoder_signs": [
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "control_ms": 10,
+      "telemetry_ms": 40,
+      "watchdog_ms": 500,
+      "min_battery_mv": 10000,
+      "max_wheel_mm_s": 800,
+      "max_body_mm_s": 800,
+      "max_yaw_mrad_s": 3500,
+      "encoder_max_speed_m_s": 1.0,
+      "pwm_limit_permille": 600,
+      "pwm_test_limit_permille": 750,
+      "calibration_permille": 150,
+      "calibration_ms": 250,
+      "stall_timeout_ms": 3000,
+      "direction_timeout_ms": 1000
+    },
+    "wheel_pi": {
+      "kp": 1.0,
+      "ki": 4.0,
+      "feedforward": 3.0
+    },
+    "body": {
+      "linear_kp": 0.3,
+      "linear_ki": 0.5,
+      "linear_kd": 0.0,
+      "linear_compensation_max_m_s": 0.15,
+      "yaw_kp": 0.1,
+      "yaw_ki": 0.2,
+      "yaw_kd": 0.0,
+      "yaw_compensation_max_m_s": 0.25
+    },
+    "imu": {
+      "address_7bit": 104,
+      "yaw_axis": 2,
+      "gyro_signs": [
+        1,
+        1,
+        1
+      ],
+      "accel_signs": [
+        1,
+        1,
+        1
+      ],
+      "gyro_fs_dps": 500,
+      "accel_fs_g": 2,
+      "filter_tau_s": 0.05,
+      "startup_bias_samples": 200,
+      "bias_stationary_gyro_rad_s": 0.15,
+      "bias_stationary_wheel_mm_s": 5,
+      "sample_timeout_ms": 100
+    }
+  },
+  "build_only": true,
+  "flashed": false
+}

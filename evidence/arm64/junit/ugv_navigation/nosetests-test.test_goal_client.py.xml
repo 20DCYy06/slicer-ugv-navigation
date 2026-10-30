@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite name="nosetests" tests="9" errors="0" failures="0" skip="0"><testcase classname="test_goal_client.GoalClientTest" name="test_alternate_action_and_frame" time="0.006"></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_cancel_is_explicit" time="0.004"></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_empty_frame_rejected" time="0.005"><system-err><![CDATA[usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --frame: use a nonempty TF frame without leading slash or spaces
+]]></system-err></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_invalid_timeout_rejected" time="0.011"><system-err><![CDATA[usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --timeout: must be greater than zero
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --timeout: must be greater than zero
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --timeout: must be finite
+]]></system-err></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_nonfinite_coordinates_rejected" time="0.011"><system-err><![CDATA[usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --x: must be finite
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --x: must be finite
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --x: must be finite
+]]></system-err></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_plan_is_an_explicit_non_action_command" time="0.004"></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_pose_preserves_coordinates_and_yaw" time="0.003"></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_relative_goal_cannot_use_moving_target_frame" time="0.004"><system-err><![CDATA[usage: nosetests3 [-h] [--action ACTION] {send,plan,cancel} ...
+nosetests3: error: relative goal needs a fixed target frame different from base frame
+]]></system-err></testcase><testcase classname="test_goal_client.GoalClientTest" name="test_relative_target_is_fixed_in_odom_once" time="0.004"></testcase></testsuite>

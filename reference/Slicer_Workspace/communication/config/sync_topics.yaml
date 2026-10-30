@@ -1,0 +1,9 @@
+# FKIE imports matching remote registrations; it does not rename publications.
+# The UAV receiver must also allow the four /ugv/... interfaces.
+sync_topics:
+  - /uav/test
+  - /uav/mission/waypoints
+  - /ugv/odom
+  - /ugv/pose
+  - /ugv/chassis_ready
+  - /ugv/mission/state

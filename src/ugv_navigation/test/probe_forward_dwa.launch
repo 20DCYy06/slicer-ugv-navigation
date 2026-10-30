@@ -1,0 +1,35 @@
+<launch>
+  <!-- TEST_ONLY: fresh tools/noetic.sh container/master, no devices/network. -->
+  <arg name="initial_yaw" default="0.0"/>
+  <arg name="goal_x" default="0.0"/>
+  <arg name="goal_y" default="0.5"/>
+  <arg name="goal_yaw" default="0.0"/>
+  <arg name="timeout" default="55.0"/>
+  <arg name="forward_point_distance" default="0.325"/>
+  <arg name="angular_sim_granularity" default="0.1"/>
+  <arg name="output"/>
+  <param name="use_sim_time" value="false"/>
+  <include file="$(find ugv_bringup)/launch/slicer_odom.launch">
+    <arg name="local_planner" value="dwa"/>
+    <arg name="connect_control" value="true"/>
+    <arg name="source_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="control_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="raw_topic" value="/TEST_ONLY_chain/raw"/>
+    <arg name="release_owner" value="/TEST_ONLY_chain_operator"/>
+  </include>
+  <rosparam command="load" ns="ugv/move_base"
+            file="$(find ugv_bringup)/config/test_dwa.yaml"/>
+  <param name="ugv/move_base/DWAPlannerROS/forward_point_distance"
+         value="$(arg forward_point_distance)"/>
+  <param name="ugv/move_base/DWAPlannerROS/angular_sim_granularity"
+         value="$(arg angular_sim_granularity)"/>
+  <node pkg="ugv_navigation" type="probe_forward_dwa.py" name="TEST_ONLY_chain_operator"
+        output="screen" required="true">
+    <param name="initial_yaw" value="$(arg initial_yaw)"/>
+    <param name="goal_x" value="$(arg goal_x)"/>
+    <param name="goal_y" value="$(arg goal_y)"/>
+    <param name="goal_yaw" value="$(arg goal_yaw)"/>
+    <param name="timeout" value="$(arg timeout)"/>
+    <param name="output" value="$(arg output)"/>
+  </node>
+</launch>

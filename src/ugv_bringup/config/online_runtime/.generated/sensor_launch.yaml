@@ -1,0 +1,9 @@
+xfer_format: 1
+multi_topic: 0
+data_src: 0
+publish_freq: 10.0
+output_data_type: 0
+cmdline_str: '100000000000000'
+frame_id: laser_link
+enable_lidar_bag: false
+enable_imu_bag: false

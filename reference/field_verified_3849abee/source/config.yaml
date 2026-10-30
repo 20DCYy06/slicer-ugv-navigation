@@ -1,0 +1,51 @@
+# 新固件独立配置；编译时生成 generated.h，运行旧固件不受影响。
+hardware:
+  part: STM32F407VET6
+  baud: 115200
+  counts_per_revolution: 60000
+  wheel_diameter_m: 0.085
+  track_width_m: 0.15
+  wheelbase_m: 0.17
+  # A右后、B左后、C右前、D左前；0x10闭环桥臂极性与0x11开环不同。
+  wheel_side: [1, -1, 1, -1] # 右=+1，左=-1
+  pwm_signs: [-1, 1, 1, 1]
+  encoder_signs: [-1, 1, -1, 1]
+  control_ms: 10
+  telemetry_ms: 40
+  watchdog_ms: 500
+  min_battery_mv: 10000
+  max_wheel_mm_s: 800
+  max_body_mm_s: 800
+  max_yaw_mrad_s: 3500
+  encoder_max_speed_m_s: 1.0
+  pwm_limit_permille: 600
+  pwm_test_limit_permille: 750
+  calibration_permille: 150
+  calibration_ms: 250
+  stall_timeout_ms: 3000
+  direction_timeout_ms: 1000
+wheel_pi:
+  kp: 1.0
+  ki: 4.0
+  feedforward: 3.0
+body:
+  linear_kp: 0.30
+  linear_ki: 0.50
+  linear_kd: 0.0
+  linear_compensation_max_m_s: 0.15
+  yaw_kp: 0.10               # rad/s误差 -> 左右轮差速补偿m/s
+  yaw_ki: 0.20
+  yaw_kd: 0.0
+  yaw_compensation_max_m_s: 0.25
+imu:
+  address_7bit: 0x68
+  yaw_axis: 2
+  gyro_signs: [1, 1, 1]       # 首次架空验证后确认；左转Z应为正
+  accel_signs: [1, 1, 1]
+  gyro_fs_dps: 500
+  accel_fs_g: 2
+  filter_tau_s: 0.05
+  startup_bias_samples: 200
+  bias_stationary_gyro_rad_s: 0.15
+  bias_stationary_wheel_mm_s: 5
+  sample_timeout_ms: 100

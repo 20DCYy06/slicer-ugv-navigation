@@ -1,0 +1,98 @@
+{
+  "archive_sha256": {
+    "slicer_current_sources_20261030.zip": "1dff9dfcaf9c4ea8b2fa1597b3566ca73acfc14b2821932e9fe17fe60412840a",
+    "slicer_gnss_arm64_20261030.zip": "68d9a79b24b111857ed497064af97927d0196a43ded6db5e5a81fbfdcfa046a2"
+  },
+  "source_manifest_checked": 625,
+  "source_manifest_failed": [],
+  "arm_archive_files": 234,
+  "arm_vs_current_mismatches": [],
+  "licenses": [
+    {
+      "path": "jetson_deployed_ugv\\src\\ugv_bringup\\package.xml",
+      "name": "ugv_bringup",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    },
+    {
+      "path": "jetson_deployed_ugv\\src\\ugv_navigation\\package.xml",
+      "name": "ugv_navigation",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    },
+    {
+      "path": "jetson_deployed_ugv\\src\\ugv_slicer_control\\package.xml",
+      "name": "ugv_slicer_control",
+      "licenses": [
+        "BSD-3-Clause",
+        "MIT"
+      ]
+    },
+    {
+      "path": "slicer_ugv_ros1\\src\\cup_gnss\\package.xml",
+      "name": "cup_gnss",
+      "licenses": [
+        "MIT"
+      ]
+    },
+    {
+      "path": "slicer_ugv_ros1\\src\\ugv_bringup\\package.xml",
+      "name": "ugv_bringup",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    },
+    {
+      "path": "slicer_ugv_ros1\\src\\ugv_navigation\\package.xml",
+      "name": "ugv_navigation",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    },
+    {
+      "path": "slicer_ugv_ros1\\src\\ugv_slicer_control\\package.xml",
+      "name": "ugv_slicer_control",
+      "licenses": [
+        "BSD-3-Clause",
+        "MIT"
+      ]
+    },
+    {
+      "path": "Slicer_Workspace\\catkin_ws\\src\\fast_lio\\package.xml",
+      "name": "fast_lio",
+      "licenses": [
+        "BSD"
+      ]
+    },
+    {
+      "path": "Slicer_Workspace\\catkin_ws\\src\\livox_ros_driver2\\package.xml",
+      "name": "livox_ros_driver2",
+      "licenses": [
+        "MIT"
+      ]
+    },
+    {
+      "path": "Slicer_Workspace\\catkin_ws\\src\\slicer_bringup\\package.xml",
+      "name": "slicer_bringup",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    },
+    {
+      "path": "Slicer_Workspace\\catkin_ws\\src\\slicer_navigation\\package.xml",
+      "name": "slicer_navigation",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    },
+    {
+      "path": "Slicer_Workspace\\catkin_ws\\src\\Slicer_wasd_control\\package.xml",
+      "name": "slicer_wasd_control",
+      "licenses": [
+        "BSD-3-Clause"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,674 @@
+[
+  {
+    "path": ".catkin_workspace",
+    "status": "identical"
+  },
+  {
+    "path": ".dockerignore",
+    "status": "identical"
+  },
+  {
+    "path": ".gitignore",
+    "status": "candidate_only"
+  },
+  {
+    "path": "AGENTS.md",
+    "status": "candidate_only"
+  },
+  {
+    "path": "Dockerfile",
+    "status": "different"
+  },
+  {
+    "path": "README.md",
+    "status": "different"
+  },
+  {
+    "path": "src/CMakeLists.txt",
+    "status": "identical"
+  },
+  {
+    "path": "src/cup_gnss/CMakeLists.txt",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/LICENSES/ntrip_client-1.4.1-LICENSE.txt",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/package.xml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/reference/cors_cgcs2000.json",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/scripts/gnss_node.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/scripts/gnss_status.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/setup.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/NMEA_UPSTREAM.json",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/__init__.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/_nmea_0_6_1_checksum.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/_nmea_0_6_1_parser.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/core.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/enu.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/ntrip.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/quality.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/sources.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/upstream_nmea.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/src/cup_gnss/upstream_ntrip.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/gnss_process_helpers.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/ros_mature_gnss_drill.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_core.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_enu.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_evidence_epochs.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_mature_default.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_ntrip.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_quality.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_serial_rtcm.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_sources.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_upstream_nmea.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_upstream_nmea_ros.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tests/test_upstream_ntrip.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/cup_gnss/tools/rtk_evidence.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/CMakeLists.txt",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/costmap_common.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/costmaps.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/depth_camera.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/depth_costmap.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/dwa.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/dwa_goal_baseline.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/dwa_goal_xy_010.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/dwa_goal_yaw_012.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/ekf_velocity_response.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/footprint.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/gmapping_online.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/gnss_enu_origin.json",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/gnss_site.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/indoor_10m_020.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/indoor_10m_030.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/move_base.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_map.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_runtime/.generated/MID360.json",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_runtime/.generated/fusion.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_runtime/.generated/lio.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_runtime/.generated/scan.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_runtime/.generated/sensor_launch.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/online_runtime/config/slicer_config.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/rolling_global_12m.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/slicer_driver.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/slicer_driver_body_speed.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/slicer_driver_wheel_speed_reference.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/slicer_gnss.yaml",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/config/slicer_guard.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/slicer_planner.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/small_obstacle_projection.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/teb.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/test_control_chain.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/test_dwa.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/config/test_slicer_guard.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/launch/odom.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/launch/slicer_depth.launch",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/launch/slicer_driver.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/launch/slicer_gnss.launch",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/launch/slicer_odom.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/launch/slicer_online.launch",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_bringup/launch/slicer_sensors.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/launch/small_obstacle_projection.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/package.xml",
+    "status": "different"
+  },
+  {
+    "path": "src/ugv_bringup/rviz/odom_navigation.rviz",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_bringup/rviz/small_obstacle.rviz",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/CMakeLists.txt",
+    "status": "different"
+  },
+  {
+    "path": "src/ugv_navigation/launch/move_base.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/package.xml",
+    "status": "different"
+  },
+  {
+    "path": "src/ugv_navigation/scripts/depth_geometry.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_navigation/scripts/depth_obstacles.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_navigation/scripts/goal.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/characterize_guarded_navigation.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/client.test",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/guarded.test",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/guarded_characterization.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/model.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/odom.test",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/probe_dwa_safety.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/probe_dwa_safety.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/probe_forward_dwa.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/probe_forward_dwa.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/probe_forward_teb.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/probe_forward_teb.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/software_demo.launch",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/test_depth_geometry.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "src/ugv_navigation/test/test_goal_client.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/test_goal_process.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/test_guarded_navigation.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/test_odom_navigation.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_navigation/test/test_plant_geometry.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/CMakeLists.txt",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/SOURCES.json",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/package.xml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/arc_velocity_guard.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/c30d_driver_node.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/c30d_link.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/chassis_core.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/control.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/control_core.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/navigation_core.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/serial_transport.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/slicer_manual.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/scripts/velocity_mux.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/control.test",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/guard.test",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/mux.yaml",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_body_config.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_body_link.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_control.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_control_ros.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_driver.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_guard_ros.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_lio_stale_observation.py",
+    "status": "identical"
+  },
+  {
+    "path": "src/ugv_slicer_control/test/test_navigation_guard.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/analyze_ekf_response.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/analyze_motion_bag.py",
+    "status": "different"
+  },
+  {
+    "path": "tools/analyze_nav_speed.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/analyze_odom_test.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/check_collect_odom_ros.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/check_noetic_install.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/check_odom12_ros.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/check_small_obstacle_ros.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/check_teb_ros.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/collect_odom_test.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/noetic.sh",
+    "status": "different"
+  },
+  {
+    "path": "tools/preview_enu_goal.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/preview_forward_goal.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/preview_gnss_goal.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/probe_body_turn.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/replay_ekf_response.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/rviz_wsl.sh",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/slicer_shell.sh",
+    "status": "different"
+  },
+  {
+    "path": "tools/test_analyze_ekf_response.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_analyze_motion_bag.py",
+    "status": "different"
+  },
+  {
+    "path": "tools/test_analyze_odom_test.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/test_collect_odom_test.py",
+    "status": "identical"
+  },
+  {
+    "path": "tools/test_gnss_launch.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_noetic.sh",
+    "status": "different"
+  },
+  {
+    "path": "tools/test_noetic_shell.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_online_launch.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_preview_enu_goal.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_preview_forward_goal.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_preview_gnss_goal.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_probe_body_turn.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_replay_ekf_response.py",
+    "status": "candidate_only"
+  },
+  {
+    "path": "tools/test_slicer_shell.py",
+    "status": "different"
+  },
+  {
+    "path": "tools/udev/99-c30d.rules",
+    "status": "identical"
+  }
+]

@@ -1,0 +1,22 @@
+# 独立接收配置；沿用现有单串口 GNSS/NTRIP 实现，不接管 odom 或 TF。
+# 宿主机用 UGV_GNSS_DEVICE 指定真实设备后，容器内统一映射为 /dev/gnss。
+source: serial
+serial_port: /dev/gnss
+expected_usb_serial: '5185028488'  # 旧接收机 USB 序列号；换接收机时按实物更新。
+baud: 115200                    # 接收机串口波特率，不是 GNSS 测量频率。
+frame_id: gnss_link              # GNSS 天线点；没有自动补偿到 base_link。
+# 以下沿用已经验证的新鲜度规则，单位秒；一般无需现场调整。
+data_timeout_s: 2.5
+max_differential_age_s: 5.0
+max_source_age_s: 2.0
+future_tolerance_s: 0.5
+rtcm_evidence_dir: ''            # 可选 RTCM 证据输出目录；留空不落盘。
+ntrip_enabled: false             # 确认服务/账号/基准后改 true；单看定位时保持 false。
+# 历史公开服务声明，尚未确认当前有效；8003 当时声明为 CGCS2000。
+# 服务基准需与接收机和 gnss_site.yaml 对上；此处不做基准转换。
+ntrip_host: '103.143.19.54'
+ntrip_port: 8003
+ntrip_mountpoint: RTCM33GRCEJpro
+# 只填容器内的凭据路径；用户名/密码不写进此配置或 ROS 参数。
+ntrip_credentials_file: /run/secrets/slicer_ntrip.json
+rtcm_pause_file: ''              # 旧链已有的暂停文件接口；普通使用留空。

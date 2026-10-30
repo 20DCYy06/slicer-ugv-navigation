@@ -1,0 +1,23 @@
+{
+  "baseline_bin_sha256": "92e816859d94d94e20077998b4cd4b86bd0c52fdc590d5e21c0b7246048885da",
+  "candidate_bin_sha256": "3849abee0451ef94a6ac5bfd5bbe508c7ca9da016ae87afed70ee09ea18a17a4",
+  "baseline_size": 10144,
+  "candidate_size": 10208,
+  "toolchain_identical": true,
+  "changed_inputs": [
+    {
+      "file": "BALANCE/balance.c",
+      "baseline": "5cded19ee3dae00eda35fc49591f0716ad7b5046df88e1d390a3155fcf6e382a",
+      "candidate": "85bf21baf35bf66112acf68e1c448582e99f69496e349d4cc666077ce79d27ab"
+    },
+    {
+      "file": "tests/test_firmware.c",
+      "baseline": "60f80ce9934d7b7f642e0779b7a21c70a33290272f07c24ea9d6b806363731f8",
+      "candidate": "e27cfd46ac76c86bba0d31cc8e3ddcd31f3cdd34dacacd5093976e5f16b16ccd"
+    }
+  ],
+  "current_source_mismatches": [],
+  "all_commands_exit_zero": true,
+  "source_unchanged_through_build": true,
+  "configuration_identical": true
+}

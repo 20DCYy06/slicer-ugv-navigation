@@ -1,0 +1,34 @@
+{
+  "action": "install",
+  "baseline_sha256": "62ce0a97c3199f5115c5c2e77cfc1cacfec3d600fbdcb0387d543c14d408b435",
+  "before_sha256": "62ce0a97c3199f5115c5c2e77cfc1cacfec3d600fbdcb0387d543c14d408b435",
+  "commands": [
+    "0x0",
+    "0x2",
+    "0x11",
+    "0x31",
+    "0x44"
+  ],
+  "erased": true,
+  "expected_sha256": "fe4d0b107dfa5eaa83487aca60b73eb8a7747addb0273fa0d5e92d0b5a68b410",
+  "image_sha256": "0852f4b43c5bfb21b34dec5ee727a7cbb72d4e4db982fe925b0d40a7f60a962a",
+  "install_uid_stable": false,
+  "option_bytes_written": false,
+  "pwm_patch_sha256": "ab02ee17a1b7f92bde4ca2883e121c1cf37658bae437b97a4bdd326c3149a6fd",
+  "readback_sha256": "fe4d0b107dfa5eaa83487aca60b73eb8a7747addb0273fa0d5e92d0b5a68b410",
+  "sectors_changed": [
+    0
+  ],
+  "uid_after": {
+    "reason": "ROM NACK: stop; NEVER unprotect or erase",
+    "status": "unavailable",
+    "unprotect_attempted": false
+  },
+  "uid_before": {
+    "reason": "ROM NACK: stop; NEVER unprotect or erase",
+    "status": "unavailable",
+    "unprotect_attempted": false
+  },
+  "uid_verified": false,
+  "verified": true
+}

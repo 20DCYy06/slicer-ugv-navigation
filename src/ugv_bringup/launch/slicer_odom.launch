@@ -1,0 +1,40 @@
+<launch>
+  <!-- No sensors, chassis driver, keyboard, TF publisher or control release. -->
+  <arg name="namespace" default="ugv"/>
+  <arg name="local_planner" default="dwa"/>
+  <arg name="connect_control" default="false"/>
+  <arg name="start_mux" default="true"/>
+  <arg name="odom_topic" default="/odom"/>
+  <arg name="scan_topic" default="/scan"/>
+  <!-- Optional test overrides; empty preserves the existing 8 m profile. -->
+  <arg name="global_costmap_config" default=""/>
+  <arg name="source_config" default="/slicer/config/slicer_config.yaml"/>
+  <arg name="control_config" default="/slicer/catkin_ws/src/Slicer_wasd_control/config/teleop_params.yaml"/>
+  <arg name="raw_topic" default="/cmd_vel/nav_raw"/>
+  <arg name="release_owner" default="$(eval '/' + arg('namespace').strip('/') + '/control')"/>
+  <include file="$(find ugv_bringup)/launch/odom.launch">
+    <arg name="namespace" value="$(arg namespace)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="scan_topic" value="$(arg scan_topic)"/>
+    <arg name="local_planner" value="$(arg local_planner)"/>
+    <arg name="cmd_vel_topic" value="$(eval arg('raw_topic') if arg('connect_control') else 'cmd_vel/nav_raw')"/>
+  </include>
+  <rosparam if="$(eval arg('global_costmap_config') != '')" command="load"
+            ns="$(arg namespace)/move_base" file="$(arg global_costmap_config)"/>
+  <rosparam if="$(eval arg('local_planner') == 'teb')" command="load" ns="$(arg namespace)/move_base"
+            file="$(find ugv_bringup)/config/slicer_planner.yaml"/>
+  <group if="$(arg connect_control)">
+    <node pkg="ugv_slicer_control" type="arc_velocity_guard.py" name="slicer_nav_arc_guard" output="screen" required="true">
+      <rosparam command="load" file="$(find ugv_bringup)/config/slicer_guard.yaml"/>
+      <param name="config_file" value="$(arg source_config)"/>
+      <param name="control_config_file" value="$(arg control_config)"/>
+      <param name="input_topic" value="$(arg raw_topic)"/>
+      <param name="planner_namespace" value="$(eval '/' + arg('namespace').strip('/') + '/move_base')"/>
+      <param name="costmap_topic" value="$(eval '/' + arg('namespace').strip('/') + '/move_base/local_costmap/costmap')"/>
+    </node>
+    <node if="$(arg start_mux)" pkg="ugv_slicer_control" type="velocity_mux.py" name="slicer_velocity_mux" output="screen" required="true">
+      <param name="config_file" value="$(arg control_config)"/>
+      <param name="manual_release_owner" value="$(arg release_owner)"/>
+    </node>
+  </group>
+</launch>

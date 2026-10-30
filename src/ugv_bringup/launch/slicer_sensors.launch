@@ -1,0 +1,18 @@
+<launch>
+  <!-- Reuse the existing sensor launch; add only our EKF parameter overlay.
+       Start this instead of (not alongside) slicer_bringup sensors.launch.
+       No chassis driver, navigation, release, or motion commands. -->
+  <arg name="root" default="/slicer"/>
+  <arg name="rviz" default="false"/>
+  <arg name="tune_ekf" default="true"/>
+  <!-- roslaunch leaves parameters on shutdown. Clear only this overlay key
+       before loading, so tune_ekf:=false really returns to the source config. -->
+  <group ns="slicer_ekf/process_noise_covariance" clear_params="true"/>
+  <include file="$(find slicer_bringup)/launch/sensors.launch">
+    <arg name="root" value="$(arg root)"/>
+    <arg name="rviz" value="$(arg rviz)"/>
+  </include>
+  <!-- Must follow the included launch so the final private parameter wins. -->
+  <rosparam if="$(arg tune_ekf)" command="load" ns="slicer_ekf"
+            file="$(find ugv_bringup)/config/ekf_velocity_response.yaml"/>
+</launch>

@@ -1,0 +1,18 @@
+# Selected Slicer 681 guard settings; after review, forbidden reverse commands
+# are rejected in full. These values introduce no turn boost or speed increase.
+# Source: ugv_slicer_control/SOURCES.json. Absolute outputs are existing Slicer
+# hardware interfaces; planner/input/costmap are selected by launch.
+output_topic: /cmd_vel/nav
+command_timeout: 0.5
+publish_hz: 20.0
+costmap_timeout: 1.5
+tf_timeout: 0.5
+compensation_horizon: 0.8
+turning_linear_window: 0.03
+angular_intent_threshold: 0.01
+turn_compensation_enabled: false
+allow_patrol_spin: false
+
+# Independent upstream localization freshness; EKF/TF may continue on wheel input.
+lio_topic: /lio/odom
+lio_timeout: 0.5  # initial proposal, confirm from measured LIO frequency/jitter

@@ -1,0 +1,16 @@
+<launch>
+  <!-- Explicit replacement only: the operator must first stop the original driver.
+       Single serial owner; this launch neither releases control nor starts navigation. -->
+  <arg name="config_file" default="$(find ugv_bringup)/config/slicer_driver.yaml"/>
+  <!-- Empty override uses config control_mode; default config remains pwm_reference. -->
+  <arg name="control_mode" default=""/>
+  <arg name="publish_tf" default="false"/>
+  <arg name="observe_motor_registers" default="false"/>
+  <node pkg="ugv_slicer_control" type="c30d_driver_node.py" name="slicer_c30d_driver"
+        output="screen" required="true">
+    <param name="control_mode" value="$(arg control_mode)" type="str"/>
+    <param name="config_file" value="$(arg config_file)"/>
+    <param name="publish_tf" value="$(arg publish_tf)"/>
+    <param name="observe_motor_registers" value="$(arg observe_motor_registers)" type="bool"/>
+  </node>
+</launch>

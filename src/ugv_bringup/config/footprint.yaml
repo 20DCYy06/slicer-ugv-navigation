@@ -1,0 +1,15 @@
+# Deliberately retained larger Slicer commissioning envelope from old profile:
+# [-.165, +.27] x [-.14, +.14] m. The initially selected 681de31 source
+# generated [-.145, +.25] x [-.12, +.12]; this is not a statement about the
+# later teammate snapshot. Neither is physical acceptance; see MIGRATION.
+# Aliases keep the costmap footprint and TEB vertices identical in one file.
+global_costmap:
+  footprint: &ugv_footprint [[-0.165, -0.14], [-0.165, 0.14], [0.27, 0.14], [0.27, -0.14]]
+  footprint_padding: 0.0
+local_costmap:
+  footprint: *ugv_footprint
+  footprint_padding: 0.0
+TebLocalPlannerROS:
+  footprint_model:
+    type: polygon
+    vertices: *ugv_footprint

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/ros-drivers/nmea_navsat_driver",
+  "version": "0.6.1",
+  "commit": "371f3c9709f424879df76cf6cf4324805ef130b8",
+  "license": "BSD-3-Clause",
+  "upstream_files": {
+    "_nmea_0_6_1_parser.py": "src/libnmea_navsat_driver/parser.py",
+    "_nmea_0_6_1_checksum.py": "src/libnmea_navsat_driver/checksum_utils.py"
+  },
+  "files": {
+    "_nmea_0_6_1_parser.py": "fa0a9a441a48379c12e50a43ad46889233c6fd73cc7aaad3038ec839e9b61bdb",
+    "_nmea_0_6_1_checksum.py": "e392380cfae4dbbf361e22cee1f3cf717f7b041289ab9e3e5dbf2ae9a4db2d2a"
+  },
+  "reason": "Unmodified pure-Python parser/checksum for existing offline non-ROS preparation tools. Live ROS message generation uses the matching released ROS dependency."
+}

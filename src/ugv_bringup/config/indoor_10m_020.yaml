@@ -1,0 +1,17 @@
+# Opt-in move_base ROOT overlay for slicer_odom.launch local_planner:=dwa.
+# The existing argument is named global_costmap_config but loads at move_base
+# scope: this file also selects cruise caps and retains the validated tolerances.
+# Restart navigation/Guard together; Guard caches planner limits at startup.
+# No local-costmap, angular/acceleration/stop/scoring or safety-rule changes.
+global_costmap:
+  width: 24.0
+  height: 16.0
+  resolution: 0.05
+  rolling_window: true
+GlobalPlanner:
+  allow_unknown: true
+DWAPlannerROS:
+  max_vel_x: 0.20
+  max_vel_trans: 0.20
+  yaw_goal_tolerance: 0.12
+  xy_goal_tolerance: 0.10

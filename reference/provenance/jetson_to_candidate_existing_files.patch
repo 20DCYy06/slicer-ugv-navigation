@@ -1,0 +1,379 @@
+--- jetson_deployed_ugv/Dockerfile
++++ slicer_ugv_ros1/Dockerfile
+@@ -2,7 +2,10 @@
+ RUN apt-get update && apt-get install -y --no-install-recommends \
+       ros-noetic-move-base ros-noetic-global-planner ros-noetic-teb-local-planner ros-noetic-dwa-local-planner \
+       ros-noetic-move-base-msgs ros-noetic-tf2-ros ros-noetic-tf2-geometry-msgs ros-noetic-tf ros-noetic-rostest \
+-      python3-nose python3-yaml \
++      ros-noetic-gmapping ros-noetic-realsense2-camera \
++      ros-noetic-robot-localization ros-noetic-pointcloud-to-laserscan \
++      ros-noetic-ntrip-client ros-noetic-nmea-navsat-driver python3-serial \
++      python3-nose python3-yaml python3-numpy \
+     && rm -rf /var/lib/apt/lists/*
+ WORKDIR /workspace
+ CMD ["bash"]
+--- jetson_deployed_ugv/README.md
++++ slicer_ugv_ros1/README.md
+@@ -1,4 +1,15 @@
+ # Slicer UGV · ROS1 Noetic
++
++## 2026-10-30 离线候选
++
++新增独立的在线建图与 D455 深度避障入口，保留现有定位和底盘控制链。
++请先读 [本轮使用说明与验证范围](docs/OFFLINE_ONLINE_NAV_20261030.md)。
++新入口为 `roslaunch ugv_bringup slicer_online.launch`；默认不启动传感器、
++相机或底盘驱动，不连接真实控制入口，消费已有传感器/录包输入。
++本轮未部署。旧 README 下方的现场版本描述为采集时保留的历史记录，
++不能替代本轮说明和用户 2026-10-29 的固件审查结论。
++
++## 既有 odom 导航说明（采集时保留）
+ 
+ 独立 Catkin 工作区，当前范围为 **odom 局部导航与最小实车接线**。已有 Slicer 定位提供 `/odom`、`odom→base_link` 和 `/scan`；本工程启动标准move_base和GlobalPlanner。Slicer入口默认DWA，通用odom入口默认TEB；可用 `local_planner:=dwa|teb` 明确选择，不需要GNSS、AMCL或静态地图。
+ 
+--- jetson_deployed_ugv/src/ugv_bringup/package.xml
++++ slicer_ugv_ros1/src/ugv_bringup/package.xml
+@@ -7,9 +7,14 @@
+   <license>BSD-3-Clause</license>
+   <buildtool_depend>catkin</buildtool_depend>
+   <exec_depend>ugv_navigation</exec_depend>
++  <exec_depend>cup_gnss</exec_depend>
+   <exec_depend>roslaunch</exec_depend>
+   <exec_depend>tf</exec_depend>
+   <exec_depend>ugv_slicer_control</exec_depend>
+   <exec_depend>rviz</exec_depend>
+   <exec_depend>pointcloud_to_laserscan</exec_depend>
++  <exec_depend>gmapping</exec_depend>
++  <exec_depend>realsense2_camera</exec_depend>
++  <exec_depend>slicer_bringup</exec_depend>
++  <exec_depend>slicer_wasd_control</exec_depend>
+ </package>
+--- jetson_deployed_ugv/src/ugv_navigation/CMakeLists.txt
++++ slicer_ugv_ros1/src/ugv_navigation/CMakeLists.txt
+@@ -2,11 +2,13 @@
+ project(ugv_navigation)
+ find_package(catkin REQUIRED)
+ catkin_package()
+-catkin_install_python(PROGRAMS scripts/goal.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
++catkin_install_python(PROGRAMS scripts/goal.py scripts/depth_obstacles.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
++install(FILES scripts/depth_geometry.py DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+ install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+ if(CATKIN_ENABLE_TESTING)
+   find_package(rostest REQUIRED)
+   catkin_add_nosetests(test/test_goal_client.py)
++  catkin_add_nosetests(test/test_depth_geometry.py)
+   add_rostest(test/odom.test)
+   add_rostest(test/client.test)
+   add_rostest(test/guarded.test)
+--- jetson_deployed_ugv/src/ugv_navigation/package.xml
++++ slicer_ugv_ros1/src/ugv_navigation/package.xml
+@@ -12,6 +12,9 @@
+   <exec_depend>geometry_msgs</exec_depend>
+   <exec_depend>nav_msgs</exec_depend>
+   <exec_depend>sensor_msgs</exec_depend>
++  <exec_depend>std_msgs</exec_depend>
++  <exec_depend>tf</exec_depend>
++  <exec_depend>python3-numpy</exec_depend>
+   <exec_depend>move_base</exec_depend>
+   <exec_depend>move_base_msgs</exec_depend>
+   <exec_depend>global_planner</exec_depend>
+@@ -24,5 +27,4 @@
+   <test_depend>rosunit</test_depend>
+   <test_depend>python3-nose</test_depend>
+   <test_depend>ugv_slicer_control</test_depend>
+-  <test_depend>std_msgs</test_depend>
+ </package>
+--- jetson_deployed_ugv/tools/analyze_motion_bag.py
++++ slicer_ugv_ros1/tools/analyze_motion_bag.py
+@@ -127,6 +127,19 @@
+                 maximum_zero_tail_gap_s=max(gaps, default=None), sustained_zero=state)
+ 
+ 
++def planar_pose(pose, frame_id):
++    x, y = get(pose, 'position.x'), get(pose, 'position.y')
++    q = [get(pose, 'orientation.'+key, 0.) for key in ('x', 'y', 'z', 'w')]
++    if not number(x) or not number(y) or not all(map(number, q)):
++        return unknown('pose or quaternion is unavailable')
++    norm = math.hypot(*q)
++    if not number(norm) or norm < 1e-6:
++        return unknown('pose or quaternion is unavailable')
++    qx, qy, qz, qw = [v/norm for v in q]
++    yaw = math.atan2(2*(qw*qz+qx*qy), 1-2*(qy*qy+qz*qz))
++    return dict(state='observed', frame_id=frame_id, x_m=x, y_m=y, yaw_rad=yaw)
++
++
+ def pose_sample(rows, at, max_age, bag_end):
+     candidates = [(time, message) for time, message in rows if time <= at]
+     if not candidates or at > bag_end:
+@@ -134,19 +147,11 @@
+     time, message = candidates[-1]
+     if at-time > max_age:
+         return dict(unknown('latest pose is stale'), latest_receive_s=time, age_s=at-time)
+-    pose = get(message, 'pose.pose')
+-    x, y = get(pose, 'position.x'), get(pose, 'position.y')
+-    q = [get(pose, 'orientation.'+key, 0.) for key in ('x', 'y', 'z', 'w')]
+-    if not number(x) or not number(y) or not all(map(number, q)) or sum(v*v for v in q) < 1e-12:
+-        return unknown('pose or quaternion is unavailable')
+-    norm = math.sqrt(sum(v*v for v in q))
+-    qx, qy, qz, qw = [v/norm for v in q]
+-    yaw = math.atan2(2*(qw*qz+qx*qy), 1-2*(qy*qy+qz*qz))
+-    return point(message, time, state='observed', age_s=at-time,
+-                 frame_id=get(message, 'header.frame_id'), x_m=x, y_m=y, yaw_rad=yaw)
+-
+-
+-def pose_summary(rows, begin, terminal, max_age, bag_end, next_goal=None):
++    pose = planar_pose(get(message, 'pose.pose'), get(message, 'header.frame_id'))
++    return point(message, time, age_s=at-time, **pose) if pose['state'] == 'observed' else pose
++
++
++def pose_summary(rows, begin, terminal, max_age, bag_end, next_goal=None, target=None):
+     before = pose_sample(rows, begin, max_age, bag_end)
+     output = dict(before_goal=before)
+     for label, at in (('terminal', terminal), ('terminal_plus_5s', terminal+5 if terminal is not None else None)):
+@@ -161,6 +166,15 @@
+                                       displacement_m=math.hypot(dx, dy), yaw_rad=math.atan2(math.sin(da), math.cos(da)))
+         else:
+             sample['relative'] = unknown('need fresh start/end poses in the same frame')
++        if target is not None:
++            residual = unknown('need a valid goal and fresh /odom pose in the same goal frame')
++            if (target.get('state') == sample.get('state') == 'observed'
++                    and target.get('frame_id') and target['frame_id'] == sample['frame_id']):
++                dx, dy = target['x_m']-sample['x_m'], target['y_m']-sample['y_m']
++                da = target['yaw_rad']-sample['yaw_rad']
++                residual = dict(state='observed', frame_id=target['frame_id'], x_m=dx, y_m=dy,
++                                position_norm_m=math.hypot(dx, dy), yaw_rad=math.atan2(math.sin(da), math.cos(da)))
++            sample['goal_frame_odom_residual'] = residual
+         output[label] = sample
+     return output
+ 
+@@ -376,15 +390,16 @@
+             for stream in [*chain.values(), wheel]:
+                 stream['sustained_zero'] = unknown('no matching terminal result')
+         target = get(message, 'goal.target_pose')
++        target = planar_pose(get(target, 'pose'), get(target, 'header.frame_id'))
+         output.append(dict(goal_id=identifier, receive_s=at,
+-                           target=dict(frame_id=get(target, 'header.frame_id'), x_m=get(target, 'pose.position.x'),
+-                                       y_m=get(target, 'pose.position.y')),
++                           target=target,
+                            result=point(terminal_message, terminal, status=get(terminal_message, 'status.status'))
+                            if terminal is not None else None,
+                            observation_end_s=until, next_goal_receive_s=next_goal,
+                            requested_post_result_5s_covered=terminal is not None and end >= terminal+5
+                            and (next_goal is None or next_goal > terminal+5),
+-                           poses={topic: pose_summary(scoped[topic], at, terminal, max_age_s, end, next_goal) for topic in POSE_TOPICS},
++                           poses={topic: pose_summary(scoped[topic], at, terminal, max_age_s, end, next_goal,
++                                                      target if topic == '/odom' else None) for topic in POSE_TOPICS},
+                            velocity_chain=chain, wheel_stop=wheel,
+                            driver_observations=driver_groups([item for item in events if at <= item['receive_s'] <= until
+                                                             and (next_goal is None or item['receive_s'] < next_goal)], max_age_s)))
+@@ -403,6 +418,7 @@
+                                 '0x93 body feedback uses m/s and rad/s. Its MCU ticks and IMU health are reported independently of 0x90; a fresh ACK pair does not establish valid IMU response or physical stopping.',
+                                 'A final zero alone cannot establish timely stopping; missing, stale or interrupted observations remain unknown.',
+                                 'Event sequence gaps include missing evidence, not a diagnosis of where loss occurred; unobserved prefixes may predate recording.',
++                                'Only /odom has goal-frame residuals: target minus observed pose in the matching goal frame, with yaw wrapped to +/-pi; these are odom residuals, not external accuracy.',
+                                 'Relative poses use each topic own initial frame and heading; provisional wheel geometry is not ground truth.'],
+                 goals=output, driver_instances=driver_groups(events, max_age_s))
+ 
+--- jetson_deployed_ugv/tools/noetic.sh
++++ slicer_ugv_ros1/tools/noetic.sh
+@@ -3,13 +3,21 @@
+ set -euo pipefail
+ ugv_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+ ugv_image="${UGV_NOETIC_IMAGE:-industrial-cup/nav-slicer:20261023-dwa}"
++# Optional source-only reference for launch/include resolution. Never source
++# the collected ARM devel/install setup files in an x86 test container.
++ugv_slicer_root="${UGV_SLICER_ROOT:-$(dirname -- "$ugv_root")/Slicer_Workspace}"
++ugv_reference_args=()
++if [[ -d "$ugv_slicer_root/catkin_ws/src" ]]; then
++  ugv_reference_args=(--mount "type=bind,src=${ugv_slicer_root},dst=/slicer,readonly")
++fi
+ ugv_tty=()
+ if [[ -t 0 && -t 1 ]]; then ugv_tty=(-it); fi
+ if [[ $# -eq 0 ]]; then set -- bash; fi
+ exec docker run --rm "${ugv_tty[@]}" --network none --cap-drop ALL \
+   --security-opt no-new-privileges --user "$(id -u):$(id -g)" \
++  "${ugv_reference_args[@]}" \
+   --mount "type=bind,src=${ugv_root},dst=/workspace" --workdir /workspace \
+   -e ROS_MASTER_URI=http://127.0.0.1:11311 -e ROS_IP=127.0.0.1 \
+   -e ROS_HOME=/workspace/.ros -e PYTHONDONTWRITEBYTECODE=1 \
+   --entrypoint /bin/bash "$ugv_image" -c \
+-  'set -e; ugv_command=("$@"); set --; source /opt/ros/noetic/setup.bash; if [[ -f /workspace/devel/setup.bash ]]; then source /workspace/devel/setup.bash; fi; exec "${ugv_command[@]}"' bash "$@"
++  'set -e; ugv_command=("$@"); set --; source /opt/ros/noetic/setup.bash; if [[ -f /workspace/devel/setup.bash ]]; then source /workspace/devel/setup.bash; fi; if [[ -d /slicer/catkin_ws/src ]]; then export ROS_PACKAGE_PATH="${ROS_PACKAGE_PATH}:/slicer/catkin_ws/src"; fi; exec "${ugv_command[@]}"' bash "$@"
+--- jetson_deployed_ugv/tools/slicer_shell.sh
++++ slicer_ugv_ros1/tools/slicer_shell.sh
+@@ -18,12 +18,36 @@
+   ugv_serial="$(readlink -f -- "$ugv_serial")"
+   ugv_device_args=(--device "$ugv_serial" --group-add "$(stat -Lc %g -- "$ugv_serial")")
+ fi
++ugv_gnss="${UGV_GNSS_DEVICE:-}"
++if [[ -n "$ugv_gnss" ]]; then
++  if [[ "$ugv_gnss" != /dev/* || "$ugv_gnss" == */../* || ! -c "$ugv_gnss" ||
++        "$(readlink -f -- "$ugv_gnss")" != /dev/* ]]; then
++    printf 'UGV_GNSS_DEVICE must name an existing character device under /dev: %s\n' "$ugv_gnss" >&2
++    exit 2
++  fi
++  ugv_gnss="$(readlink -f -- "$ugv_gnss")"
++  if [[ "$ugv_gnss" == "$ugv_serial" ]]; then
++    printf 'The same device cannot be mapped as both chassis and GNSS.\n' >&2
++    exit 2
++  fi
++  ugv_device_args+=(--device "$ugv_gnss:/dev/gnss" --group-add "$(stat -Lc %g -- "$ugv_gnss")")
++fi
++ugv_secret_args=()
++if [[ -n "${UGV_NTRIP_CREDENTIALS:-}" ]]; then
++  if [[ ! -f "$UGV_NTRIP_CREDENTIALS" || ! -r "$UGV_NTRIP_CREDENTIALS" ]]; then
++    printf 'UGV_NTRIP_CREDENTIALS must name a readable file.\n' >&2
++    exit 2
++  fi
++  ugv_secret="$(readlink -f -- "$UGV_NTRIP_CREDENTIALS")"
++  ugv_secret_args=(--mount "type=bind,src=${ugv_secret},dst=/run/secrets/slicer_ntrip.json,readonly")
++fi
+ ugv_tty=()
+ if [[ -t 0 && -t 1 ]]; then ugv_tty=(-it); fi
+ if [[ $# -eq 0 ]]; then set -- bash; fi
+ exec docker run --rm "${ugv_tty[@]}" --network host --cap-drop ALL \
+   --security-opt no-new-privileges --user "$(id -u):$(id -g)" \
+   "${ugv_device_args[@]}" \
++  "${ugv_secret_args[@]}" \
+   --mount "type=bind,src=${ugv_root},dst=/workspace" \
+   --mount "type=bind,src=${ugv_slicer_root},dst=/slicer,readonly" --workdir /workspace \
+   -e "ROS_MASTER_URI=${ugv_master}" -e "ROS_IP=${ugv_ip}" -e ROS_HOSTNAME= \
+--- jetson_deployed_ugv/tools/test_analyze_motion_bag.py
++++ slicer_ugv_ros1/tools/test_analyze_motion_bag.py
+@@ -64,6 +64,55 @@
+         self.assertAlmostEqual(poses['terminal_plus_5s']['relative']['forward_m'], .55)
+         self.assertEqual(poses['before_goal']['header_stamp_s'], -99.1)
+         self.assertEqual(data['time_basis'], 'bag_receive_s')
++
++    def test_goal_yaw_is_normalized_and_odom_target_residual_wraps_across_pi(self):
++        target = goal('one', 1)
++        target_yaw = -math.pi+.03
++        target[1]['goal']['target_pose']['pose']['orientation'] = {
++            'z': 3*math.sin(target_yaw/2), 'w': 3*math.cos(target_yaw/2)}
++        records = [target, result('one', 2), odom(.9),
++                   odom(2, x=.4, y=-.1, yaw=math.pi-.02),
++                   odom(7, x=.45, y=-.05, yaw=math.pi-.01),
++                   odom(2, x=50, topic='/wheel/odom'),
++                   odom(2, x=60, topic='/lio/odom')]
++        motion = analyze(records)['goals'][0]
++        self.assertAlmostEqual(motion['target'].get('yaw_rad', math.inf), target_yaw)
++        terminal = motion['poses']['/odom']['terminal']['goal_frame_odom_residual']
++        self.assertEqual(terminal['state'], 'observed')
++        self.assertEqual(terminal['frame_id'], 'odom')
++        self.assertAlmostEqual(terminal['x_m'], .1)
++        self.assertAlmostEqual(terminal['y_m'], .1)
++        self.assertAlmostEqual(terminal['position_norm_m'], math.sqrt(.02))
++        self.assertAlmostEqual(terminal['yaw_rad'], .05)
++        post = motion['poses']['/odom']['terminal_plus_5s']['goal_frame_odom_residual']
++        self.assertAlmostEqual(post['yaw_rad'], .04)
++        for topic in ('/wheel/odom', '/lio/odom', '/Odometry'):
++            self.assertNotIn('goal_frame_odom_residual', motion['poses'][topic]['terminal'])
++
++    def test_goal_odom_residual_is_unknown_for_frame_mismatch_or_invalid_quaternion(self):
++        for invalid in ('frame', 'goal_quaternion', 'odom_quaternion'):
++            with self.subTest(invalid=invalid):
++                target, terminal = goal('one', 1), odom(2, x=.4)
++                if invalid == 'frame':
++                    target[1]['goal']['target_pose']['header']['frame_id'] = 'map'
++                elif invalid == 'goal_quaternion':
++                    target[1]['goal']['target_pose']['pose']['orientation'] = {'w': 0}
++                else:
++                    terminal[1]['pose']['pose']['orientation'] = {'w': 0}
++                motion = analyze([target, result('one', 2), odom(.9), terminal])['goals'][0]
++                residual = motion['poses']['/odom']['terminal'].get('goal_frame_odom_residual')
++                self.assertIsNotNone(residual)
++                self.assertEqual(residual['state'], 'unknown')
++                if invalid == 'goal_quaternion':
++                    self.assertEqual(motion['target']['state'], 'unknown')
++
++    def test_goal_odom_post5_residual_stays_unknown_without_observation_coverage(self):
++        motion = analyze([goal('one', 1), result('one', 2), odom(.9),
++                          odom(2, x=.4), velocity(3)])['goals'][0]
++        self.assertFalse(motion['requested_post_result_5s_covered'])
++        post = motion['poses']['/odom']['terminal_plus_5s']
++        self.assertEqual(post.get('goal_frame_odom_residual', {}).get('state'), 'unknown')
++        self.assertNotIn('goal_frame_odom_residual', motion['poses']['/wheel/odom']['terminal_plus_5s'])
+ 
+     def test_velocity_thresholds_and_continuous_zero_require_observed_coverage(self):
+         records = [goal('one', 0), result('one', .5)]
+--- jetson_deployed_ugv/tools/test_noetic.sh
++++ slicer_ugv_ros1/tools/test_noetic.sh
+@@ -10,10 +10,29 @@
+   set -eo pipefail
+   catkin_make -j2
+   source devel/setup.bash
+-  python3 -m unittest discover -s src/ugv_navigation/test -p test_goal_client.py -v
++  # Sourcing Catkin replaces ROS_PACKAGE_PATH; restore the optional source-only
++  # reference added by noetic.sh without sourcing its collected ARM setup files.
++  if [[ -d /slicer/catkin_ws/src ]]; then
++    export ROS_PACKAGE_PATH="${ROS_PACKAGE_PATH}:/slicer/catkin_ws/src"
++  fi
++  python3 -m unittest discover -s tools -p "test_*.py" -v
+   catkin_make run_tests -j2
+   catkin_test_results --all build/test_results
+   catkin_make install -j2
++  # Start with no inherited devel/source overlay for the installed checks.
++  env -i PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
++    HOME="${HOME:-/tmp}" ROS_HOME=/workspace/.ros \
++    ROS_MASTER_URI=http://127.0.0.1:11311 ROS_IP=127.0.0.1 \
++    PYTHONDONTWRITEBYTECODE=1 bash --noprofile --norc -c "
++      set -e
++      source /opt/ros/noetic/setup.bash
++      source /workspace/install/setup.bash
++      if [[ -d /slicer/catkin_ws/src ]]; then
++        export ROS_PACKAGE_PATH=\"\${ROS_PACKAGE_PATH}:/slicer/catkin_ws/src\"
++      fi
++      cd /tmp
++      exec python3 /workspace/tools/check_noetic_install.py --prefix /workspace/install
++    "
+ ' 2>&1 | tee "$ugv_run/output.log"
+ ugv_status=${PIPESTATUS[0]}
+ set -e
+--- jetson_deployed_ugv/tools/test_slicer_shell.py
++++ slicer_ugv_ros1/tools/test_slicer_shell.py
+@@ -33,6 +33,8 @@
+         fake_docker.chmod(0o755)
+         self.env = dict(os.environ)
+         self.env.pop('UGV_SERIAL_DEVICE', None)
++        self.env.pop('UGV_GNSS_DEVICE', None)
++        self.env.pop('UGV_NTRIP_CREDENTIALS', None)
+         self.env.update(PATH=str(self.root) + os.pathsep + self.env['PATH'],
+                         UGV_TEST_DOCKER_ARGV=str(self.argv_file),
+                         UGV_SLICER_ROOT='/unused/read only slicer',
+@@ -109,6 +111,37 @@
+         self.assertEqual(result.returncode, 0, result.stderr)
+         self.assertEqual(self.docker_args()[-len(command):], list(command))
+ 
++    def test_gnss_device_has_a_stable_alias_without_mapping_the_chassis(self):
++        self.env['UGV_GNSS_DEVICE'] = '/dev/null'
++        result = self.run_shell()
++        self.assertEqual(result.returncode, 0, result.stderr)
++        args = self.docker_args()
++        self.assertEqual(args.count('--device'), 1)
++        self.assertEqual(args[args.index('--device') + 1], '/dev/null:/dev/gnss')
++
++    def test_missing_gnss_device_is_rejected_before_docker(self):
++        self.env['UGV_GNSS_DEVICE'] = '/dev/gnss-TEST_ONLY-missing'
++        result = self.run_shell()
++        self.assertNotEqual(result.returncode, 0)
++        self.assertFalse(self.argv_file.exists())
++
++    def test_credentials_are_mounted_read_only_without_becoming_ros_arguments(self):
++        fixture = self.root / 'TEST_ONLY.json'
++        fixture.write_text('{}')
++        self.env['UGV_NTRIP_CREDENTIALS'] = str(fixture)
++        result = self.run_shell('roslaunch', 'ugv_bringup', 'slicer_gnss.launch')
++        self.assertEqual(result.returncode, 0, result.stderr)
++        args = self.docker_args()
++        self.assertIn('type=bind,src=' + str(fixture) +
++                      ',dst=/run/secrets/slicer_ntrip.json,readonly', args)
++        self.assertFalse(any(x.startswith('--device') for x in args))
++
++    def test_chassis_and_gnss_cannot_map_the_same_physical_device_twice(self):
++        self.env['UGV_GNSS_DEVICE'] = '/dev/null'
++        result = self.run_shell(device='/dev/null')
++        self.assertNotEqual(result.returncode, 0)
++        self.assertFalse(self.argv_file.exists())
++
+ 
+ if __name__ == '__main__':
+     unittest.main()

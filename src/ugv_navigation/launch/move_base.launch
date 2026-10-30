@@ -1,0 +1,28 @@
+<launch>
+  <arg name="config_dir"/>
+  <arg name="odom_topic"/><arg name="scan_topic"/><arg name="cmd_vel_topic"/>
+  <arg name="global_frame"/><arg name="base_frame"/>
+  <arg name="local_planner" default="teb"/>
+  <node pkg="move_base" type="move_base" name="move_base" output="screen" required="true">
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <!-- Resolve odometry as a ROS topic in the node namespace rather than as
+         a private planner name. Scan is remapped through a fixed relative name. -->
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+    <rosparam command="load" file="$(arg config_dir)/move_base.yaml"/>
+    <rosparam command="load" file="$(arg config_dir)/$(arg local_planner).yaml"/>
+    <param name="base_local_planner"
+           value="$(eval {'teb': 'teb_local_planner/TebLocalPlannerROS', 'dwa': 'dwa_local_planner/DWAPlannerROS'}[arg('local_planner')])"/>
+    <rosparam command="load" file="$(arg config_dir)/costmap_common.yaml" ns="global_costmap"/>
+    <rosparam command="load" file="$(arg config_dir)/costmap_common.yaml" ns="local_costmap"/>
+    <rosparam command="load" file="$(arg config_dir)/costmaps.yaml"/>
+    <param name="global_costmap/global_frame" value="$(arg global_frame)"/>
+    <param name="local_costmap/global_frame" value="$(arg global_frame)"/>
+    <param name="global_costmap/robot_base_frame" value="$(arg base_frame)"/>
+    <param name="local_costmap/robot_base_frame" value="$(arg base_frame)"/>
+    <param if="$(eval arg('local_planner') == 'teb')" name="TebLocalPlannerROS/map_frame" value="$(arg global_frame)"/>
+    <param if="$(eval arg('local_planner') == 'teb')" name="TebLocalPlannerROS/odom_topic" value="odom"/>
+    <!-- One commissioning footprint is shared with TEB; no second polygon. -->
+    <rosparam command="load" file="$(arg config_dir)/footprint.yaml"/>
+  </node>
+</launch>

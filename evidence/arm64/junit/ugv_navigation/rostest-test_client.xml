@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="1" time="22.586"><testcase classname="rostest.runner.RosTest" name="testgoal_process" time="22.5852" /><system-out>&lt;![CDATA[
+[ROSTEST]setup[/workspace/src/ugv_navigation/test/client.test] run_id[620ef476-d439-11f1-8f65-c5621a1af335] starting
+&amp;#x001B;[1mstarted roslaunch server http://127.0.0.1:39701/&amp;#x001B;[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /ugv/move_base/GlobalPlanner/allow_unknown: False
+ * /ugv/move_base/GlobalPlanner/cost_factor: 3.0
+ * /ugv/move_base/GlobalPlanner/default_tolerance: 0.0
+ * /ugv/move_base/GlobalPlanner/lethal_cost: 253
+ * /ugv/move_base/GlobalPlanner/neutral_cost: 50
+ * /ugv/move_base/GlobalPlanner/old_navfn_behavior: False
+ * /ugv/move_base/GlobalPlanner/orientation_mode: 1
+ * /ugv/move_base/GlobalPlanner/orientation_window_size: 2
+ * /ugv/move_base/GlobalPlanner/use_dijkstra: True
+ * /ugv/move_base/GlobalPlanner/use_grid_path: False
+ * /ugv/move_base/GlobalPlanner/use_quadratic: True
+ * /ugv/move_base/TebLocalPlannerROS/acc_lim_theta: 1.0
+ * /ugv/move_base/TebLocalPlannerROS/acc_lim_x: 0.2
+ * /ugv/move_base/TebLocalPlannerROS/acc_lim_y: 0.0
+ * /ugv/move_base/TebLocalPlannerROS/allow_init_with_backwards_motion: False
+ * /ugv/move_base/TebLocalPlannerROS/cmd_angle_instead_rotvel: False
+ * /ugv/move_base/TebLocalPlannerROS/complete_global_plan: True
+ * /ugv/move_base/TebLocalPlannerROS/costmap_obstacles_behind_robot_dist: 1.0
+ * /ugv/move_base/TebLocalPlannerROS/dt_hysteresis: 0.1
+ * /ugv/move_base/TebLocalPlannerROS/dt_ref: 0.3
+ * /ugv/move_base/TebLocalPlannerROS/enable_homotopy_class_planning: False
+ * /ugv/move_base/TebLocalPlannerROS/enable_multithreading: False
+ * /ugv/move_base/TebLocalPlannerROS/exact_arc_length: True
+ * /ugv/move_base/TebLocalPlannerROS/feasibility_check_no_poses: 3
+ * /ugv/move_base/TebLocalPlannerROS/footprint_model/type: polygon
+ * /ugv/move_base/TebLocalPlannerROS/footprint_model/vertices: [[-0.165, -0.14],...
+ * /ugv/move_base/TebLocalPlannerROS/force_reinit_new_goal_angular: 0.52
+ * /ugv/move_base/TebLocalPlannerROS/force_reinit_new_goal_dist: 1.0
+ * /ugv/move_base/TebLocalPlannerROS/free_goal_vel: False
+ * /ugv/move_base/TebLocalPlannerROS/global_plan_overwrite_orientation: True
+ * /ugv/move_base/TebLocalPlannerROS/global_plan_viapoint_sep: 0.5
+ * /ugv/move_base/TebLocalPlannerROS/include_costmap_obstacles: True
+ * /ugv/move_base/TebLocalPlannerROS/inflation_dist: 0.25
+ * /ugv/move_base/TebLocalPlannerROS/map_frame: odom
+ * /ugv/move_base/TebLocalPlannerROS/max_global_plan_lookahead_dist: 1.5
+ * /ugv/move_base/TebLocalPlannerROS/max_samples: 60
+ * /ugv/move_base/TebLocalPlannerROS/max_vel_theta: 0.25
+ * /ugv/move_base/TebLocalPlannerROS/max_vel_x: 0.125
+ * /ugv/move_base/TebLocalPlannerROS/max_vel_x_backwards: 0.02
+ * /ugv/move_base/TebLocalPlannerROS/max_vel_y: 0.0
+ * /ugv/move_base/TebLocalPlannerROS/min_obstacle_dist: 0.12
+ * /ugv/move_base/TebLocalPlannerROS/min_resolution_collision_check_angular: 0.15
+ * /ugv/move_base/TebLocalPlannerROS/min_samples: 3
+ * /ugv/move_base/TebLocalPlannerROS/min_turning_radius: 0.0
+ * /ugv/move_base/TebLocalPlannerROS/no_inner_iterations: 3
+ * /ugv/move_base/TebLocalPlannerROS/no_outer_iterations: 3
+ * /ugv/move_base/TebLocalPlannerROS/obstacle_poses_affected: 15
+ * /ugv/move_base/TebLocalPlannerROS/odom_topic: odom
+ * /ugv/move_base/TebLocalPlannerROS/oscillation_recovery: True
+ * /ugv/move_base/TebLocalPlannerROS/penalty_epsilon: 0.01
+ * /ugv/move_base/TebLocalPlannerROS/publish_feedback: False
+ * /ugv/move_base/TebLocalPlannerROS/selection_prefer_initial_plan: 0.95
+ * /ugv/move_base/TebLocalPlannerROS/shrink_horizon_backup: True
+ * /ugv/move_base/TebLocalPlannerROS/teb_autosize: True
+ * /ugv/move_base/TebLocalPlannerROS/visualize_hc_graph: False
+ * /ugv/move_base/TebLocalPlannerROS/weight_inflation: 0.2
+ * /ugv/move_base/TebLocalPlannerROS/weight_kinematics_forward_drive: 900.0
+ * /ugv/move_base/TebLocalPlannerROS/weight_kinematics_nh: 1000.0
+ * /ugv/move_base/TebLocalPlannerROS/weight_kinematics_turning_radius: 0.0
+ * /ugv/move_base/TebLocalPlannerROS/weight_obstacle: 60.0
+ * /ugv/move_base/TebLocalPlannerROS/weight_optimaltime: 1.0
+ * /ugv/move_base/TebLocalPlannerROS/weight_shortest_path: 0.0
+ * /ugv/move_base/TebLocalPlannerROS/weight_viapoint: 0.3
+ * /ugv/move_base/TebLocalPlannerROS/xy_goal_tolerance: 0.15
+ * /ugv/move_base/TebLocalPlannerROS/yaw_goal_tolerance: 0.25
+ * /ugv/move_base/base_global_planner: global_planner/Gl...
+ * /ugv/move_base/base_local_planner: teb_local_planner...
+ * /ugv/move_base/clearing_rotation_allowed: False
+ * /ugv/move_base/controller_frequency: 10.0
+ * /ugv/move_base/controller_patience: 15.0
+ * /ugv/move_base/global_costmap/always_send_full_costmap: True
+ * /ugv/move_base/global_costmap/footprint: [[-0.165, -0.14],...
+ * /ugv/move_base/global_costmap/footprint_padding: 0.0
+ * /ugv/move_base/global_costmap/global_frame: odom
+ * /ugv/move_base/global_costmap/height: 8.0
+ * /ugv/move_base/global_costmap/inflation_layer/cost_scaling_factor: 4.5
+ * /ugv/move_base/global_costmap/inflation_layer/enabled: True
+ * /ugv/move_base/global_costmap/inflation_layer/inflation_radius: 0.24
+ * /ugv/move_base/global_costmap/obstacle_layer/combination_method: 1
+ * /ugv/move_base/global_costmap/obstacle_layer/enabled: True
+ * /ugv/move_base/global_costmap/obstacle_layer/footprint_clearing_enabled: True
+ * /ugv/move_base/global_costmap/obstacle_layer/observation_sources: scan
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/clearing: True
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/data_type: LaserScan
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/expected_update_rate: 0.2
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/inf_is_valid: True
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/marking: True
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/max_obstacle_height: 0.5
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/min_obstacle_height: -0.05
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/observation_persistence: 0.0
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/obstacle_range: 3.0
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/raytrace_range: 4.0
+ * /ugv/move_base/global_costmap/obstacle_layer/scan/topic: scan
+ * /ugv/move_base/global_costmap/obstacle_layer/track_unknown_space: True
+ * /ugv/move_base/global_costmap/plugins: [{'name': 'obstac...
+ * /ugv/move_base/global_costmap/publish_frequency: 4.0
+ * /ugv/move_base/global_costmap/resolution: 0.05
+ * /ugv/move_base/global_costmap/robot_base_frame: base_link
+ * /ugv/move_base/global_costmap/rolling_window: True
+ * /ugv/move_base/global_costmap/static_map: False
+ * /ugv/move_base/global_costmap/track_unknown_space: True
+ * /ugv/move_base/global_costmap/transform_tolerance: 0.3
+ * /ugv/move_base/global_costmap/update_frequency: 4.0
+ * /ugv/move_base/global_costmap/width: 8.0
+ * /ugv/move_base/local_costmap/always_send_full_costmap: True
+ * /ugv/move_base/local_costmap/footprint: [[-0.165, -0.14],...
+ * /ugv/move_base/local_costmap/footprint_padding: 0.0
+ * /ugv/move_base/local_costmap/global_frame: odom
+ * /ugv/move_base/local_costmap/height: 4.0
+ * /ugv/move_base/local_costmap/inflation_layer/cost_scaling_factor: 4.5
+ * /ugv/move_base/local_costmap/inflation_layer/enabled: True
+ * /ugv/move_base/local_costmap/inflation_layer/inflation_radius: 0.24
+ * /ugv/move_base/local_costmap/obstacle_layer/combination_method: 1
+ * /ugv/move_base/local_costmap/obstacle_layer/enabled: True
+ * /ugv/move_base/local_costmap/obstacle_layer/footprint_clearing_enabled: True
+ * /ugv/move_base/local_costmap/obstacle_layer/observation_sources: scan
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/clearing: True
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/data_type: LaserScan
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/expected_update_rate: 0.2
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/inf_is_valid: True
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/marking: True
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/max_obstacle_height: 0.5
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/min_obstacle_height: -0.05
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/observation_persistence: 0.0
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/obstacle_range: 3.0
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/raytrace_range: 4.0
+ * /ugv/move_base/local_costmap/obstacle_layer/scan/topic: scan
+ * /ugv/move_base/local_costmap/obstacle_layer/track_unknown_space: True
+ * /ugv/move_base/local_costmap/plugins: [{'name': 'obstac...
+ * /ugv/move_base/local_costmap/publish_frequency: 4.0
+ * /ugv/move_base/local_costmap/resolution: 0.05
+ * /ugv/move_base/local_costmap/robot_base_frame: base_link
+ * /ugv/move_base/local_costmap/rolling_window: True
+ * /ugv/move_base/local_costmap/static_map: False
+ * /ugv/move_base/local_costmap/track_unknown_space: True
+ * /ugv/move_base/local_costmap/transform_tolerance: 0.3
+ * /ugv/move_base/local_costmap/update_frequency: 5.0
+ * /ugv/move_base/local_costmap/width: 4.0
+ * /ugv/move_base/make_plan_add_unreachable_goal: False
+ * /ugv/move_base/make_plan_clear_costmap: False
+ * /ugv/move_base/oscillation_distance: 0.05
+ * /ugv/move_base/oscillation_timeout: 20.0
+ * /ugv/move_base/planner_frequency: 1.0
+ * /ugv/move_base/planner_patience: 5.0
+ * /ugv/move_base/recovery_behavior_enabled: False
+ * /ugv/move_base/recovery_behaviors: []
+ * /ugv/move_base/shutdown_costmaps: False
+ * /use_sim_time: False
+
+NODES
+  /
+    TEST_ONLY_kinematic_model (ugv_navigation/model.py)
+  /ugv/
+    move_base (move_base/move_base)
+
+[ROSTEST]setup[/workspace/src/ugv_navigation/test/client.test] run_id[620ef476-d439-11f1-8f65-c5621a1af335] done
+[ROSTEST]Running test [goal_process]
+&amp;#x001B;[1mROS_MASTER_URI=http://127.0.0.1:42931/&amp;#x001B;[0m
+&amp;#x001B;[1msetting /run_id to 620ef476-d439-11f1-8f65-c5621a1af335&amp;#x001B;[0m
+&amp;#x001B;[1mprocess[ugv/move_base-1]: started with pid [748]&amp;#x001B;[0m
+&amp;#x001B;[1mprocess[TEST_ONLY_kinematic_model-2]: started with pid [749]&amp;#x001B;[0m
+[ROSTEST]running test goal_process
+&amp;#x001B;[1mprocess[goal_process-3]: started with pid [750]&amp;#x001B;[0m
+&amp;#x001B;[1m[goal_process-3] process has finished cleanly
+log file: /workspace/.ros/log/620ef476-d439-11f1-8f65-c5621a1af335/goal_process-3*.log&amp;#x001B;[0m
+[ROSTEST]test [goal_process] finished
+[ROSTEST]test [goal_process] results are in [/workspace/build/test_results/ugv_navigation/rosunit-goal_process.xml]
+[ROSTEST]test [goal_process] results summary: 0 errors, 0 failures, 1 tests
+[ROSTEST][ROSTEST] test [goal_process] done
+[ROSTEST]tearDown[/workspace/src/ugv_navigation/test/client.test]
+shutting down processing monitor...
+[TEST_ONLY_kinematic_model-2] killing on exit
+[ugv/move_base-1] killing on exit
+... shutting down processing monitor complete
+[ROSTEST]rostest teardown /workspace/src/ugv_navigation/test/client.test complete
+
+]]&gt;</system-out><system-err>&lt;![CDATA[
+
+]]&gt;</system-err></testsuite>

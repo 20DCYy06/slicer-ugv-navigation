@@ -1,0 +1,26 @@
+# Sources and limits: docs/MIGRATION.md. Commissioning values, not calibration.
+base_global_planner: global_planner/GlobalPlanner
+controller_frequency: 10.0
+planner_frequency: 1.0
+controller_patience: 15.0  # software trial budget; not measured safe outage duration
+planner_patience: 5.0
+oscillation_timeout: 20.0
+oscillation_distance: 0.05
+shutdown_costmaps: false
+make_plan_clear_costmap: false
+make_plan_add_unreachable_goal: false
+recovery_behavior_enabled: false
+clearing_rotation_allowed: false
+recovery_behaviors: []
+GlobalPlanner:
+  use_dijkstra: true
+  use_quadratic: true
+  use_grid_path: false
+  old_navfn_behavior: false
+  allow_unknown: false
+  default_tolerance: 0.0
+  orientation_mode: 1
+  orientation_window_size: 2
+  lethal_cost: 253
+  neutral_cost: 50
+  cost_factor: 3.0

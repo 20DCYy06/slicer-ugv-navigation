@@ -1,0 +1,12 @@
+# Bounded rolling windows adapted from the old software drill. These dimensions
+# and rates are software defaults, not measured arena/sensor coverage.
+global_costmap:
+  width: 8.0
+  height: 8.0
+  update_frequency: 4.0
+  publish_frequency: 4.0
+local_costmap:
+  width: 4.0
+  height: 4.0
+  update_frequency: 5.0
+  publish_frequency: 4.0

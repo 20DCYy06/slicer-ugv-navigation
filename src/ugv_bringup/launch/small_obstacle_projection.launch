@@ -1,0 +1,19 @@
+<launch>
+  <!-- Optional diagnostic projection of an already-running sensor chain.
+       No sensor/driver/EKF/TF/control nodes. Output is not wired to navigation.
+       Without this launch, use existing /scan_raw and /scan in the RViz preset.
+       Use this only to compare one projection parameter without modifying the
+       teammate generated files or restarting the existing perception chain. -->
+  <arg name="namespace" default="ugv/perception_test"/>
+  <arg name="cloud_topic" default="/cloud_nav_filtered"/>
+  <arg name="scan_topic" default="/ugv/perception_test/scan"/>
+  <arg name="projection_config" default="$(find ugv_bringup)/config/small_obstacle_projection.yaml"/>
+  <group ns="$(arg namespace)">
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node"
+          name="cloud_to_scan" output="screen" required="true">
+      <rosparam command="load" file="$(arg projection_config)"/>
+      <remap from="cloud_in" to="$(arg cloud_topic)"/>
+      <remap from="scan" to="$(arg scan_topic)"/>
+    </node>
+  </group>
+</launch>

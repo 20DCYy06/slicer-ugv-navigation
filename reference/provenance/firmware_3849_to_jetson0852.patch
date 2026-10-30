@@ -1,0 +1,272 @@
+--- field_verified_3849abee/build/generated.h
++++ jetson_recorded_0852f4b4/build/generated.h
+@@ -12,7 +12,7 @@
+ #define CAL_PERMILLE 150u
+ #define CAL_MS 250u
+ #define PWM_PERIOD 1600u
+-#define PWM_CAP 960u
++#define PWM_CAP 1280u
+ #define TEST_PWM_CAP 1200u
+ #define TEST_MAX_MS 0u
+ #define ENCODER_DELTA_LIMIT 2247u
+--- field_verified_3849abee/build.py
++++ jetson_recorded_0852f4b4/build.py
+@@ -21,7 +21,8 @@
+     assert 0 < h['wheel_diameter_m'] < 1 and h['track_width_m'] > 0 and h['wheelbase_m'] > 0
+     assert 0 < h['max_wheel_mm_s'] <= 800 and 0 < h['max_body_mm_s'] <= 800
+     assert 0 < h['max_yaw_mrad_s'] <= 32767
+-    assert 1 <= h['pwm_limit_permille'] <= h['pwm_test_limit_permille'] <= 750
++    assert 1 <= h['pwm_limit_permille'] <= 800
++    assert 1 <= h['pwm_test_limit_permille'] <= 750  # legacy direct-PWM interface unchanged
+     assert imu['address_7bit'] in (0x68, 0x69) and imu['yaw_axis'] in (0, 1, 2)
+     assert imu['gyro_fs_dps'] == 500 and imu['accel_fs_g'] == 2
+     assert imu['startup_bias_samples'] > 0 and imu['filter_tau_s'] >= 0
+--- field_verified_3849abee/config.yaml
++++ jetson_recorded_0852f4b4/config.yaml
+@@ -18,7 +18,7 @@
+   max_body_mm_s: 800
+   max_yaw_mrad_s: 3500
+   encoder_max_speed_m_s: 1.0
+-  pwm_limit_permille: 600
++  pwm_limit_permille: 800
+   pwm_test_limit_permille: 750
+   calibration_permille: 150
+   calibration_ms: 250
+--- field_verified_3849abee/main.c
++++ jetson_recorded_0852f4b4/main.c
+@@ -26,6 +26,9 @@
+ static uint32_t test_started;
+ static uint32_t nonce,last_command,last_control,last_report,cal_end;
+ static uint16_t seq,ack_seq;
++/* User output ceiling: 0..100% of the compiled 80% PWM ceiling.
++ * It limits effort only; velocity/IMU feedback and all stop conditions remain. */
++static uint16_t output_pwm_cap=PWM_CAP;
+ static int16_t targets[4],actual[4],duty[4];
+ static int8_t pwm_sign[4],enc_sign[4];
+ static uint16_t previous[4],battery_mv;
+@@ -161,6 +164,13 @@
+   p32(reply,nonce);reply[4]=1;reply[5]=imu.who;
+   reply[6]=(imu.present?1:0)|(imu.calibrated?2:0)|(icm20948_ready(ms)?4:0)|(imu.failed?8:0);
+   reply[7]=active_source;emit(BODY_INFO_REPLY,reply,8);
++ }else if(frame[3]==0x18&&n==5&&hello_ok&&rd32(p)==nonce){
++  if(p[4]>100)return;
++  /* Configuration is explicit and session-bound. Clear old motion once when
++   * applying a new ceiling; a subsequent normal speed command resumes control. */
++  stop();output_pwm_cap=(uint32_t)PWM_CAP*p[4]/100u;
++  p32(reply,nonce);reply[4]=p[4];p16(reply+5,PWM_CAP*1000u/PWM_PERIOD);
++  p16(reply+7,PWM_PERIOD);p16(reply+9,output_pwm_cap);emit(0x85,reply,11);
+  }else if(frame[3]==BODY_COMMAND&&n==8&&hello_ok&&rd32(p)==nonce){
+   BodyCommand request;if(!body_decode_command(p,n,nonce,&request))return;
+   if(!configured||fault||!enabled()||!powered())return;
+@@ -192,7 +202,7 @@
+  }else if(frame[3]==0x20&&n==9&&hello_ok&&rd32(p)==nonce){
+   unsigned i=p[4];int16_t v=(int16_t)rd16(p+5);unsigned duration=rd16(p+7);
+   if(i>3||v<=0||(unsigned)v>CAL_PERMILLE||duration==0||duration>CAL_MS||fault||!enabled()||!powered())return;
+-  stop();configured=0;cal_index=i;duty[i]=(int16_t)(v*PWM_PERIOD/1000);cal_end=ms+duration;
++  stop();configured=0;cal_index=i;duty[i]=(int16_t)clamp(v*(int)PWM_PERIOD/1000,output_pwm_cap);cal_end=ms+duration;
+   last_command=ms;have_command=1;
+  }
+ }
+@@ -221,7 +231,7 @@
+  t->EGR=1;t->CR1=TIM_CR1_ARPE|TIM_CR1_CEN;
+ }
+ static void pwm(unsigned i,int signed_value){
+- unsigned v=absi(signed_value);if(v>PWM_CAP)v=PWM_CAP;
++ unsigned v=absi(signed_value);if(v>output_pwm_cap)v=output_pwm_cap;
+  /* 与实车已验证的test_pwm使用同一电桥调制：驱动侧恒高、另一侧互补PWM。
+   * 只统一调制，不改变闭环pwm_signs所定义的电气方向；零仍为00。
+   * 如A前进：闭环负号 -> TIM10恒高、TIM11=周期-v，与开环正号完全一致。 */
+@@ -247,6 +257,7 @@
+  else if(i==2){a=&TIM1->CCR2;b=&TIM1->CCR1;}
+  else{a=&TIM1->CCR4;b=&TIM1->CCR3;}
+  unsigned v=(unsigned)absi(value);if(v>TEST_PWM_CAP)v=TEST_PWM_CAP;
++ if(v>output_pwm_cap)v=output_pwm_cap;
+  if(!v){*a=*b=0;return;}
+  int forward=(value>0)^((i==1)||(i==3));
+  if(forward){*a=PWM_PERIOD;*b=PWM_PERIOD-v;}
+@@ -327,7 +338,8 @@
+  }else if(next==SOURCE_BODY)last_command=sources.nav_ms;
+ }
+ static void wheel_control(float dt){
+- float effort[4],saved[4],error[4],peak=PWM_CAP;
++ if(!output_pwm_cap){zero();return;} /* No 0/0 scaling at software 0%. */
++ float effort[4],saved[4],error[4],peak=output_pwm_cap;
+  for(unsigned i=0;i<4;i++){
+   if(!targets[i]){
+    duty[i]=0;integral[i]=0;previous_target[i]=0;
+@@ -337,7 +349,7 @@
+   if((int32_t)targets[i]*previous_target[i]<0)integral[i]=0;
+   previous_target[i]=targets[i];saved[i]=integral[i];
+   error[i]=targets[i]-filtered[i];
+-  integral[i]=clamp(integral[i]+error[i]*KI*dt,PWM_CAP);
++  integral[i]=clamp(integral[i]+error[i]*KI*dt,output_pwm_cap);
+   effort[i]=KP*error[i]+integral[i]+FEEDFORWARD*targets[i];
+   if(effort[i]*targets[i]<0)effort[i]=0;
+   float magnitude=effort[i]<0?-effort[i]:effort[i];
+@@ -345,8 +357,8 @@
+  }
+  /* 四轮使用一个缩放系数，保留饱和前的差速比例；禁止分别截成相同满输出。
+   * 饱和时冻结仍在推高输出的积分，反向误差仍可释放积分。 */
+- if(peak>PWM_CAP){
+-  peak=PWM_CAP;
++ if(peak>output_pwm_cap){
++  peak=output_pwm_cap;
+   for(unsigned i=0;i<4;i++){
+    if(error[i]*effort[i]>0)integral[i]=saved[i];
+    effort[i]=targets[i]?KP*error[i]+integral[i]+FEEDFORWARD*targets[i]:0;
+@@ -355,7 +367,7 @@
+    if(magnitude>peak)peak=magnitude;
+   }
+  }
+- float scale=PWM_CAP/peak;
++ float scale=output_pwm_cap/peak;
+  for(unsigned i=0;i<4;i++){
+   duty[i]=(int16_t)(effort[i]*scale)*pwm_sign[i];
+   if(!targets[i]){pwm(i,0);continue;}
+@@ -384,7 +396,7 @@
+  body.measured_yaw=imu.yaw_rate;
+  battery_mv=voltage();
+  select_source();
+- if(fault||!enabled()||!powered()||!have_command||(uint32_t)(ms-last_command)>=WATCHDOG_MS){stop();return;}
++ if(fault||!enabled()||!powered()||!have_command||!output_pwm_cap||(uint32_t)(ms-last_command)>=WATCHDOG_MS){stop();return;}
+  if(direct_mode){
+   /* Zero means continuous commands; the independent stale-command watchdog
+    * above still stops outputs after 500ms without valid command refresh. */
+@@ -392,7 +404,7 @@
+   if((uint32_t)(ms-test_started)>=TEST_MAX_MS){stop();test_blocked=1;return;}
+ #endif
+   for(unsigned i=0;i<4;i++){
+-   duty[i]=(int16_t)(direct_pwm[i]*(int)PWM_PERIOD/1000);test_pwm(i,duty[i]);
++   duty[i]=(int16_t)clamp(direct_pwm[i]*(int)PWM_PERIOD/1000,output_pwm_cap);test_pwm(i,duty[i]);
+   }
+   return;
+  }
+--- field_verified_3849abee/tests/test_firmware.c
++++ jetson_recorded_0852f4b4/tests/test_firmware.c
+@@ -27,7 +27,7 @@
+  for(unsigned i=0;i<n+9;i++)parse(b[i]);
+ }
+ static void reset(void){
+- stop();clear_fault();hello_ok=1;configured=1;nonce=123;ms=0;
++ stop();clear_fault();hello_ok=1;configured=1;nonce=123;ms=0;output_pwm_cap=PWM_CAP;
+  control_interval_ms=CONTROL_MS;battery_mv=12000;gd.IDR=8;ad.DR=1354;ad.SR=ADC_SR_EOC;u1.SR=USART_SR_TXE;
+  const int8_t ps[4]=DEFAULT_PWM_SIGNS,es[4]=DEFAULT_ENCODER_SIGNS;
+  for(unsigned i=0;i<4;i++){
+@@ -98,10 +98,11 @@
+  reset();
+  /* 四路闭环/开环前进方向及反向的实际CCR逐一相等；占空比取相同物理ticks。 */
+  const int test_signs[4]={1,-1,1,-1};
++ const int common_cap=PWM_CAP<TEST_PWM_CAP?PWM_CAP:TEST_PWM_CAP;
+  for(unsigned i=0;i<4;i++)for(int direction=-1;direction<=1;direction++){
+-  zero();pwm(i,direction*pwm_sign[i]*PWM_CAP);
++  zero();pwm(i,direction*pwm_sign[i]*common_cap);
+   uint32_t closed[8]={t10.CCR1,t11.CCR1,t9.CCR1,t9.CCR2,t1.CCR1,t1.CCR2,t1.CCR3,t1.CCR4};
+-  zero();test_pwm(i,direction*test_signs[i]*PWM_CAP);
++  zero();test_pwm(i,direction*test_signs[i]*common_cap);
+   uint32_t opened[8]={t10.CCR1,t11.CCR1,t9.CCR1,t9.CCR2,t1.CCR1,t1.CCR2,t1.CCR3,t1.CCR4};
+   for(unsigned n=0;n<8;n++)assert(closed[n]==opened[n]);
+  }
+@@ -397,10 +398,35 @@
+  return reversal_failures?2:0;
+ }
+ 
++static void output_limit_tests(void){
++ for(unsigned percent=0;percent<=100;percent++){
++  reset();uint8_t p[5];p32(p,nonce);p[4]=percent;feed(0x18,p,5,0);
++  assert(output_pwm_cap==PWM_CAP*percent/100u);
++  assert(last_tx[3]==0x85&&last_tx[4]==11&&rd32(last_tx+7)==nonce);
++  assert(last_tx[11]==percent&&rd16(last_tx+12)==800);
++  assert(rd16(last_tx+14)==PWM_PERIOD&&rd16(last_tx+16)==output_pwm_cap);
++  targets[0]=targets[2]=800;targets[1]=targets[3]=400;wheel_control(.01f);
++  for(unsigned i=0;i<4;i++)assert((unsigned)absi(duty[i])<=output_pwm_cap);
++  if(percent){assert(absi(duty[0])>=output_pwm_cap-1);assert(absi(absi(duty[0])-2*absi(duty[1]))<=2);}
++  else for(unsigned i=0;i<4;i++)assert(duty[i]==0);
++  p[4]=101;feed(0x18,p,5,0);assert(output_pwm_cap==PWM_CAP*percent/100u);
++  p[4]=100;p32(p,nonce+1);feed(0x18,p,5,0);assert(output_pwm_cap==PWM_CAP*percent/100u);
++ }
++ reset();uint8_t p[5];p32(p,nonce);p[4]=50;feed(0x18,p,5,0);
++ assert(output_pwm_cap==640);
++ manual_cmd(750);control();for(unsigned i=0;i<4;i++)assert(absi(duty[i])<=640);
++ ms=WATCHDOG_MS+1;control();assert(!have_command);for(unsigned i=0;i<4;i++)assert(!duty[i]);
++ reset();p[4]=0;feed(0x18,p,5,0);manual_cmd(350);control();assert(!have_command);
++ for(unsigned i=0;i<4;i++)assert(!duty[i]);
++ reset();p[4]=100;feed(0x18,p,5,0);assert(output_pwm_cap==1280);
++ puts("OUTPUT_PERCENT_0_100_CAP80_RATIO_NONCE_WATCHDOG_PASS");
++}
++
+ int main(int argc,char **argv){
+  assert(crc((const uint8_t*)"123456789",9)==0x29b1);
+  imu_and_pid();protocol_and_arbitration();telemetry_and_legacy();bridge_and_saturation();
+  puts("BODY_PID_IMU_CONVERSION_POLARITY_ARBITRATION_WATCHDOG_PROTOCOL_PASS");
++ output_limit_tests();
+  if(argc==2&&!strcmp(argv[1],"--reversal-regression"))return reversal_suite();
+  if(argc==3&&!strcmp(argv[1],"--yaw-suite"))return yaw_suite(argv[2]);
+  return reversal_suite();
+--- field_verified_3849abee/tests/test_protocol.py
++++ jetson_recorded_0852f4b4/tests/test_protocol.py
+@@ -31,5 +31,27 @@
+         self.assertEqual(sent, [(0x16, struct.pack('<Ihh', 123, 125, -1200))])
+ 
+ 
++    def test_output_percent_cap_and_payload(self):
++        for percent in range(101):
++            car=object.__new__(BodyChassis);car.nonce=123;sent=[]
++            def send(kind,payload):
++                sent.append((kind,payload));car.output_limit_reply=(123,percent,800,1600,1280*percent//100)
++            car.send=send
++            car.wait=lambda predicate,timeout:self.assertTrue(predicate())
++            applied=car.set_output_limit_percent(percent)
++            self.assertEqual(sent,[(0x18,struct.pack('<IB',123,percent))])
++            self.assertEqual(applied['applied_ticks'],1280*percent//100)
++        for value in [-1,101,50.5,'100',True]:
++            with self.assertRaises(ValueError):car.set_output_limit_percent(value)
++
++    def test_output_percent_wrong_firmware_ack_rejected(self):
++        car=object.__new__(BodyChassis);car.nonce=123
++        car.send=lambda kind,payload:None
++        for reply in [(124,100,800,1600,1280),(123,100,600,1600,960),(123,100,800,1600,1281)]:
++            def wait(predicate,timeout):car.output_limit_reply=reply
++            car.wait=wait
++            with self.assertRaises(RuntimeError):car.set_output_limit_percent(100)
++
++
+ if __name__ == '__main__':
+     unittest.main()
+--- field_verified_3849abee/tools/body_link.py
++++ jetson_recorded_0852f4b4/tools/body_link.py
+@@ -31,6 +31,7 @@
+     def __init__(self, config):
+         self.body_telemetry = None
+         self.body_info = None
++        self.output_limit_reply = None
+         super().__init__(config)
+ 
+     def poll(self, timeout=0):
+@@ -44,6 +45,8 @@
+                 self.body_telemetry = decode_body(data)
+             elif kind == 0x84 and len(data) == 8:
+                 self.body_info = struct.unpack('<IBBBB', data)
++            elif kind == 0x85 and len(data) == 11:
++                self.output_limit_reply = struct.unpack('<IBHHH', data)
+             elif kind == 0x81 and len(data) == 14:
+                 self.reply = data
+             elif kind == 0x82 and len(data) == 5:
+@@ -60,6 +63,18 @@
+                                'flags': v[6], 'ack': v[7], 'raw': v[8:12],
+                                'mm_s': v[12:16], 'pwm': v[16:20], 'voltage': v[20]/1000}
+                 self.last_rx = time.monotonic()
++
++    def set_output_limit_percent(self, percent):
++        """百分比只限制PID最大努力，不把期望速度变成开环PWM；仅初始化时调用。"""
++        if type(percent) is not int or not 0 <= percent <= 100:
++            raise ValueError('motor_output_limit_percent must be an integer 0..100')
++        self.output_limit_reply = None
++        self.send(0x18, struct.pack('<IB', self.nonce, percent))
++        self.wait(lambda: self.output_limit_reply is not None, 1.)
++        nonce, echoed, maximum, period, ticks = self.output_limit_reply
++        if nonce != self.nonce or echoed != percent or maximum != 800 or period <= 0 or ticks != period*maximum*percent//100000:
++            raise RuntimeError('MCU output-limit acknowledgement mismatch: %r' % (self.output_limit_reply,))
++        return dict(percent=percent, hard_limit_permille=maximum, timer_period=period, applied_ticks=ticks)
+ 
+     def extension_info(self):
+         self.send(0x17, struct.pack('<I', self.nonce))

@@ -1,0 +1,19 @@
+<launch>
+  <!-- TEST_ONLY: one fresh no-device, network-none container/master per run. -->
+  <arg name="scenario"/>
+  <arg name="output"/>
+  <param name="use_sim_time" value="false"/>
+  <include file="$(find ugv_bringup)/launch/slicer_odom.launch">
+    <arg name="local_planner" value="dwa"/>
+    <arg name="connect_control" value="true"/>
+    <arg name="source_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="control_config" value="$(find ugv_bringup)/config/test_control_chain.yaml"/>
+    <arg name="raw_topic" value="/TEST_ONLY_chain/raw"/>
+    <arg name="release_owner" value="/TEST_ONLY_chain_operator"/>
+  </include>
+  <node pkg="ugv_navigation" type="probe_dwa_safety.py" name="TEST_ONLY_chain_operator"
+        output="screen" required="true">
+    <param name="scenario" value="$(arg scenario)"/>
+    <param name="output" value="$(arg output)"/>
+  </node>
+</launch>

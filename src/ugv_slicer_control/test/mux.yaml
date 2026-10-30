@@ -1,0 +1,25 @@
+# Hardware-free mux configuration: none of these topics reach a driver.
+wheel_diameter: 0.085
+track_width: 0.15
+turn_gain_permille_per_rad_s: 283.11258278
+linear_speed: 0.22
+test_slew_permille_s: 1000
+initial_scale: 1.0
+min_scale: 0.2
+max_scale: 2.0
+scale_step: 0.2
+test_pwm_limit_permille: 750
+ros_driver_pwm_limit_permille: 600
+test_duty_permille: 250
+wasd_spin_pwm_permille: 300
+test_pwm_signs: [1, -1, 1, -1]
+encoder_signs: [-1, 1, -1, 1]
+wheel_ports: {left_front: D, right_front: C, left_rear: B, right_rear: A}
+key_timeout_s: 0.25
+command_timeout_s: 0.25
+telemetry_timeout_s: 0.5
+publish_hz: 20
+teleop_topic: /audit/teleop
+mission_topic: /audit/mission
+nav_topic: /audit/nav
+output_topic: /audit/output

@@ -1,0 +1,23 @@
+PACKAGE ugv_bringup /handoff/slicer_ugv_ros1/src/ugv_bringup
+PACKAGE ugv_navigation /handoff/slicer_ugv_ros1/src/ugv_navigation
+PACKAGE ugv_slicer_control /handoff/slicer_ugv_ros1/src/ugv_slicer_control
+PACKAGE cup_gnss /handoff/slicer_ugv_ros1/src/cup_gnss
+PACKAGE slicer_bringup /handoff/Slicer_Workspace/catkin_ws/src/slicer_bringup
+PACKAGE slicer_navigation /handoff/Slicer_Workspace/catkin_ws/src/slicer_navigation
+PACKAGE slicer_wasd_control /handoff/Slicer_Workspace/catkin_ws/src/Slicer_wasd_control
+PACKAGE fast_lio /handoff/Slicer_Workspace/catkin_ws/src/fast_lio
+PACKAGE livox_ros_driver2 /handoff/Slicer_Workspace/catkin_ws/src/livox_ros_driver2
+PACKAGE gmapping /opt/ros/noetic/share/gmapping
+PACKAGE realsense2_camera /opt/ros/noetic/share/realsense2_camera
+PACKAGE ntrip_client /opt/ros/noetic/share/ntrip_client
+PACKAGE nmea_navsat_driver /opt/ros/noetic/share/nmea_navsat_driver
+SCRIPT_SOURCE /handoff/Slicer_Workspace/catkin_ws/src/slicer_bringup/scripts/sensor_geometry.py mode 0o775 find_node ['/handoff/Slicer_Workspace/catkin_ws/src/slicer_bringup/scripts/sensor_geometry.py']
+SCRIPT_SOURCE /handoff/Slicer_Workspace/catkin_ws/src/slicer_bringup/scripts/lio_projector.py mode 0o775 find_node ['/handoff/Slicer_Workspace/catkin_ws/src/slicer_bringup/scripts/lio_projector.py']
+SCRIPT_SOURCE /handoff/Slicer_Workspace/catkin_ws/src/slicer_navigation/scripts/arm_cloud_filter.py mode 0o664 find_node NEEDS CATKIN WRAPPER (not included)
+SCRIPT_SOURCE /handoff/Slicer_Workspace/catkin_ws/src/slicer_navigation/scripts/self_scan_filter.py mode 0o775 find_node ['/handoff/Slicer_Workspace/catkin_ws/src/slicer_navigation/scripts/self_scan_filter.py']
+SCRIPT_SOURCE /handoff/Slicer_Workspace/catkin_ws/src/slicer_navigation/scripts/uav_waypoint_receiver.py mode 0o775 find_node ['/handoff/Slicer_Workspace/catkin_ws/src/slicer_navigation/scripts/uav_waypoint_receiver.py']
+PARSE slicer_online.launch [] nodes 3 NONE STARTED
+PARSE slicer_online.launch ['start_sensors:=true', 'connect_control:=true'] nodes 13 NONE STARTED
+PARSE slicer_online.launch ['start_camera:=true', 'camera_serial:=source-check'] nodes 5 NONE STARTED
+PARSE slicer_gnss.launch [] nodes 1 NONE STARTED
+PASS: source presence, package lookup and launch XML parsing only; no external sensor binary build or hardware verification

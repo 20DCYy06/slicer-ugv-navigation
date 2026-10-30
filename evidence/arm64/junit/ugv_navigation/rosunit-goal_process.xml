@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite errors="0" failures="0" name="unittest.suite.TestSuite" tests="1" time="20.062"><testcase classname="__main__.GoalProcessTest" name="test_cli_success_timeout_interrupt_and_explicit_cancel" time="20.0619" /><system-out>&lt;![CDATA[
+Fixed target odom: x=0.500 y=0.000 q=(0.0000,0.0000,0.0000,1.0000)
+GetPlan only: 22 poses; no Action goal sent
+
+Fixed target odom: x=0.500 y=0.000 q=(0.0000,0.0000,0.0000,1.0000)
+Goal sent to /ugv/move_base in odom; Ctrl-C cancels this goal
+state=3 Goal reached.
+
+Fixed target odom: x=1.000 y=0.000 q=(0.0000,0.0000,0.0000,1.0000)
+Goal sent to /ugv/move_base in odom; Ctrl-C cancels this goal
+Timeout; cancel sent, terminal result received=True
+
+Fixed target odom: x=1.000 y=0.000 q=(0.0000,0.0000,0.0000,1.0000)
+Goal sent to /ugv/move_base in odom; Ctrl-C cancels this goal
+Interrupted; goal cancellation requested
+
+Cancel ALL requested; verify terminal state on /ugv/move_base/status
+
+Fixed target odom: x=1.200 y=0.000 q=(0.0000,0.0000,0.0000,1.0000)
+Goal sent to /ugv/move_base in odom; Ctrl-C cancels this goal
+state=2 
+
+
+]]&gt;</system-out><system-err>&lt;![CDATA[
+
+]]&gt;</system-err></testsuite>

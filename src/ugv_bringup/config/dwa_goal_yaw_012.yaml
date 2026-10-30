@@ -1,0 +1,3 @@
+# Load with dynamic_reconfigure dynparam, not rosparam load on a running DWA.
+# Only yaw changes; keep the current xy tolerance, stop thresholds and caps.
+yaw_goal_tolerance: 0.12

@@ -1,0 +1,5 @@
+routes:
+  - {source: /odom, target: /ugv/odom, type: nav_msgs/Odometry, latch: false, max_hz: 5.0}
+  - {source: /amcl_pose, target: /ugv/pose, type: geometry_msgs/PoseWithCovarianceStamped, latch: false, max_hz: 1.0}
+  - {source: /slicer_c30d_driver/ready, target: /ugv/chassis_ready, type: std_msgs/Bool, latch: true, on_change: true}
+  - {source: /slicer_multi_goal_patrol/state, target: /ugv/mission/state, type: std_msgs/String, latch: true, on_change: true}

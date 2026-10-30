@@ -1,0 +1,28 @@
+<launch>
+  <!-- D455 perception only. Existing camera/bag input can be reused without
+       launching a second camera driver. No velocity or navigation nodes. -->
+  <arg name="config_file" default="$(find ugv_bringup)/config/depth_camera.yaml"/>
+  <arg name="start_camera" default="false"/>
+  <arg name="camera_serial" default=""/>
+  <include if="$(arg start_camera)" file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="serial_no" value="$(arg camera_serial)"/>
+    <arg name="enable_color" value="false"/>
+    <arg name="enable_depth" value="true"/>
+    <arg name="align_depth" value="false"/>
+    <arg name="enable_pointcloud" value="false"/>
+    <arg name="enable_gyro" value="false"/>
+    <arg name="enable_accel" value="false"/>
+    <arg name="enable_confidence" value="false"/>
+    <arg name="enable_infra" value="false"/>
+    <arg name="enable_infra1" value="false"/>
+    <arg name="enable_infra2" value="false"/>
+    <arg name="enable_fisheye" value="false"/>
+    <arg name="depth_width" value="640"/>
+    <arg name="depth_height" value="480"/>
+    <arg name="depth_fps" value="15"/>
+  </include>
+  <node pkg="ugv_navigation" type="depth_obstacles.py" name="online_depth_obstacles"
+        output="screen" required="true">
+    <rosparam command="load" file="$(arg config_file)"/>
+  </node>
+</launch>

@@ -1,0 +1,61 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+  - Class: rviz/Tool Properties
+    Name: Tool Properties
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Fixed Frame: map
+    Background Color: 48; 48; 48
+    Frame Rate: 15
+  Displays:
+    - Class: rviz/Grid
+      Name: Grid
+      Enabled: true
+      Plane Cell Count: 20
+    - Class: rviz/Map
+      Name: Map
+      Enabled: true
+      Topic: /map
+    - Class: rviz/LaserScan
+      Name: Live Scan
+      Enabled: true
+      Topic: /scan
+      Size (m): 0.02
+      Queue Size: 2
+    - Class: rviz/Map
+      Name: Local Costmap
+      Enabled: true
+      Topic: /move_base/local_costmap/costmap
+      Alpha: 0.5
+      Color Scheme: costmap
+    - Class: rviz/Path
+      Name: Global Path
+      Enabled: true
+      Topic: /move_base/GlobalPlanner/plan
+    - Class: rviz/Path
+      Name: TEB Local Path
+      Enabled: true
+      Topic: /move_base/TebLocalPlannerROS/local_plan
+    - Class: rviz/Image
+      Name: Red Target Camera
+      Enabled: false
+      Image Topic: /slicer_grasp/debug_image
+      Queue Size: 1
+  Tools:
+    - Class: rviz/Interact
+    - Class: rviz/MoveCamera
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz/SetGoal
+      Topic: /slicer/record_goal
+    - Class: rviz/PublishPoint
+      Topic: /clicked_point
+  Views:
+    Current:
+      Class: rviz/TopDownOrtho
+      Scale: 70
+Window Geometry:
+  Width: 1280
+  Height: 900

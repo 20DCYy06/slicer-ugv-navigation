@@ -1,0 +1,3 @@
+# Apply only after yaw comparison. Preserve the then-validated yaw setting.
+# Only xy changes; stop thresholds and speed/acceleration limits stay unchanged.
+xy_goal_tolerance: 0.10

@@ -1,0 +1,13 @@
+<launch>
+  <arg name="waypoint_topic" default="/uav/mission/waypoints"/>
+  <arg name="waypoint_file" default="$(dirname)/../catkin_ws/src/slicer_navigation/config/waypoints.yaml"/>
+  <!-- Compatibility entry point: existing ugv-sync command remains valid. -->
+  <node pkg="fkie_master_sync" type="master_sync" name="master_sync" output="screen">
+    <rosparam command="load" file="$(dirname)/../communication/config/sync_topics.yaml"/>
+  </node>
+  <!-- FKIE imports the topic; this node only saves its payload, never navigates. -->
+  <node pkg="slicer_navigation" type="uav_waypoint_receiver.py" name="ugv_waypoint_receiver" output="screen">
+    <param name="topic" value="$(arg waypoint_topic)"/>
+    <param name="file" value="$(arg waypoint_file)"/>
+  </node>
+</launch>

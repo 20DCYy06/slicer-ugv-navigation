@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-29",
+  "provided_zip": "firmware/c30d_yaw_fix_20261029_3849abee.zip",
+  "provided_zip_sha256": "7835f69c3ea258e87356701fc6ea5e733d0395e749d1cffbb7871ee02fd261b7",
+  "baseline_app_size": 10144,
+  "baseline_app_sha256": "92e816859d94d94e20077998b4cd4b86bd0c52fdc590d5e21c0b7246048885da",
+  "candidate_app_size": 10208,
+  "candidate_app_sha256": "3849abee0451ef94a6ac5bfd5bbe508c7ca9da016ae87afed70ee09ea18a17a4",
+  "production_changed_files": [
+    "BALANCE/balance.c"
+  ],
+  "config_unchanged": true,
+  "fresh_native_baseline_reversal": "997 checks / 965 failures (expected)",
+  "fresh_native_candidate_reversal": "997 checks / 0 failures",
+  "fresh_yaw_regression": "baseline and candidate pass",
+  "fresh_protocol_payload": "2 pass",
+  "remote_artifacts_verified": 31,
+  "backup_verified": true,
+  "flash_readback_verified": true,
+  "zero_interface_verified": true,
+  "field_results": [
+    {
+      "observation": "前两段基本连续；最后一段确实左右交替；A轮正常，自动停止",
+      "bag": "field/work-yaw-turns-20261029-01/motion.bag",
+      "feedback_frames": 9311,
+      "nonzero_target_frames": 876,
+      "fault_frames": 0,
+      "functional_alternating_direction": "PASS this run",
+      "precise_low_speed_tracking": "NOT PASSED; pulse/latency remain",
+      "reverse_integral_tracking_ratios": [
+        0.4404106159238858,
+        0.4237804878048781,
+        0.34558823529411775
+      ],
+      "positive_raw_phase_guard_block_s": 1.2677490711212158
+    }
+  ],
+  "teammate_source_modified": false,
+  "runtime_note": "slicer-online-navigation private master 11331 was temporarily stopped to avoid lidar contention; same WSL-project sensors/Guard/Mux restarted on WiFi 192.168.3.68:11311; original container can be restored after this test chain stops.",
+  "full_readback_sha256": "62ce0a97c3199f5115c5c2e77cfc1cacfec3d600fbdcb0387d543c14d408b435",
+  "current_state": "3849abee candidate remains flashed; manual_hold=true; final accepted targets, wheel feedback and software duty zero",
+  "not_tested": [
+    "short straight / waypoint navigation this round",
+    "nonzero-vx arcs",
+    "physical minimum stable speed / current / friction",
+    "longer repeated runs and precision speed following"
+  ],
+  "video_status": "User recorded; files/path not yet supplied, not claimed archived"
+}

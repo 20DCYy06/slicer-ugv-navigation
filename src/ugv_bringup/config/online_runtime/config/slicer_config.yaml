@@ -1,0 +1,511 @@
+schema_version: 1
+runtime:
+  docker_image: slicer-fkie:latest
+  ros_master_uri: http://127.0.0.1:11311
+  build_jobs: 2
+frames:
+  map: map
+  odom: odom
+  base: base_link
+  laser: laser_link
+  arm: arm_base_link
+chassis:
+  serial_port: /dev/ttyACM0
+  fallback_port: /dev/ttyUSB0
+  usb_vid: 6790
+  usb_pid: 21972
+  serial_number: 5CF0016379
+  baud: 115200
+  firmware_confirmed: false
+  polarity_verified: false
+  host_uart: 1
+  uart_route_verified: false
+  wheel_diameter: 0.085
+  wheel_radius: 0.0425
+  wheelbase: 0.17
+  track_width: 0.15
+  body_length: 0.23
+  body_width: 0.18
+  encoder_lines: 500
+  gear_ratio: 30
+  quadrature: 4
+  counts_per_revolution: 60000
+  port_order:
+  - A
+  - B
+  - C
+  - D
+  wheel_ports:
+    left_front: D
+    right_front: C
+    left_rear: B
+    right_rear: A
+  encoder_signs:
+  - 1
+  - 1
+  - -1
+  - -1
+  pwm_signs:
+  - -1
+  - -1
+  - 1
+  - 1
+  control_hz: 100
+  telemetry_hz: 25
+  firmware_watchdog_ms: 500
+  host_watchdog_s: 0.25
+  telemetry_timeout_s: 0.25
+  max_linear: 0.25
+  max_angular: 0.6
+  max_wheel_speed: 0.4
+  velocity_kp: 700.0
+  velocity_ki: 700.0
+  pwm_limit: 16500
+  pi_output_limit: 16800
+  accel_linear: 0.25
+  accel_angular: 0.8
+  pose_covariance:
+  - 0.04
+  - 0.04
+  - 0.09
+  twist_covariance:
+  - 0.01
+  - 0.04
+teleop:
+  linear_speed: 0.22
+  angular_speed: 0.5
+  key_timeout_s: 0.25
+  initial_scale: 1.0
+  scale_step: 0.1
+  min_scale: 0.1
+  max_scale: 1.0
+  publish_hz: 20
+factory_wasd:
+  serial_port: auto
+  usb_vid: 6790
+  usb_pid: 21972
+  serial_number: 5CF0016377
+  baud: 115200
+  linear_speed: 0.3
+  angular_speed: 0.25
+  max_linear_speed: 0.15
+  max_angular_speed: 0.5
+  accel_linear: 0.15
+  accel_angular: 0.6
+  initial_scale: 1.0
+  min_scale: 0.2
+  max_scale: 2.0
+  scale_step: 0.2
+  key_timeout_s: 0.25
+  telemetry_timeout_s: 0.5
+  publish_hz: 20
+  invert_linear: false
+  invert_angular: false
+c30d_firmware:
+  pwm_test_max_ms: 0
+  part: STM32F407VET6
+  baud: 115200
+  counts_per_revolution: 60000
+  wheel_diameter_m: 0.085
+  control_ms: 10
+  telemetry_ms: 40
+  watchdog_ms: 500
+  closed_loop_stall_timeout_ms: 3000
+  closed_loop_direction_timeout_ms: 1000
+  min_battery_mv: 10000
+  max_wheel_mm_s: 600
+  encoder_max_speed_m_s: 1.0
+  pwm_limit_permille: 600
+  pwm_test_limit_permille: 750
+  calibration_permille: 150
+  calibration_ms: 250
+  kp: 1.0
+  ki: 4.0
+  feedforward: 3.0
+c30d_wasd:
+  control_mode: pwm_test
+  test_pwm_signs:
+  - 1
+  - -1
+  - 1
+  - -1
+  test_duty_permille: 250
+  test_turn_duty_permille: 400
+  test_slew_permille_s: 1000
+  test_max_hold_s: 1.5
+  serial_port: auto
+  usb_vid: 6790
+  usb_pid: 21972
+  serial_number: 5CF0016377
+  baud: 115200
+  counts_per_revolution: 60000
+  max_wheel_mm_s: 600
+  track_width_m: 0.15
+  wheel_ports:
+    left_front: D
+    right_front: C
+    left_rear: B
+    right_rear: A
+  pwm_signs:
+  - 1
+  - 1
+  - 1
+  - 1
+  encoder_signs: null
+  linear_speed: 0.3
+  angular_speed: 0.4
+  max_linear_speed: 0.6
+  max_angular_speed: 0.6
+  accel_linear: 0.2
+  accel_angular: 0.8
+  initial_scale: 1.0
+  min_scale: 0.2
+  max_scale: 2.0
+  scale_step: 0.2
+  key_timeout_s: 0.25
+  telemetry_timeout_s: 0.5
+  publish_hz: 20
+  invert_linear: false
+  invert_angular: false
+sensors:
+  base_to_laser:
+    xyz:
+    - 0.07
+    - 0.0
+    - 0.18
+    quaternion:
+    - 0
+    - 0
+    - 0
+    - 1
+  laser_to_arm:
+    xyz:
+    - 0.0
+    - 0.0
+    - 0.045
+    quaternion:
+    - 0
+    - 0
+    - 0
+    - 1
+  lidar_ip: 192.168.1.192
+  host_lidar_ip: 192.168.1.5
+  lidar_interface: enP8p1s0
+  lidar_publish_hz: 10.0
+  lidar_to_imu_translation:
+  - -0.011
+  - -0.02329
+  - 0.04412
+  lidar_to_imu_rotation:
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  lio_pose_variance:
+  - 0.0025
+  - 0.0025
+  - 0.0025
+  scan_min_height: 0.05
+  scan_max_height: 0.5
+  scan_range_min: 0.05
+  scan_range_max: 20.0
+  scan_angle_increment: 0.008726646
+  self_filter_padding: 0.01
+  arm_self_filter_min_z: 0.23
+  front_fov_deg: 160.0
+  camera_width: 640
+  camera_height: 480
+  camera_fps: 15
+navigation:
+  A: null
+  B: null
+  map_file: null
+  footprint_padding: 0.03
+  travel_envelope:
+    rear_x: -0.1
+    front_x: 0.17
+    half_width: 0.11
+  front_stop_distance: 0.15
+  inflation_radius: 0.192
+  cost_scaling_factor: 4.5
+  min_obstacle_dist: 0.144
+  obstacle_range: 3.0
+  raytrace_range: 4.0
+  min_obstacle_height: -0.05
+  max_forward: 0.9
+  max_reverse: 0.0
+  turn_start_angular: 2.1192982456
+  min_turning_radius: 0.0
+  teb_forward_drive_weight: 900.0
+  max_angular: 2.4725146199
+  accel_linear: 0.2
+  accel_angular: 1.2
+  xy_tolerance: 0.15
+  yaw_tolerance: 0.3
+  controller_hz: 10.0
+  planner_hz: 1.0
+  local_costmap_publish_hz: 4.0
+  goal_timeout_s: 120.0
+  local_size: 5.0
+  costmap_resolution: 0.05
+  odometry_fusion_hz: 30
+  amcl_min_particles: 500
+  amcl_max_particles: 2000
+  amcl_xy_variance: 0.05
+  amcl_yaw_variance: 0.09
+mission:
+  search_angular_speed: 0.35
+  search_timeout_s: 30.0
+  vision_timeout_s: 3.0
+  align_kp: 1.0
+  align_tolerance: 0.08
+  align_timeout_s: 20.0
+  settling_time_s: 0.5
+arm:
+  initial_positions:
+  - 500
+  - 270
+  - 970
+  - 1100
+  - 540
+  - 300
+  soft_limits:
+    1:
+    - -100
+    - 930
+    2:
+    - 60
+    - 800
+    3:
+    - 340
+    - 980
+    4:
+    - 450
+    - 1180
+    5:
+    - 410
+    - 610
+    6:
+    - 80
+    - 950
+  gripper_open_pos: 300
+  gripper_close_pos: null
+  gripper_calibrated: false
+  mapping_confirmed: true
+  logical_to_protocol:
+    1:
+      logical_range:
+      - -100
+      - 930
+      protocol_range:
+      - 0
+      - 1000
+    2:
+      scale: 1.0
+      offset: 0.0
+    3:
+      scale: 1.0
+      offset: 0.0
+    4:
+      logical_range:
+      - 450
+      - 1180
+      protocol_range:
+      - 0
+      - 1000
+    5:
+      scale: 1.0
+      offset: 0.0
+    6:
+      scale: 1.0
+      offset: 0.0
+  serial_port: null
+  serial_number: 5CE5119829
+  blocked_serials:
+  - '5185028488'
+  - 5CF0016379
+  baud: 115200
+  position_tolerance: 5
+  max_joint_step: 30
+  min_segment_time_s: 0.25
+  move_time_s: 2.0
+  arrival_timeout_s: 3.0
+  cartesian_step_m: 0.005
+  cartesian_speed_mps: 0.03
+  joint_path_tcp_tolerance_m: 0.015
+  stop_on_exit: true
+kinematics:
+  backend: package
+  links_m:
+    base: 0.217
+    link1: 0.085
+    link2: 0.085
+    link3: 0.05
+    tool: 0.121
+  joint_calibration:
+  - neutral_pulse: 500
+    angle_at_neutral_deg: 0.0
+    degrees_per_pulse: 0.24
+    angle_limits_deg:
+    - -120.2
+    - 120.2
+  - neutral_pulse: 500
+    angle_at_neutral_deg: -90.0
+    degrees_per_pulse: -0.24
+    angle_limits_deg:
+    - -186.2
+    - 6.2
+  - neutral_pulse: 500
+    angle_at_neutral_deg: 0.0
+    degrees_per_pulse: -0.24
+    angle_limits_deg:
+    - -120.2
+    - 120.2
+  - neutral_pulse: 500
+    angle_at_neutral_deg: -90.0
+    degrees_per_pulse: -0.24
+    angle_limits_deg:
+    - -200.2
+    - 20.2
+  - neutral_pulse: 500
+    angle_at_neutral_deg: 0.0
+    degrees_per_pulse: 0.24
+    angle_limits_deg:
+    - -120.2
+    - 120.2
+  tcp_length: 0.121
+  tcp_offset:
+  - 0.0
+  - 0.0
+  - 0.121
+  R_model_tool_flange:
+  - - 0
+    - 0
+    - 1
+  - - 0
+    - 1
+    - 0
+  - - -1
+    - 0
+    - 0
+  flange_at_link3_end: true
+  tool_m: 0.121
+  tcp_calibrated: true
+  pitch_deg: 90.0
+  roll_deg: 0.0
+  search_pitch: false
+  max_position_error_m: 0.002
+  max_rotation_error_deg: 1.0
+camera:
+  color_topic: /camera/color/image_raw
+  depth_topic: /camera/aligned_depth_to_color/image_raw
+  info_topic: /camera/color/camera_info
+  debug_topic: /slicer_grasp/debug_image
+  aligned_depth_required: true
+  sync_slop_s: 0.04
+  frame_timeout_s: 1.0
+  camera_wait_timeout_s: 30.0
+  depth_scale_16u: 0.001
+  mounting: eye_in_hand
+  extrinsics_calibrated: false
+  T_tool_camera_optical: null
+  T_base_camera_optical: null
+  T_base_camera_initial_guess:
+  - - 0
+    - 0
+    - 1
+    - 0.12
+  - - -1
+    - 0
+    - 0
+    - 0.0
+  - - 0
+    - -1
+    - 0
+    - 0.035
+  - - 0
+    - 0
+    - 0
+    - 1
+  camera_height_ground_m: 0.26
+  camera_to_base_dist: 0.12
+  base_height_ground_m: 0.225
+  extrinsic_height_tolerance_m: 0.03
+  distortion_model: plumb_bob
+vision:
+  lower_red_1:
+  - 0
+  - 100
+  - 70
+  upper_red_1:
+  - 10
+  - 255
+  - 255
+  lower_red_2:
+  - 170
+  - 100
+  - 70
+  upper_red_2:
+  - 180
+  - 255
+  - 255
+  min_contour_area: 200
+  max_contour_area: 180000
+  morph_kernel: 3
+  min_depth_m: 0.1
+  max_depth_m: 1.5
+  min_depth_pixels: 25
+  min_valid_fraction: 0.3
+  max_depth_mad_m: 0.015
+  aspect_ratio:
+  - 0.5
+  - 2.0
+  min_extent: 0.45
+  stable_frames: 5
+  stable_distance_m: 0.01
+  detection_timeout_s: 40.0
+  surface_to_tcp_offset_m:
+  - 0.0
+  - 0.0
+  - 0.0
+task:
+  lift_height: 0.06
+  pregrasp_height_m: 0.04
+  preapproach_clearance_m: 0.02
+  place_servo_1_target: null
+  servo_1_turn_offset: 180
+  place_plane_z_m: null
+  place_tcp_offset_m: 0.02
+  scene_calibrated: false
+  workspace_min_m:
+  - -0.35
+  - -0.35
+  - 0.01
+  workspace_max_m:
+  - 0.35
+  - 0.35
+  - 0.5
+  gripper_dwell_s: 0.7
+  settle_s: 0.4
+  cycle_pause_s: 2.0
+  max_cycles: 1
+calibration:
+  chessboard_inner_corners:
+  - 7
+  - 5
+  square_size_m: null
+  min_samples: 12
+mock:
+  target_base_m:
+  - 0.18
+  - 0.0
+  - 0.12
+  place_plane_z_m: 0.1
+  gripper_close_pos: 900
+  time_scale: 0.0
+  seed: 18

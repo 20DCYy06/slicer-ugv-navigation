@@ -1,0 +1,48 @@
+{
+  "device_or_ros_access": false,
+  "os": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n",
+  "images": [
+    {
+      "tag": "industrial-cup/nav-slicer:20261023-dwa",
+      "id": "sha256:bd1daedc41721933507b0017b2acae3a8079b583489498db96707abad069feca",
+      "architecture": "arm64",
+      "created": "2026-10-23T11:56:05.741281777-04:00",
+      "repo_digests": [
+        "industrial-cup/nav-slicer@sha256:bd1daedc41721933507b0017b2acae3a8079b583489498db96707abad069feca"
+      ]
+    },
+    {
+      "tag": "ugv-online-rtk:arm64-20261030",
+      "id": "sha256:5a194ce7eb0689b4a7eea4ddefd360db747fd631136877ced77de5d4c1485c28",
+      "architecture": "arm64",
+      "created": "2026-10-30T04:09:21.76625509-04:00",
+      "repo_digests": [
+        "ugv-online-rtk@sha256:5a194ce7eb0689b4a7eea4ddefd360db747fd631136877ced77de5d4c1485c28"
+      ]
+    },
+    {
+      "tag": "slicer-fkie:local",
+      "id": "sha256:0d0aba55bee7baf6e25449b67b4fd9dabedef5fe09b99eada3068d25f6c8ec07",
+      "architecture": "arm64",
+      "created": "2026-10-22T06:00:42.998978119-04:00",
+      "repo_digests": [
+        "slicer-fkie@sha256:0d0aba55bee7baf6e25449b67b4fd9dabedef5fe09b99eada3068d25f6c8ec07"
+      ]
+    }
+  ],
+  "sdk_artifacts": [
+    {
+      "path": "/usr/local/lib/liblivox_lidar_sdk_static.a",
+      "resolved": "/usr/local/lib/liblivox_lidar_sdk_static.a",
+      "size": 5788626,
+      "sha256": "d8227467b34d3977c3ec6121bd8f9239bc55d02c34979ae010284c48f2fe4533"
+    },
+    {
+      "path": "/usr/local/lib/liblivox_lidar_sdk_shared.so",
+      "resolved": "/usr/local/lib/liblivox_lidar_sdk_shared.so",
+      "size": 1217304,
+      "sha256": "630509ac580d72f347e31438df7d3c42adcd409ed8f391a78416aadca90216a4"
+    }
+  ],
+  "sdk_source_candidates": []
+}

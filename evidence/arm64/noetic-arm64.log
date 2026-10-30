@@ -1,0 +1,982 @@
+TEST_ONLY: no network, no devices. Evidence: /home/potato/slicer_ugv_ros1/.test-results/rtk-online-arm64-20261030/source/.test-results/run-n4HfM8IE
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using CATKIN_DEVEL_PREFIX: /workspace/devel
+-- Using CMAKE_PREFIX_PATH: /opt/ros/noetic
+-- This workspace overlays: /opt/ros/noetic
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Using Debian Python package layout
+-- Found PY_em: /usr/lib/python3/dist-packages/em.py  
+-- Using empy: /usr/lib/python3/dist-packages/em.py
+-- Using CATKIN_ENABLE_TESTING: ON
+-- Call enable_testing()
+-- Using CATKIN_TEST_RESULTS_DIR: /workspace/build/test_results
+-- Forcing gtest/gmock from source, though one was otherwise available.
+-- Found gtest sources under '/usr/src/googletest': gtests will be built
+-- Found gmock sources under '/usr/src/googletest': gmock will be built
+-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+-- Found Threads: TRUE  
+-- Using Python nosetests: /usr/bin/nosetests3
+-- catkin 0.8.12
+-- BUILD_SHARED_LIBS is on
+-- BUILD_SHARED_LIBS is on
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ~~  traversing 4 packages in topological order:
+-- ~~  - ugv_bringup
+-- ~~  - cup_gnss
+-- ~~  - ugv_slicer_control
+-- ~~  - ugv_navigation
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- +++ processing catkin package: 'ugv_bringup'
+-- ==> add_subdirectory(ugv_bringup)
+-- +++ processing catkin package: 'cup_gnss'
+-- ==> add_subdirectory(cup_gnss)
+-- Installing devel-space wrapper /workspace/src/cup_gnss/scripts/gnss_node.py to /workspace/devel/lib/cup_gnss
+-- Installing devel-space wrapper /workspace/src/cup_gnss/scripts/gnss_status.py to /workspace/devel/lib/cup_gnss
+-- +++ processing catkin package: 'ugv_slicer_control'
+-- ==> add_subdirectory(ugv_slicer_control)
+-- Installing devel-space wrapper /workspace/src/ugv_slicer_control/scripts/velocity_mux.py to /workspace/devel/lib/ugv_slicer_control
+-- Installing devel-space wrapper /workspace/src/ugv_slicer_control/scripts/arc_velocity_guard.py to /workspace/devel/lib/ugv_slicer_control
+-- Installing devel-space wrapper /workspace/src/ugv_slicer_control/scripts/control.py to /workspace/devel/lib/ugv_slicer_control
+-- Installing devel-space wrapper /workspace/src/ugv_slicer_control/scripts/c30d_driver_node.py to /workspace/devel/lib/ugv_slicer_control
+-- +++ processing catkin package: 'ugv_navigation'
+-- ==> add_subdirectory(ugv_navigation)
+-- Installing devel-space wrapper /workspace/src/ugv_navigation/scripts/goal.py to /workspace/devel/lib/ugv_navigation
+-- Installing devel-space wrapper /workspace/src/ugv_navigation/scripts/depth_obstacles.py to /workspace/devel/lib/ugv_navigation
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /workspace/build
+Base path: /workspace
+Source space: /workspace/src
+Build space: /workspace/build
+Devel space: /workspace/devel
+Install space: /workspace/install
+####
+#### Running command: "cmake /workspace/src -DCATKIN_DEVEL_PREFIX=/workspace/devel -DCMAKE_INSTALL_PREFIX=/workspace/install -G Unix Makefiles" in "/workspace/build"
+####
+####
+#### Running command: "make -j2" in "/workspace/build"
+####
+test_dwell_reports_first_quiet_time_only_after_confirmation (test_analyze_ekf_response.ResponseMetricsTests) ... ok
+test_lio_increment_comparison_removes_pose_origin_offsets (test_analyze_ekf_response.ResponseMetricsTests) ... ok
+test_missing_samples_cannot_join_short_quiet_runs (test_analyze_ekf_response.ResponseMetricsTests) ... ok
+test_stationary_window_requires_fresh_valid_and_quiet_sensors (test_analyze_ekf_response.ResponseMetricsTests) ... ok
+test_yaw_crossing_pi_remains_continuous (test_analyze_ekf_response.ResponseMetricsTests) ... ok
+test_a_later_goal_cannot_supply_the_previous_goals_zero_tail_or_post_pose (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_acceptance_freshness_needs_a_nearby_advancing_mcu_pair (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_backward_mcu_frame_cannot_supply_pwm_zero_after_acceptance (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_body_duty_observation_requires_the_same_0x93_confirmed_zero_sequence (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_body_linear_motion_is_nonzero_and_malformed_body_values_never_count_as_zero (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_body_rotation_and_double_zero_use_wire_units_and_independent_feedback (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_body_zero_ack_alone_is_not_a_motion_transition_or_fresh_feedback (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_body_zero_confirmed_by_0x93_can_have_0x90_duty_and_encoder_observations (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_continuous_body_zeros_with_0x90_before_0x93_match_each_confirmed_sequence (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_failed_imu_bit_is_invalid_even_with_all_ready_bits (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_failed_serial_write_is_not_an_accepted_zero_reference (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_goal_odom_post5_residual_stays_unknown_without_observation_coverage (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_goal_odom_residual_is_unknown_for_frame_mismatch_or_invalid_quaternion (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_goal_yaw_is_normalized_and_odom_target_residual_wraps_across_pi (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_goals_match_exact_result_id_and_pose_deltas_use_initial_heading (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_invalid_last_encoder_pair_does_not_extend_observation_coverage (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_legacy_feedback_cannot_supply_body_feedback_freshness_or_body_acceptance (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_long_gap_does_not_extend_fresh_mcu_tick_coverage (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_missing_mcu_tick_cannot_supply_encoder_evidence (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_missing_or_stale_evidence_never_infers_timely_stop (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_missing_sequence_cannot_supply_acceptance_evidence (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_missing_wrong_kind_or_failed_speed_payload_is_not_a_zero_reference (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_nonfinite_velocity_is_an_unknown_barrier_in_a_zero_tail (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_old_body_confirmation_cannot_be_kept_fresh_by_later_0x90 (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_repeated_body_ticks_and_bad_imu_are_reported_separately_from_legacy_ticks (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_restarts_and_event_sequence_gaps_are_separated (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_speed_acceptance_does_not_cross_driver_instances (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_speed_acceptance_with_stale_telemetry_remains_unknown (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_speed_zero_acceptance_wraps_without_mixing_sent_units (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_speed_zero_for_a_later_goal_cannot_finish_the_earlier_goal (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_velocity_thresholds_and_continuous_zero_require_observed_coverage (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_wheel_stop_uses_explicit_linear_and_angular_thresholds (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_zero_acceptance_matches_skipped_sequences_and_16bit_wrap (test_analyze_motion_bag.MotionAnalysisTests) ... ok
+test_after_zero_is_pose_estimate_not_physical_stop (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_bad_measurements_and_windows_rejected (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_different_sample_rates_share_interpolated_endpoints (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_frame_change_and_suspected_reset_do_not_become_error (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_header_anomalies_are_separate_from_record_frequency (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_host_monotonic_not_subtracted_from_ros_time (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_independent_origins_compare_start_frame_increments (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_input_record_order_anomaly_is_visible (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_manual_stop_window_requires_fresh_coverage (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_manual_values_are_labelled_and_not_fabricated (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_no_overlap_or_missing_topic_is_unknown (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_null_template_uses_existing_coverage (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_pose_speed_is_separate_from_reported_zero_twist (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_stale_or_duplicate_lio_cannot_make_comparison_pass (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_tf_edges_and_static_stamps_reported_separately (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_yaw_wrap_uses_short_signed_rotation (test_analyze_odom_test.OdomAnalysisTests) ... ok
+test_real_bag_read_only_cli_with_remapping_and_manual_values (test_analyze_odom_test.RosbagCliIntegration) ... /usr/lib/python3/dist-packages/Cryptodome/Util/_raw_api.py:41: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+ok
+test_body_feedback_reports_independent_ticks_imu_health_and_faults (test_collect_odom_test.CaptureTests) ... ok
+test_body_nonce_capability_and_imu_failures_remain_findings (test_collect_odom_test.CaptureTests) ... ok
+test_body_requested_parameter_or_zero_frames_cannot_replace_runtime_provenance (test_collect_odom_test.CaptureTests) ... ok
+test_default_topic_selection_has_feedback_without_large_sensor_streams (test_collect_odom_test.CaptureTests) ... ok
+test_empty_stream_has_no_manufactured_rate_or_age (test_collect_odom_test.CaptureTests) ... ok
+test_explicit_body_provenance_checks_configuration_and_extension_without_claiming_motion (test_collect_odom_test.CaptureTests) ... ok
+test_failed_imu_bit_overrides_all_ready_bits_in_body_feedback (test_collect_odom_test.CaptureTests) ... ok
+test_legacy_wheel_speed_provenance_keeps_existing_behavior (test_collect_odom_test.CaptureTests) ... ok
+test_missing_or_receive_stale_body_feedback_remains_a_finding (test_collect_odom_test.CaptureTests) ... ok
+test_navigation_capture_selects_costmaps_both_local_planners_and_speed_chain (test_collect_odom_test.CaptureTests) ... ok
+test_perception_capture_adds_raw_and_intermediate_clouds_only_when_selected (test_collect_odom_test.CaptureTests) ... ok
+test_perception_snapshot_reads_only_selected_sensor_and_fastlio_parameters (test_collect_odom_test.CaptureTests) ... ok
+test_receive_frequency_is_independent_of_header_clock (test_collect_odom_test.CaptureTests) ... ok
+test_record_command_is_only_a_bounded_topic_whitelist (test_collect_odom_test.CaptureTests) ... ok
+test_repeated_and_old_headers_do_not_look_like_fresh_lio (test_collect_odom_test.CaptureTests) ... ok
+test_selected_parameter_credentials_are_not_copied (test_collect_odom_test.CaptureTests) ... ok
+test_combination_preserves_unique_tf_owners_and_dwa_chain (test_gnss_launch.GnssLaunchTests) ... ok
+test_existing_online_navigation_does_not_start_or_depend_on_receiver (test_gnss_launch.GnssLaunchTests) ... ok
+test_public_config_can_be_replaced_without_embedding_credentials_in_params (test_gnss_launch.GnssLaunchTests) ... ok
+test_receiver_starts_alone_with_one_serial_owner_and_no_tf_or_navigation (test_gnss_launch.GnssLaunchTests) ... ok
+test_command_arguments_are_not_evaluated_by_wrapper (test_noetic_shell.OfflineShellTests) ... ok
+test_reference_sources_are_available_read_only_with_network_and_devices_absent (test_noetic_shell.OfflineShellTests) ... ok
+test_without_reference_existing_offline_shell_still_works (test_noetic_shell.OfflineShellTests) ... ok
+test_camera_serial_and_sensor_flags_reach_real_driver_include (test_online_launch.OnlineLaunchTests) ... ok
+test_control_connection_has_one_guard_mux_and_no_driver (test_online_launch.OnlineLaunchTests) ... ok
+test_current_navigation_limits_and_footprint_survive_online_overlay (test_online_launch.OnlineLaunchTests) ... ok
+test_custom_namespace_and_external_mux_use_matching_guard_topics (test_online_launch.OnlineLaunchTests) ... ok
+test_default_planning_uses_online_map_and_continuous_local_frame (test_online_launch.OnlineLaunchTests) ... ok
+test_depth_reuses_independent_marking_and_clearing_layers (test_online_launch.OnlineLaunchTests) ... ok
+test_disabling_depth_removes_processor_and_observation_sources (test_online_launch.OnlineLaunchTests) ... ok
+test_far_field_target_fits_initial_map_and_extent_can_be_reduced (test_online_launch.OnlineLaunchTests) ... ok
+test_installed_share_layout_resolves_without_source_runtime_directory (test_online_launch.OnlineLaunchTests) ... ok
+test_sensors_preserve_fusion_and_unique_tf_owners (test_online_launch.OnlineLaunchTests) ... ok
+test_angles_outside_one_turn_are_normalized (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_cli_runs_without_ros_network_or_an_executable_goal_command (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_composition_applies_enu_to_odom_before_odom_to_map (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_finite_inputs_that_overflow_do_not_produce_invalid_json (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_identity_preserves_the_declared_target_and_units (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_negative_rotation_and_wrapped_yaw (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_new_map_transform_snapshot_changes_composed_result (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_ninety_degree_rotation_then_translation_uses_correct_direction (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_nonfinite_coordinates_yaw_and_transform_values_are_rejected (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_origin_and_measurement_notes_are_retained_without_verification_claim (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_transform_choice_is_required_mutually_exclusive_and_complete (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_unspecified_target_yaw_is_not_invented (test_preview_enu_goal.PreviewEnuGoalTest) ... ok
+test_24_by_16_window_rejects_forward_goal_along_short_axis (test_preview_forward_goal.ForwardGoalGeometryTest) ... ok
+test_frozen_goal_does_not_follow_a_later_odom_sample (test_preview_forward_goal.ForwardGoalGeometryTest) ... ok
+test_margin_comes_from_existing_footprint_circumscribed_radius (test_preview_forward_goal.ForwardGoalGeometryTest) ... ok
+test_project_ten_metres_at_zero_45_and_90_degrees (test_preview_forward_goal.ForwardGoalGeometryTest) ... ok
+test_window_uses_actual_origin_and_requires_edge_margin (test_preview_forward_goal.ForwardGoalGeometryTest) ... ok
+test_composed_transforms_apply_enu_to_odom_before_odom_to_map (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_east_offset_rotates_and_translates_in_the_declared_direction (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_explicit_zero_yaw_is_rotated_but_an_omitted_yaw_stays_absent (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_height_is_ellipsoid_metres_and_up_is_reported_without_a_map_z (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_invalid_or_incomplete_target_coordinates_are_rejected (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_invalid_transform_choice_and_nonfinite_yaw_are_rejected (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_latitude_offset_is_north_in_metres (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_missing_bad_or_non_wgs84_origin_is_rejected_without_writing_it (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_origin_id_is_optional_and_origin_coordinates_define_the_reference (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_same_point_has_zero_enu_and_keeps_origin_identity (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_small_negative_enu_values_are_not_reparsed_as_cli_options (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_small_negative_transform_and_yaw_keep_their_numeric_values (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_unconfigured_default_origin_is_rejected_without_selecting_the_input (test_preview_gnss_goal.PreviewGnssGoalTest) ... ok
+test_explicit_cli_transform_overrides_site_transform_and_preserves_optional_yaw (test_preview_gnss_goal.SiteConfiguredPreviewTest) ... ok
+test_invalid_datum_transform_and_antenna_values_are_rejected (test_preview_gnss_goal.SiteConfiguredPreviewTest) ... ok
+test_site_accepts_comments_and_unknown_antenna_without_faking_zero_offset (test_preview_gnss_goal.SiteConfiguredPreviewTest) ... ok
+test_site_and_legacy_origin_file_are_not_silently_mixed (test_preview_gnss_goal.SiteConfiguredPreviewTest) ... ok
+test_site_supplies_common_origin_and_map_transform_without_extra_cli_fields (test_preview_gnss_goal.SiteConfiguredPreviewTest) ... ok
+test_unconfigured_default_site_is_rejected_without_adopting_target_as_origin (test_preview_gnss_goal.SiteConfiguredPreviewTest) ... ok
+test_alternate_reverses_every_two_seconds_without_zero_gaps (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_both_sequences_finish_at_sixteen_seconds_and_twenty_hz (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_exception_and_ctrl_c_end_with_zero (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_false_ready_during_run_remains_latched_after_true_recovers (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_late_wakeup_uses_elapsed_time_and_does_not_extend_nonzero (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_lost_ready_during_nonzero_ends_with_zero (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_ready_requires_true_and_a_fresh_received_observation (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_shutdown_stops_before_next_nonzero_and_finishes_zero (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_steady_has_zero_brackets_and_twelve_seconds_same_sign (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_steady_negative_is_the_mirror_of_steady (test_probe_body_turn.ProbeScheduleTest) ... ok
+test_conflicting_recorded_static_geometry_is_rejected (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_covariance_override_copies_and_preserves_every_other_field (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_explicit_body_frame_correction_preserves_raw_gyro_and_stamp (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_imu_candidate_cannot_enable_orientation_or_acceleration (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_multiple_static_publishers_are_aggregated_without_stamp_changes (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_only_candidate_counts_as_imu_subscriber (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_unknown_or_invalid_gyro_variance_is_rejected (test_replay_ekf_response.OptionalImuReplayTests) ... ok
+test_character_device_alias_maps_resolved_path_for_driver_auto_discovery (test_slicer_shell.SlicerShellTest) ... ok
+test_character_device_outside_dev_is_rejected_before_docker (test_slicer_shell.SlicerShellTest) ... ok
+test_chassis_and_gnss_cannot_map_the_same_physical_device_twice (test_slicer_shell.SlicerShellTest) ... ok
+test_command_arguments_with_spaces_are_preserved (test_slicer_shell.SlicerShellTest) ... ok
+test_credentials_are_mounted_read_only_without_becoming_ros_arguments (test_slicer_shell.SlicerShellTest) ... ok
+test_default_shell_has_no_device_mapping (test_slicer_shell.SlicerShellTest) ... ok
+test_dev_path_cannot_traverse_to_a_character_device_outside_dev (test_slicer_shell.SlicerShellTest) ... ok
+test_explicit_character_device_adds_only_that_device_and_its_gid (test_slicer_shell.SlicerShellTest) ... ok
+test_gnss_device_has_a_stable_alias_without_mapping_the_chassis (test_slicer_shell.SlicerShellTest) ... ok
+test_missing_device_is_rejected_before_docker (test_slicer_shell.SlicerShellTest) ... ok
+test_missing_gnss_device_is_rejected_before_docker (test_slicer_shell.SlicerShellTest) ... ok
+test_regular_file_is_rejected_before_docker (test_slicer_shell.SlicerShellTest) ... ok
+
+----------------------------------------------------------------------
+Ran 153 tests in 13.379s
+
+OK
+Scanning dependencies of target clean_test_results_ugv_navigation
+Scanning dependencies of target tests
+Built target tests
+Scanning dependencies of target clean_test_results_cup_gnss
+Removing test result files from '/workspace/build/test_results/ugv_navigation'
+Built target clean_test_results_ugv_navigation
+Removing test result files from '/workspace/build/test_results/cup_gnss'
+Scanning dependencies of target clean_test_results_ugv_slicer_control
+Built target clean_test_results_cup_gnss
+Scanning dependencies of target _run_tests_ugv_navigation_rostest_test_odom.test
+Removing test result files from '/workspace/build/test_results/ugv_slicer_control'
+Built target clean_test_results_ugv_slicer_control
+Scanning dependencies of target _run_tests_ugv_navigation_rostest_test_guarded.test
+[33m[WARN] [1793347825.287736073]: global_costmap: Pre-Hydro parameter "static_map" unused since "plugins" is provided[0m
+[33m[WARN] [1793347825.365090337]: global_costmap: Pre-Hydro parameter "static_map" unused since "plugins" is provided[0m
+[33m[WARN] [1793347825.419360156]: local_costmap: Pre-Hydro parameter "static_map" unused since "plugins" is provided[0m
+[33m[WARN] [1793347825.485152726]: local_costmap: Pre-Hydro parameter "static_map" unused since "plugins" is provided[0m
+[33m[WARN] [1793347825.696479090]: The scan observation buffer has not been updated for 0.31 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347825.753088383]: The scan observation buffer has not been updated for 0.25 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347825.878614697]: The scan observation buffer has not been updated for 0.55 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347825.887667128]: The scan observation buffer has not been updated for 0.45 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347826.141289334]: The goal sent to the global planner is off the global costmap. Planning will always fail to this goal.[0m
+[31m[ERROR] [1793347826.146642061]: Failed to get a plan.[0m
+[33m[WARN] [1793347831.953103509]: The scan observation buffer has not been updated for 0.21 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347832.153138792]: Costmap2DROS transform timeout. Current time: 1793347832.1530, global_pose stamp: 1793347831.7419, tolerance: 0.3000[0m
+[0m[INFO] [1793347825.368277666]: global_costmap: Using plugin "obstacle_layer"[0m
+[0m[INFO] [1793347825.379232140]:     Subscribed to Topics: scan[0m
+[0m[INFO] [1793347825.404945622]: global_costmap: Using plugin "inflation_layer"[0m
+[0m[INFO] [1793347825.487260684]: local_costmap: Using plugin "obstacle_layer"[0m
+[0m[INFO] [1793347825.492929021]:     Subscribed to Topics: scan[0m
+[0m[INFO] [1793347825.514227645]: local_costmap: Using plugin "inflation_layer"[0m
+[0m[INFO] [1793347825.573158301]: Created local_planner dwa_local_planner/DWAPlannerROS[0m
+[0m[INFO] [1793347825.576927091]: Sim period is set to 0.10[0m
+[0m[INFO] [1793347825.827279573]: odom received![0m
+[0m[INFO] [1793347825.969496664]: Got new plan[0m
+[0m[INFO] [1793347826.697626921]: Got new plan[0m
+[0m[INFO] [1793347827.697642010]: Got new plan[0m
+[0m[INFO] [1793347828.697640974]: Got new plan[0m
+[0m[INFO] [1793347829.697592871]: Got new plan[0m
+[0m[INFO] [1793347830.297674503]: Goal reached[0m
+[0m[INFO] [1793347830.400580412]: Got new plan[0m
+[WARN] [1793347825.050576]: Navigation compensation held stopped: command missing/stale
+[WARN] [1793347831.250406]: Navigation compensation held stopped: command missing/stale
+[INFO] [1793347825.024026]: Guard planner dwa_local_planner/DWAPlannerROS limits: forward=0.125 reverse=0.000 angular=0.250
+... logging to /workspace/.ros/log/rostest-5713f9a3125b-538.log
+[ROSUNIT] Outputting test results to /workspace/build/test_results/ugv_navigation/rostest-test_guarded.xml
+[Testcase: testguarded_navigation] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[ugv_navigation.rosunit-guarded_navigation/test_01_startup_hold_blocks_real_teb_output][passed]
+[ugv_navigation.rosunit-guarded_navigation/test_02_explicit_release_forward_arrival_and_cancel][passed]
+
+SUMMARY
+[32m * RESULT: SUCCESS[0m
+ * TESTS: 2
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /workspace/.ros/log/rostest-5713f9a3125b-538.log
+-- run_tests.py: execute commands
+  /usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/workspace/src/ugv_navigation --package=ugv_navigation --results-filename test_guarded.xml --results-base-dir "/workspace/build/test_results" /workspace/src/ugv_navigation/test/guarded.test 
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_navigation/rostest-test_guarded.xml"
+Built target _run_tests_ugv_navigation_rostest_test_guarded.test
+Scanning dependencies of target _run_tests_ugv_navigation_rostest_test_client.test
+[33m[WARN] [1793347834.287726740]: The scan observation buffer has not been updated for 0.33 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.368993579]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347834.378587917]: The scan observation buffer has not been updated for 0.42 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.469086829]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347834.487692316]: The scan observation buffer has not been updated for 0.53 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.569033874]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347834.628641813]: The scan observation buffer has not been updated for 0.67 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.669043093]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347834.687720387]: The scan observation buffer has not been updated for 0.73 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.768995194]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347834.869040445]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347834.878636223]: The scan observation buffer has not been updated for 0.92 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.887688236]: The scan observation buffer has not been updated for 0.93 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347834.969003105]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.069052962]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.087680049]: The scan observation buffer has not been updated for 1.13 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.128612421]: The scan observation buffer has not been updated for 1.17 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.169035844]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.269035493]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.287691571]: The scan observation buffer has not been updated for 1.33 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.369045990]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.378652103]: The scan observation buffer has not been updated for 1.42 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.469037575]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.487714293]: The scan observation buffer has not been updated for 1.53 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.569035240]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.628642538]: The scan observation buffer has not been updated for 1.67 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.669014282]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.687683832]: The scan observation buffer has not been updated for 1.73 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.769002507]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.869006668]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347835.878632365]: The scan observation buffer has not been updated for 1.92 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.887666618]: The scan observation buffer has not been updated for 1.93 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347835.968992398]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.043465736]: global_costmap: Pre-Hydro parameter "static_map" unused since "plugins" is provided[0m
+[33m[WARN] [1793347836.069027116]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.087659482]: The scan observation buffer has not been updated for 2.13 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.128603533]: The scan observation buffer has not been updated for 2.17 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.169006251]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.198921049]: local_costmap: Pre-Hydro parameter "static_map" unused since "plugins" is provided[0m
+[33m[WARN] [1793347836.268984074]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.287663959]: The scan observation buffer has not been updated for 2.33 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.368977129]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.378593066]: The scan observation buffer has not been updated for 2.42 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.468956743]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.487649524]: The scan observation buffer has not been updated for 2.53 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.569009221]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[33m[WARN] [1793347836.652630024]: The scan observation buffer has not been updated for 0.57 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.662759903]: The scan observation buffer has not been updated for 0.44 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347836.669012323]: [/ugv/move_base]:Sensor data is out of date, we're not going to allow commanding of the base for safety[0m
+[31m[ERROR] [1793347841.159892855]: Failed to get a plan.[0m
+[31m[ERROR] [1793347846.163075854]: Failed to get a plan.[0m
+[31m[ERROR] [1793347846.261896331]: Aborting because a valid plan could not be found. Even after executing all recovery behaviors[0m
+[33m[WARN] [1793347846.487677486]: The scan observation buffer has not been updated for 0.26 seconds, and it should be updated every 0.20 seconds.[0m
+[33m[WARN] [1793347846.628658107]: Costmap2DROS transform timeout. Current time: 1793347846.6285, global_pose stamp: 1793347846.2262, tolerance: 0.3000[0m
+[0m[INFO] [1793347825.292918308]: global_costmap: Using plugin "obstacle_layer"[0m
+[0m[INFO] [1793347825.310353775]:     Subscribed to Topics: scan[0m
+[0m[INFO] [1793347825.345162886]: global_costmap: Using plugin "inflation_layer"[0m
+[0m[INFO] [1793347825.421182168]: local_costmap: Using plugin "obstacle_layer"[0m
+[0m[INFO] [1793347825.427050789]:     Subscribed to Topics: scan[0m
+[0m[INFO] [1793347825.455343868]: local_costmap: Using plugin "inflation_layer"[0m
+[0m[INFO] [1793347825.506771055]: Created local_planner teb_local_planner/TebLocalPlannerROS[0m
+[0m[INFO] [1793347825.590386860]: Footprint model 'polygon' loaded for trajectory optimization.[0m
+[0m[INFO] [1793347825.590979969]: Parallel planning in distinctive topologies disabled.[0m
+[0m[INFO] [1793347825.591030144]: No costmap conversion plugin specified. All occupied costmap cells are treaten as point obstacles.[0m
+[0m[INFO] [1793347825.948925227]: odom received![0m
+[0m[INFO] [1793347830.855544733]: GOAL Reached![0m
+[0m[INFO] [1793347840.769035797]: GOAL Reached![0m
+... logging to /workspace/.ros/log/rostest-5713f9a3125b-536.log
+[ROSUNIT] Outputting test results to /workspace/build/test_results/ugv_navigation/rostest-test_odom.xml
+[Testcase: testodom_navigation] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[ugv_navigation.rosunit-odom_navigation/test_01_observed_plan_and_unknown_or_outside_window_rejection][passed]
+[ugv_navigation.rosunit-odom_navigation/test_02_real_teb_motion_and_action_success][passed]
+[ugv_navigation.rosunit-odom_navigation/test_03_cancel_is_preempted_and_does_not_revive][passed]
+[ugv_navigation.rosunit-odom_navigation/test_04_scan_loss_stops_then_original_goal_continues][passed]
+[ugv_navigation.rosunit-odom_navigation/test_05_full_width_wall_blocks_path_and_is_never_crossed][passed]
+
+SUMMARY
+[32m * RESULT: SUCCESS[0m
+ * TESTS: 5
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /workspace/.ros/log/rostest-5713f9a3125b-536.log
+-- run_tests.py: execute commands
+  /usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/workspace/src/ugv_navigation --package=ugv_navigation --results-filename test_odom.xml --results-base-dir "/workspace/build/test_results" /workspace/src/ugv_navigation/test/odom.test 
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_navigation/rostest-test_odom.xml"
+Built target _run_tests_ugv_navigation_rostest_test_odom.test
+Scanning dependencies of target _run_tests_ugv_navigation_nosetests_test.test_depth_geometry.py
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.013s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_navigation
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_navigation/test/test_depth_geometry.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_navigation/nosetests-test.test_depth_geometry.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_navigation/nosetests-test.test_depth_geometry.py.xml"
+Built target _run_tests_ugv_navigation_nosetests_test.test_depth_geometry.py
+Scanning dependencies of target _run_tests_ugv_navigation_nosetests_test.test_goal_client.py
+..usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --frame: use a nonempty TF frame without leading slash or spaces
+.usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --timeout: must be greater than zero
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --timeout: must be greater than zero
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --timeout: must be finite
+.usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --x: must be finite
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --x: must be finite
+usage: nosetests3 send [-h] --x X --y Y [--yaw YAW] [--frame FRAME]
+                       [--relative] [--base-frame BASE_FRAME]
+                       [--tf-max-age TF_MAX_AGE] [--timeout TIMEOUT]
+nosetests3 send: error: argument --x: must be finite
+...usage: nosetests3 [-h] [--action ACTION] {send,plan,cancel} ...
+nosetests3: error: relative goal needs a fixed target frame different from base frame
+..
+----------------------------------------------------------------------
+Ran 9 tests in 0.233s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_navigation
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_navigation/test/test_goal_client.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_navigation/nosetests-test.test_goal_client.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_navigation/nosetests-test.test_goal_client.py.xml"
+Built target _run_tests_ugv_navigation_nosetests_test.test_goal_client.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_core.py
+............................
+----------------------------------------------------------------------
+Ran 28 tests in 0.030s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_core.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_core.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_core.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_core.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_evidence_epochs.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.013s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_evidence_epochs.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_evidence_epochs.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_evidence_epochs.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_evidence_epochs.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_mature_default.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.025s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_mature_default.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_mature_default.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_mature_default.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_mature_default.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_upstream_nmea_ros.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.016s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_upstream_nmea_ros.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_upstream_nmea_ros.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_upstream_nmea_ros.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_upstream_nmea_ros.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_upstream_nmea.py
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.011s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_upstream_nmea.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_upstream_nmea.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_upstream_nmea.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_upstream_nmea.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_upstream_ntrip.py
+...........[0m[INFO] [1793347836.048750655]: global_costmap: Using plugin "obstacle_layer"[0m
+[0m[INFO] [1793347836.065733454]:     Subscribed to Topics: scan[0m
+[0m[INFO] [1793347836.101429801]: global_costmap: Using plugin "inflation_layer"[0m
+[0m[INFO] [1793347836.200728885]: local_costmap: Using plugin "obstacle_layer"[0m
+[0m[INFO] [1793347836.206801661]:     Subscribed to Topics: scan[0m
+[0m[INFO] [1793347836.230113454]: local_costmap: Using plugin "inflation_layer"[0m
+[0m[INFO] [1793347836.277285253]: Created local_planner teb_local_planner/TebLocalPlannerROS[0m
+[0m[INFO] [1793347836.351677600]: Footprint model 'polygon' loaded for trajectory optimization.[0m
+[0m[INFO] [1793347836.352201142]: Parallel planning in distinctive topologies disabled.[0m
+[0m[INFO] [1793347836.352255413]: No costmap conversion plugin specified. All occupied costmap cells are treaten as point obstacles.[0m
+[0m[INFO] [1793347836.722231618]: odom received![0m
+[0m[INFO] [1793347843.904537514]: GOAL Reached![0m
+[WARN] [1793347835.744423]: TEST_ONLY ideal kinematics; run only without devices on isolated master
+... logging to /workspace/.ros/log/rostest-5713f9a3125b-732.log
+[ROSUNIT] Outputting test results to /workspace/build/test_results/ugv_navigation/rostest-test_client.xml
+[Testcase: testgoal_process] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[ugv_navigation.rosunit-goal_process/test_cli_success_timeout_interrupt_and_explicit_cancel][passed]
+
+SUMMARY
+[32m * RESULT: SUCCESS[0m
+ * TESTS: 1
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /workspace/.ros/log/rostest-5713f9a3125b-732.log
+.-- run_tests.py: execute commands
+  /usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/workspace/src/ugv_navigation --package=ugv_navigation --results-filename test_client.xml --results-base-dir "/workspace/build/test_results" /workspace/src/ugv_navigation/test/client.test 
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_navigation/rostest-test_client.xml"
+.Built target _run_tests_ugv_navigation_rostest_test_client.test
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_ntrip.py
+...
+----------------------------------------------------------------------
+Ran 16 tests in 3.531s
+
+OK
+.-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_upstream_ntrip.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_upstream_ntrip.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_upstream_ntrip.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_upstream_ntrip.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_quality.py
+..............
+----------------------------------------------------------------------
+Ran 11 tests in 0.015s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_quality.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_quality.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_quality.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_quality.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_enu.py
+...........
+----------------------------------------------------------------------
+Ran 15 tests in 1.359s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_ntrip.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_ntrip.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_ntrip.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_ntrip.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_serial_rtcm.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.048s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_enu.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_enu.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_enu.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_enu.py
+Scanning dependencies of target _run_tests_cup_gnss_nosetests_tests.test_sources.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.014s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_serial_rtcm.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_serial_rtcm.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_serial_rtcm.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_serial_rtcm.py
+Scanning dependencies of target _run_tests_ugv_slicer_control_nosetests_test.test_body_link.py
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.011s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/cup_gnss
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/cup_gnss/tests/test_sources.py --with-xunit --xunit-file=/workspace/build/test_results/cup_gnss/nosetests-tests.test_sources.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/cup_gnss/nosetests-tests.test_sources.py.xml"
+Built target _run_tests_cup_gnss_nosetests_tests.test_sources.py
+Scanning dependencies of target _run_tests_ugv_slicer_control_nosetests_test.test_driver.py
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 0.250s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_slicer_control
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_slicer_control/test/test_body_link.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_body_link.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_body_link.py.xml"
+Built target _run_tests_ugv_slicer_control_nosetests_test.test_body_link.py
+Scanning dependencies of target _run_tests_ugv_slicer_control_nosetests_test.test_navigation_guard.py
+...............
+----------------------------------------------------------------------
+Ran 12 tests in 0.004s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_slicer_control
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_slicer_control/test/test_navigation_guard.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_navigation_guard.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_navigation_guard.py.xml"
+Built target _run_tests_ugv_slicer_control_nosetests_test.test_navigation_guard.py
+Scanning dependencies of target _run_tests_ugv_slicer_control_nosetests_test.test_body_config.py
+............
+----------------------------------------------------------------------
+Ran 4 tests in 0.217s
+
+OK
+.-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_slicer_control
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_slicer_control/test/test_body_config.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_body_config.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_body_config.py.xml"
+.Built target _run_tests_ugv_slicer_control_nosetests_test.test_body_config.py
+Scanning dependencies of target _run_tests_ugv_slicer_control_nosetests_test.test_control.py
+..................
+----------------------------------------------------------------------
+Ran 16 tests in 0.081s
+
+OK
+.-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_slicer_control
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_slicer_control/test/test_control.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_control.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_control.py.xml"
+Built target _run_tests_ugv_slicer_control_nosetests_test.test_control.py
+.Scanning dependencies of target _run_tests_ugv_slicer_control_rostest_test_control.test
+.................................................
+----------------------------------------------------------------------
+Ran 66 tests in 7.088s
+
+OK
+-- run_tests.py: execute commands
+  "/usr/bin/cmake" -E make_directory /workspace/build/test_results/ugv_slicer_control
+  /usr/bin/nosetests3 -P --process-timeout=60 /workspace/src/ugv_slicer_control/test/test_driver.py --with-xunit --xunit-file=/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_driver.py.xml
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/nosetests-test.test_driver.py.xml"
+Built target _run_tests_ugv_slicer_control_nosetests_test.test_driver.py
+Scanning dependencies of target _run_tests_ugv_slicer_control_rostest_test_guard.test
+... logging to /workspace/.ros/log/rostest-5713f9a3125b-1356.log
+[ROSUNIT] Outputting test results to /workspace/build/test_results/ugv_slicer_control/rostest-test_control.xml
+[Testcase: testmove_base] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[ugv_slicer_control.rosunit-move_base/test_real_handoff_busy_goal_cancel_and_latched_emergency][passed]
+
+SUMMARY
+[32m * RESULT: SUCCESS[0m
+ * TESTS: 1
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /workspace/.ros/log/rostest-5713f9a3125b-1356.log
+-- run_tests.py: execute commands
+  /usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/workspace/src/ugv_slicer_control --package=ugv_slicer_control --results-filename test_control.xml --results-base-dir "/workspace/build/test_results" /workspace/src/ugv_slicer_control/test/control.test 
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/rostest-test_control.xml"
+Built target _run_tests_ugv_slicer_control_rostest_test_control.test
+Scanning dependencies of target _run_tests_ugv_navigation_rostest
+Built target _run_tests_ugv_navigation_rostest
+Scanning dependencies of target _run_tests_ugv_navigation_nosetests
+Built target _run_tests_ugv_navigation_nosetests
+Scanning dependencies of target _run_tests_cup_gnss_nosetests
+Built target _run_tests_cup_gnss_nosetests
+Scanning dependencies of target _run_tests_ugv_slicer_control_nosetests
+Built target _run_tests_ugv_slicer_control_nosetests
+Scanning dependencies of target _run_tests_ugv_navigation
+Built target _run_tests_ugv_navigation
+Scanning dependencies of target _run_tests_cup_gnss
+Built target _run_tests_cup_gnss
+[WARN] [1793347870.510779]: Navigation compensation held stopped: command missing/stale
+[WARN] [1793347874.897976]: Navigation compensation held stopped: command missing/stale
+[WARN] [1793347878.862761]: Navigation compensation held stopped: motion needs a fresh local grid
+[WARN] [1793347881.888190]: Navigation compensation held stopped: swept footprint occupied/unknown/outside grid
+[WARN] [1793347885.535158]: Navigation compensation held stopped: swept footprint occupied/unknown/outside grid
+[INFO] [1793347870.484645]: Guard planner teb_local_planner/TebLocalPlannerROS limits: forward=0.125 reverse=0.000 angular=0.250
+[INFO] [1793347870.490438]: Turn compensation: 50 permille = 0.200rad/s floor; reverse limit=0.000m/s
+[WARN] [1793347870.517747]: Navigation compensation held stopped: command missing/stale
+[WARN] [1793347874.898544]: Navigation compensation held stopped: command missing/stale
+[WARN] [1793347878.870582]: Navigation compensation held stopped: motion needs a fresh local grid
+[WARN] [1793347881.894975]: Navigation compensation held stopped: swept footprint occupied/unknown/outside grid
+[WARN] [1793347885.543487]: Navigation compensation held stopped: swept footprint occupied/unknown/outside grid
+[INFO] [1793347870.494167]: Guard planner teb_local_planner/TebLocalPlannerROS limits: forward=0.125 reverse=0.000 angular=0.250
+... logging to /workspace/.ros/log/rostest-5713f9a3125b-1497.log
+[ROSUNIT] Outputting test results to /workspace/build/test_results/ugv_slicer_control/rostest-test_guard.xml
+[Testcase: testguard_transport] ... ok
+
+[ROSTEST]-----------------------------------------------------------------------
+
+[ugv_slicer_control.rosunit-guard_transport/test_01_forbidden_reverse_arc_and_tiny_reverse_stop_with_reason][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_02_forward_pure_turn_and_explicit_zero_remain_legal][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_03_expired_command_stops_despite_fresh_geometry][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_04_expired_tf_stops_despite_fresh_command_and_grid][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_05_expired_grid_stops_despite_fresh_command_and_tf][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_06_unknown_current_footprint_stops_both_turn_policies][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_07_occupied_current_footprint_stops_both_turn_policies][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_08_outside_footprint_stops_with_fresh_context][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_09_non_finite_command_stops][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_10_future_forward_sweep_stops_before_current_footprint_contact][passed]
+[ugv_slicer_control.rosunit-guard_transport/test_11_future_rotation_sweep_checks_the_footprint_corners][passed]
+
+SUMMARY
+[32m * RESULT: SUCCESS[0m
+ * TESTS: 11
+ * ERRORS: 0
+ * FAILURES: 0
+
+rostest log file is in /workspace/.ros/log/rostest-5713f9a3125b-1497.log
+-- run_tests.py: execute commands
+  /usr/bin/python3 /opt/ros/noetic/share/rostest/cmake/../../../bin/rostest --pkgdir=/workspace/src/ugv_slicer_control --package=ugv_slicer_control --results-filename test_guard.xml --results-base-dir "/workspace/build/test_results" /workspace/src/ugv_slicer_control/test/guard.test 
+-- run_tests.py: verify result "/workspace/build/test_results/ugv_slicer_control/rostest-test_guard.xml"
+Built target _run_tests_ugv_slicer_control_rostest_test_guard.test
+Scanning dependencies of target _run_tests_ugv_slicer_control_rostest
+Built target _run_tests_ugv_slicer_control_rostest
+Scanning dependencies of target _run_tests_ugv_slicer_control
+Built target _run_tests_ugv_slicer_control
+Scanning dependencies of target run_tests
+Built target run_tests
+Base path: /workspace
+Source space: /workspace/src
+Build space: /workspace/build
+Devel space: /workspace/devel
+Install space: /workspace/install
+####
+#### Running command: "make cmake_check_build_system" in "/workspace/build"
+####
+####
+#### Running command: "make run_tests -j2" in "/workspace/build"
+####
+cup_gnss/nosetests-tests.test_core.py.xml: 28 tests
+cup_gnss/nosetests-tests.test_enu.py.xml: 7 tests
+cup_gnss/nosetests-tests.test_evidence_epochs.py.xml: 5 tests
+cup_gnss/nosetests-tests.test_mature_default.py.xml: 2 tests
+cup_gnss/nosetests-tests.test_ntrip.py.xml: 15 tests
+cup_gnss/nosetests-tests.test_quality.py.xml: 11 tests
+cup_gnss/nosetests-tests.test_serial_rtcm.py.xml: 7 tests
+cup_gnss/nosetests-tests.test_sources.py.xml: 4 tests
+cup_gnss/nosetests-tests.test_upstream_nmea.py.xml: 12 tests
+cup_gnss/nosetests-tests.test_upstream_nmea_ros.py.xml: 5 tests
+cup_gnss/nosetests-tests.test_upstream_ntrip.py.xml: 16 tests
+ugv_navigation/nosetests-test.test_depth_geometry.py.xml: 16 tests
+ugv_navigation/nosetests-test.test_goal_client.py.xml: 9 tests
+ugv_navigation/rostest-test_client.xml: 1 tests
+ugv_navigation/rostest-test_guarded.xml: 1 tests
+ugv_navigation/rostest-test_odom.xml: 1 tests
+ugv_navigation/rosunit-goal_process.xml: 1 tests
+ugv_navigation/rosunit-guarded_navigation.xml: 2 tests
+ugv_navigation/rosunit-odom_navigation.xml: 5 tests
+ugv_slicer_control/nosetests-test.test_body_config.py.xml: 4 tests
+ugv_slicer_control/nosetests-test.test_body_link.py.xml: 18 tests
+ugv_slicer_control/nosetests-test.test_control.py.xml: 16 tests
+ugv_slicer_control/nosetests-test.test_driver.py.xml: 66 tests
+ugv_slicer_control/nosetests-test.test_navigation_guard.py.xml: 12 tests
+ugv_slicer_control/rostest-test_control.xml: 1 tests
+ugv_slicer_control/rostest-test_guard.xml: 1 tests
+ugv_slicer_control/rosunit-guard_transport.xml: 11 tests
+ugv_slicer_control/rosunit-move_base.xml: 1 tests
+Summary: 278 tests, 0 errors, 0 failures, 0 skipped
+Install the project...
+-- Install configuration: ""
+-- Installing: /workspace/install/_setup_util.py
+-- Installing: /workspace/install/env.sh
+-- Installing: /workspace/install/setup.bash
+-- Installing: /workspace/install/local_setup.bash
+-- Installing: /workspace/install/setup.sh
+-- Installing: /workspace/install/local_setup.sh
+-- Installing: /workspace/install/setup.zsh
+-- Installing: /workspace/install/local_setup.zsh
+-- Installing: /workspace/install/setup.fish
+-- Installing: /workspace/install/local_setup.fish
+-- Installing: /workspace/install/.rosinstall
+-- Installing: /workspace/install/lib/pkgconfig/ugv_bringup.pc
+-- Installing: /workspace/install/share/ugv_bringup/cmake/ugv_bringupConfig.cmake
+-- Installing: /workspace/install/share/ugv_bringup/cmake/ugv_bringupConfig-version.cmake
+-- Installing: /workspace/install/share/ugv_bringup/package.xml
+-- Installing: /workspace/install/share/ugv_bringup/launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/slicer_gnss.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/slicer_odom.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/odom.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/slicer_driver.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/slicer_sensors.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/slicer_online.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/small_obstacle_projection.launch
+-- Installing: /workspace/install/share/ugv_bringup/launch/slicer_depth.launch
+-- Installing: /workspace/install/share/ugv_bringup/config
+-- Installing: /workspace/install/share/ugv_bringup/config/ekf_velocity_response.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/gmapping_online.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/indoor_10m_030.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/small_obstacle_projection.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/config
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/config/slicer_config.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/.generated
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/.generated/fusion.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/.generated/MID360.json
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/.generated/sensor_launch.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/.generated/lio.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/online_runtime/.generated/scan.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/slicer_planner.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/slicer_gnss.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/test_slicer_guard.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/costmaps.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/teb.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/test_dwa.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/dwa.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/costmap_common.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/dwa_goal_baseline.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/depth_camera.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/slicer_driver.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/footprint.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/gnss_enu_origin.json
+-- Installing: /workspace/install/share/ugv_bringup/config/slicer_driver_body_speed.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/move_base.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/rolling_global_12m.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/gnss_site.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/depth_costmap.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/test_control_chain.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/slicer_driver_wheel_speed_reference.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/dwa_goal_yaw_012.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/indoor_10m_020.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/slicer_guard.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/dwa_goal_xy_010.yaml
+-- Installing: /workspace/install/share/ugv_bringup/config/online_map.yaml
+-- Installing: /workspace/install/share/ugv_bringup/rviz
+-- Installing: /workspace/install/share/ugv_bringup/rviz/odom_navigation.rviz
+-- Installing: /workspace/install/share/ugv_bringup/rviz/small_obstacle.rviz
++ cd /workspace/src/cup_gnss
++ mkdir -p /workspace/install/lib/python3/dist-packages
++ /usr/bin/env PYTHONPATH=/workspace/install/lib/python3/dist-packages:/workspace/build/lib/python3/dist-packages:/workspace/devel/lib/python3/dist-packages:/opt/ros/noetic/lib/python3/dist-packages CATKIN_BINARY_DIR=/workspace/build /usr/bin/python3 /workspace/src/cup_gnss/setup.py build --build-base /workspace/build/cup_gnss install --root=/ --install-layout=deb --prefix=/workspace/install --install-scripts=/workspace/install/bin
+running build
+running build_py
+creating /workspace/build/cup_gnss/lib
+creating /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/__init__.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/ntrip.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/quality.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/_nmea_0_6_1_parser.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/core.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/sources.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/upstream_ntrip.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/enu.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/_nmea_0_6_1_checksum.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/upstream_nmea.py -> /workspace/build/cup_gnss/lib/cup_gnss
+copying src/cup_gnss/NMEA_UPSTREAM.json -> /workspace/build/cup_gnss/lib/cup_gnss
+warning: build_py: byte-compiling is disabled, skipping.
+
+running install
+running install_lib
+creating /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/__init__.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/ntrip.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/quality.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/NMEA_UPSTREAM.json -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/_nmea_0_6_1_parser.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/core.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/sources.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/upstream_ntrip.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/enu.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/_nmea_0_6_1_checksum.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+copying /workspace/build/cup_gnss/lib/cup_gnss/upstream_nmea.py -> /workspace/install/lib/python3/dist-packages/cup_gnss
+running install_egg_info
+warning: install_lib: byte-compiling is disabled, skipping.
+
+Writing /workspace/install/lib/python3/dist-packages/cup_gnss-0.1.0.egg-info
+-- Installing: /workspace/install/lib/pkgconfig/cup_gnss.pc
+-- Installing: /workspace/install/share/cup_gnss/cmake/cup_gnssConfig.cmake
+-- Installing: /workspace/install/share/cup_gnss/cmake/cup_gnssConfig-version.cmake
+-- Installing: /workspace/install/share/cup_gnss/package.xml
+-- Installing: /workspace/install/lib/cup_gnss/gnss_node.py
+-- Installing: /workspace/install/lib/cup_gnss/gnss_status.py
+-- Installing: /workspace/install/share/cup_gnss/LICENSES
+-- Installing: /workspace/install/share/cup_gnss/LICENSES/ntrip_client-1.4.1-LICENSE.txt
+-- Installing: /workspace/install/share/cup_gnss/reference
+-- Installing: /workspace/install/share/cup_gnss/reference/cors_cgcs2000.json
+-- Installing: /workspace/install/lib/pkgconfig/ugv_slicer_control.pc
+-- Installing: /workspace/install/share/ugv_slicer_control/cmake/ugv_slicer_controlConfig.cmake
+-- Installing: /workspace/install/share/ugv_slicer_control/cmake/ugv_slicer_controlConfig-version.cmake
+-- Installing: /workspace/install/share/ugv_slicer_control/package.xml
+-- Installing: /workspace/install/lib/ugv_slicer_control/velocity_mux.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/arc_velocity_guard.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/control.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/c30d_driver_node.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/control_core.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/slicer_manual.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/navigation_core.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/c30d_link.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/chassis_core.py
+-- Installing: /workspace/install/lib/ugv_slicer_control/serial_transport.py
+-- Installing: /workspace/install/share/ugv_slicer_control/SOURCES.json
+-- Installing: /workspace/install/lib/pkgconfig/ugv_navigation.pc
+-- Installing: /workspace/install/share/ugv_navigation/cmake/ugv_navigationConfig.cmake
+-- Installing: /workspace/install/share/ugv_navigation/cmake/ugv_navigationConfig-version.cmake
+-- Installing: /workspace/install/share/ugv_navigation/package.xml
+-- Installing: /workspace/install/lib/ugv_navigation/goal.py
+-- Installing: /workspace/install/lib/ugv_navigation/depth_obstacles.py
+-- Installing: /workspace/install/lib/ugv_navigation/depth_geometry.py
+-- Installing: /workspace/install/share/ugv_navigation/launch
+-- Installing: /workspace/install/share/ugv_navigation/launch/move_base.launch
+Base path: /workspace
+Source space: /workspace/src
+Build space: /workspace/build
+Devel space: /workspace/devel
+Install space: /workspace/install
+####
+#### Running command: "make cmake_check_build_system" in "/workspace/build"
+####
+####
+#### Running command: "make install -j2" in "/workspace/build"
+####
+PACKAGE ugv_bringup /workspace/install/share/ugv_bringup
+PACKAGE ugv_navigation /workspace/install/share/ugv_navigation
+PACKAGE ugv_slicer_control /workspace/install/share/ugv_slicer_control
+PACKAGE cup_gnss /workspace/install/share/cup_gnss
+IMPORT /workspace/install/lib/ugv_navigation/goal.py
+IMPORT /workspace/install/lib/ugv_navigation/depth_obstacles.py
+IMPORT /workspace/install/lib/ugv_slicer_control/velocity_mux.py
+IMPORT /workspace/install/lib/ugv_slicer_control/arc_velocity_guard.py
+IMPORT /workspace/install/lib/ugv_slicer_control/control.py
+IMPORT /workspace/install/lib/ugv_slicer_control/c30d_driver_node.py
+IMPORT /workspace/install/lib/cup_gnss/gnss_node.py
+IMPORT /workspace/install/lib/cup_gnss/gnss_status.py
+HELPER /workspace/install/lib/ugv_navigation/depth_geometry.py
+HELPER /workspace/install/lib/ugv_slicer_control/control_core.py
+HELPER /workspace/install/lib/ugv_slicer_control/slicer_manual.py
+HELPER /workspace/install/lib/ugv_slicer_control/navigation_core.py
+HELPER /workspace/install/lib/ugv_slicer_control/c30d_link.py
+HELPER /workspace/install/lib/ugv_slicer_control/chassis_core.py
+HELPER /workspace/install/lib/ugv_slicer_control/serial_transport.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/core.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/sources.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/quality.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/upstream_nmea.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/upstream_ntrip.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/ntrip.py
+GNSS_HELPER /workspace/install/lib/python3/dist-packages/cup_gnss/enu.py
+GNSS_NMEA_MANIFEST upstream=0.6.1
+GNSS_CONFIG /workspace/install/share/ugv_bringup/config/slicer_gnss.yaml
+GNSS_CONFIG /workspace/install/share/ugv_bringup/config/gnss_site.yaml
+GNSS_CONFIG /workspace/install/share/ugv_bringup/config/gnss_enu_origin.json
+CONFIG /workspace/install/share/ugv_bringup/config/depth_camera.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/depth_costmap.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/gmapping_online.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/online_runtime/config/slicer_config.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/online_runtime/.generated/MID360.json
+CONFIG /workspace/install/share/ugv_bringup/config/online_runtime/.generated/fusion.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/online_runtime/.generated/lio.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/online_runtime/.generated/scan.yaml
+CONFIG /workspace/install/share/ugv_bringup/config/online_runtime/.generated/sensor_launch.yaml
+PACKAGE slicer_bringup /slicer/catkin_ws/src/slicer_bringup
+PACKAGE slicer_wasd_control /slicer/catkin_ws/src/Slicer_wasd_control
+PACKAGE slicer_navigation /slicer/catkin_ws/src/slicer_navigation
+PACKAGE fast_lio /slicer/catkin_ws/src/fast_lio
+PACKAGE livox_ros_driver2 /slicer/catkin_ws/src/livox_ros_driver2
+PACKAGE gmapping /opt/ros/noetic/share/gmapping
+PACKAGE realsense2_camera /opt/ros/noetic/share/realsense2_camera
+PACKAGE robot_localization /opt/ros/noetic/share/robot_localization
+PACKAGE pointcloud_to_laserscan /opt/ros/noetic/share/pointcloud_to_laserscan
+PACKAGE ntrip_client /opt/ros/noetic/share/ntrip_client
+PACKAGE nmea_navsat_driver /opt/ros/noetic/share/nmea_navsat_driver
+EXTERNAL_SCRIPT slicer_bringup/sensor_geometry.py ['/slicer/catkin_ws/src/slicer_bringup/scripts/sensor_geometry.py']
+EXTERNAL_SCRIPT slicer_bringup/lio_projector.py ['/slicer/catkin_ws/src/slicer_bringup/scripts/lio_projector.py']
+EXTERNAL_SCRIPT slicer_navigation/arm_cloud_filter.py UNAVAILABLE (source reference has no executable node)
+EXTERNAL_SCRIPT slicer_navigation/self_scan_filter.py ['/slicer/catkin_ws/src/slicer_navigation/scripts/self_scan_filter.py']
+EXTERNAL_COMPILED fast_lio/fastlio_mapping UNAVAILABLE (source reference only; not built here)
+EXTERNAL_COMPILED livox_ros_driver2/livox_ros_driver2_node UNAVAILABLE (source reference only; not built here)
+PARSE default nodes=3 (none started)
+PARSE guard nodes=5 (none started)
+PARSE sensors nodes=11 (none started)
+PARSE camera nodes=5 (none started)
+PARSE no_depth nodes=2 (none started)
+PARSE gnss nodes=1 (none started)
+INSTALL CHECK PASSED: lookup/import/parse only; no hardware verification
